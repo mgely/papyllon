@@ -50,6 +50,7 @@ IF EXIST "%PYTHON_PATH%\scripts\ipython-script.py" (
     GOTO EOF
 )
 
+:: papyllon extension to allow communication with qtlab kernel
 start Console -w "QTLab" -r "/k %PYTHON_PATH%\python.exe qtlab.py"
 GOTO EOF
 
