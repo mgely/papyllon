@@ -32,18 +32,26 @@ IF EXIST c:\python26\python.exe (
     GOTO mark1
 )
 :mark1
+
+IF EXIST "qtlab.lock" (
+    del "qtlab.lock"
+    )
+
+
 :: Run QTlab
 :: check if version < 0.11
 IF EXIST "%PYTHON_PATH%\scripts\ipython.py" (
     start Console -w "QTLab" -r "/k %PYTHON_PATH%\python.exe %PYTHON_PATH%\scripts\ipython.py -gthread -p sh source/qtlab_shell.py"
     GOTO EOF
 )
-start Console -w "QTLab" -r "/k %PYTHON_PATH%\python.exe qtlab.py"
 :: check if version >= 0.11
 IF EXIST "%PYTHON_PATH%\scripts\ipython-script.py" (
     start Console -w "QTLab" -r "/k %PYTHON_PATH%\python.exe qtlab.py"
     GOTO EOF
 )
+
+start Console -w "QTLab" -r "/k %PYTHON_PATH%\python.exe qtlab.py"
+GOTO EOF
 
 echo Failed to run qtlab.bat
 pause
