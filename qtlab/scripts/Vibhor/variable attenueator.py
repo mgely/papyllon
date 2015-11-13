@@ -1,0 +1,6 @@
+var_att=visa.instrument('TCPIP0::192.168.1.113::INSTR')
+var_att.ask('*IDN?')
+var_att.write('CONF:X AG8494')
+var_att.write('CONF:Y AG8496')
+var_att.write('ATT:X 11')
+var_att.write('ATT:Y 110')

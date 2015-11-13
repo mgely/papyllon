@@ -1,0 +1,66 @@
+:: qtlab.bat
+::
+:: PRISTINE  ****************************************** 
+::
+::
+:: Runs QTlab on Windows
+::
+:: QTlab needs gnuplot, Console2 and GTK to exist in the system PATH.
+:: They can be defined globally in "configuration_panel => system =>
+:: advanced => system_variables", or on the commandline just before
+:: execution of QTlab. The latter is done below with the "SET PATH"
+:: statements. Comment or uncomment these lines as needed.
+
+:: Add gnuplot to PATH ("binary" folder for >= 4.4.0, "bin" folder for 4.3)
+SET PATH=%CD%\3rd_party\gnuplot\binary;%PATH%
+
+:: Add Console2 to PATH
+SET PATH=%CD%\3rd_party\Console2\;%PATH%
+
+:: Add GTK to PATH and set GTK_BASEPATH (not needed if using
+:: pygtk-all-in-one installer).
+::SET GTK_BASEPATH=%CD%\3rd_party\gtk
+::SET PATH=%CD%\3rd_party\gtk\bin;%CD%\3rd_party\gtk\lib;%PATH%
+
+:: Check for version of python
+IF EXIST c:\python27\python.exe (
+    SET PYTHON_PATH=c:\python27
+    GOTO mark1
+)
+IF EXIST c:\python26\python.exe (
+    SET PYTHON_PATH=c:\python26
+    GOTO mark1
+)
+:mark1
+
+:: Run QTlab
+:: check if version < 0.11
+IF EXIST "%PYTHON_PATH%\scripts\ipython.py" (
+    start Console -w "QTLab" -r "/k %PYTHON_PATH%\python.exe %PYTHON_PATH%\scripts\ipython.py -gthread -p sh source/qtlab_shell.py"
+    GOTO EOF
+)
+:: check if version >= 0.11
+IF EXIST "%PYTHON_PATH%\scripts\ipython-script.py" (
+    start Console -w "QTLab" -r "/k %PYTHON_PATH%\python.exe %PYTHON_PATH%\scripts\ipython-script.py --gui=gtk -i source/qtlab_shell.py"
+    GOTO EOF
+)
+
+:: papyllon extension (for ipython version 4.*)
+
+:: corrects an jupyter bug 
+:: Details: jupyter console -f 'file.json' needs file.json to exist
+::          yet when one closes the console. file.json is deleted.
+::          So we have to create it everytime...
+echo { > kernel.json
+echo } >> kernel.json
+
+IF EXIST "kernel.json"  (
+    ipython kernel
+    start cmd.exe /k "jupyter console --existing"
+    ::start cmd.exe /k "jupyter console --JupyterConsoleApp.connection_file='%cd%\kernel.json' -i --ZMQTerminalIPythonApp.module_to_run='source/qtlab_shell.py'"
+    GOTO EOF
+    )
+
+echo Failed to run qtlab.bat
+pause
+:EOF

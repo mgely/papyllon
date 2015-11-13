@@ -1,0 +1,5 @@
+execfile('bf_smb1_smb2_fsv_1.py')
+execfile('bf_smb1_smb2_fsv_2.py')
+execfile('bf_smb1_smb2_fsv_3.py')
+execfile('bf_smb1_smb2_fsv_4.py')
+execfile('bf_smb1_smb2_fsv_5.py')

@@ -1,0 +1,11 @@
+#setup PNA for two tone spectroscopy
+
+
+#setup standard S21 measurement
+pna.reset()
+pna.setup(start_frequency=start_freq,
+          stop_frequency=stop_freq,measurement_format = 'MLIN')
+pna.set_resolution_bandwidth(bandwidth)
+pna.set_sweeppoints(f_points)
+pna.set_averages_on()
+pna.set_averages(averages)

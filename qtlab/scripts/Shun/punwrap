@@ -1,0 +1,4 @@
+import numpy as np
+f = np.loadtxt('D:\data\Shun\ParaAmp1\20140106\20140106113900_ParaAmp1.meta.txt')
+print f
+

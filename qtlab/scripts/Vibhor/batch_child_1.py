@@ -1,0 +1,7 @@
+#execfile('bf_split_3.py')
+#qt.msleep(1)
+#execfile('bf_split_4.py')
+qt.msleep(1)
+#execfile('bf_split_5.py')
+pna.set_power(-10)
+smb2.set_RF_state(False)
