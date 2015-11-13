@@ -1,5 +1,6 @@
 from lib import config, lockfile
 import os
+from IPython.lib.kernel import get_connection_file
 
 _lockname = os.path.join(config.get_execdir(), 'qtlab.lock')
 lockfile.set_filename(_lockname)

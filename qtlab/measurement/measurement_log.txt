@@ -1,0 +1,1211 @@
+2015-11-06 14:36:13,569 - INFO - Logging initialized
+2015-11-06 14:36:20,164 - INFO - Logging initialized
+2015-11-06 14:38:03,308 - INFO - Logging initialized
+2015-11-06 14:38:03,308 - INFO - Measurement kernel switched on
+2015-11-06 14:41:53,973 - INFO - Logging initialized
+2015-11-06 14:41:53,973 - INFO - Measurement kernel switched on
+2015-11-06 14:45:03,645 - INFO - Logging initialized
+2015-11-06 14:45:03,645 - INFO - Measurement kernel switched on
+2015-11-06 14:48:01,756 - INFO - Logging initialized
+2015-11-06 14:48:01,756 - INFO - Measurement kernel switched on
+2015-11-06 14:48:53,967 - INFO - Logging initialized
+2015-11-06 14:48:53,967 - INFO - Measurement kernel switched on
+2015-11-06 14:49:02,016 - INFO - Logging initialized
+2015-11-06 14:49:02,016 - INFO - Measurement kernel switched on
+2015-11-06 14:49:12,760 - INFO - Logging initialized
+2015-11-06 14:49:12,760 - INFO - Measurement kernel switched on
+2015-11-06 14:49:38,079 - INFO - Logging initialized
+2015-11-06 14:49:38,079 - INFO - Measurement kernel switched on
+2015-11-06 14:49:54,467 - INFO - Processing command...
+2015-11-06 14:49:54,467 - INFO - measurement pinged
+2015-11-06 14:50:31,506 - INFO - Logging initialized
+2015-11-06 14:50:31,506 - INFO - Measurement kernel switched on
+2015-11-06 14:50:56,818 - INFO - Logging initialized
+2015-11-06 14:50:56,818 - INFO - Measurement kernel switched on
+2015-11-06 14:53:54,200 - INFO - Logging initialized
+2015-11-06 14:53:54,200 - INFO - Measurement kernel switched on
+2015-11-06 14:53:56,000 - INFO - Processing command...
+2015-11-06 14:53:56,000 - INFO - measurement pinged
+2015-11-06 14:54:45,720 - INFO - Logging initialized
+2015-11-06 14:54:45,721 - INFO - Measurement kernel switched on
+2015-11-06 14:55:18,700 - INFO - Logging initialized
+2015-11-06 14:55:18,700 - INFO - Measurement kernel switched on
+2015-11-06 14:55:20,221 - INFO - 
+Processing command...
+2015-11-06 14:55:20,221 - INFO - measurement pinged
+2015-11-06 14:55:27,927 - INFO - Processing command...
+2015-11-06 14:55:27,927 - INFO - measurement pinged
+2015-11-06 14:55:43,020 - INFO - Logging initialized
+2015-11-06 14:55:43,020 - INFO - Measurement kernel switched on
+2015-11-06 14:55:46,104 - INFO - Processing command...
+2015-11-06 14:55:46,104 - INFO - measurement pinged
+2015-11-06 14:56:51,838 - INFO - Logging initialized
+2015-11-06 14:56:51,838 - INFO - Measurement kernel switched on
+2015-11-06 14:57:16,723 - INFO - Logging initialized
+2015-11-06 14:57:16,723 - INFO - Measurement kernel switched on
+2015-11-06 14:57:19,068 - INFO - 
+Processing command...
+2015-11-06 14:57:19,068 - INFO - measurement pinged
+2015-11-06 14:57:19,831 - INFO - Processing command...
+2015-11-06 14:57:19,831 - INFO - measurement pinged
+2015-11-06 14:57:19,842 - INFO - Processing command...
+2015-11-06 14:57:19,842 - INFO - measurement pinged
+2015-11-06 14:57:20,424 - INFO - Processing command...
+2015-11-06 14:57:20,424 - INFO - measurement pinged
+2015-11-06 14:57:27,868 - INFO - 
+Processing command...
+2015-11-06 14:57:27,868 - INFO - measurement pinged
+2015-11-06 14:57:28,325 - INFO - Processing command...
+2015-11-06 14:57:28,325 - INFO - measurement pinged
+2015-11-06 15:00:22,660 - INFO - Logging initialized
+2015-11-06 15:00:22,661 - INFO - Measurement kernel switched on
+2015-11-06 15:01:34,081 - INFO - Logging initialized
+2015-11-06 15:01:34,082 - INFO - Measurement kernel switched on
+2015-11-06 15:01:35,967 - INFO - Processing command...
+2015-11-06 15:01:35,967 - INFO - measurement pinged
+2015-11-06 15:01:35,980 - INFO - Processing command...
+2015-11-06 15:01:35,980 - INFO - measurement pinged
+2015-11-06 15:07:34,039 - INFO - Logging initialized
+2015-11-06 15:07:34,040 - INFO - Measurement kernel switched on
+2015-11-06 15:07:35,841 - INFO - Processing command...
+2015-11-06 15:07:49,361 - INFO - Logging initialized
+2015-11-06 15:07:49,361 - INFO - Measurement kernel switched on
+2015-11-06 15:07:49,461 - INFO - Processing command...
+2015-11-06 15:07:49,461 - INFO - measurement pinged
+2015-11-06 15:07:49,562 - INFO - Processing command...
+2015-11-06 15:07:49,562 - INFO - measurement pinged
+2015-11-06 15:07:49,661 - INFO - Processing command...
+2015-11-06 15:07:49,661 - INFO - measurement pinged
+2015-11-06 15:07:49,762 - INFO - Processing command...
+2015-11-06 15:07:49,762 - INFO - measurement pinged
+2015-11-06 15:07:49,861 - INFO - Processing command...
+2015-11-06 15:07:49,861 - INFO - measurement pinged
+2015-11-06 15:07:49,961 - INFO - Processing command...
+2015-11-06 15:07:49,961 - INFO - measurement pinged
+2015-11-06 15:07:50,062 - INFO - Processing command...
+2015-11-06 15:07:50,062 - INFO - measurement pinged
+2015-11-06 15:07:50,161 - INFO - Processing command...
+2015-11-06 15:07:50,161 - INFO - measurement pinged
+2015-11-06 15:07:50,262 - INFO - Processing command...
+2015-11-06 15:07:50,262 - INFO - measurement pinged
+2015-11-06 15:07:50,361 - INFO - Processing command...
+2015-11-06 15:07:50,361 - INFO - measurement pinged
+2015-11-06 15:07:50,461 - INFO - Processing command...
+2015-11-06 15:07:50,461 - INFO - measurement pinged
+2015-11-06 15:07:50,562 - INFO - Processing command...
+2015-11-06 15:07:50,562 - INFO - measurement pinged
+2015-11-06 15:07:50,661 - INFO - Processing command...
+2015-11-06 15:07:50,661 - INFO - measurement pinged
+2015-11-06 15:07:50,762 - INFO - Processing command...
+2015-11-06 15:07:50,762 - INFO - measurement pinged
+2015-11-06 15:07:50,861 - INFO - Processing command...
+2015-11-06 15:07:50,861 - INFO - measurement pinged
+2015-11-06 15:07:50,961 - INFO - Processing command...
+2015-11-06 15:07:50,961 - INFO - measurement pinged
+2015-11-06 15:07:51,062 - INFO - Processing command...
+2015-11-06 15:07:51,062 - INFO - measurement pinged
+2015-11-06 15:07:51,161 - INFO - Processing command...
+2015-11-06 15:07:51,161 - INFO - measurement pinged
+2015-11-06 15:07:51,262 - INFO - Processing command...
+2015-11-06 15:07:51,262 - INFO - measurement pinged
+2015-11-06 15:07:51,361 - INFO - Processing command...
+2015-11-06 15:07:51,361 - INFO - measurement pinged
+2015-11-06 15:07:51,461 - INFO - Processing command...
+2015-11-06 15:07:51,461 - INFO - measurement pinged
+2015-11-06 15:07:51,562 - INFO - Processing command...
+2015-11-06 15:07:51,562 - INFO - measurement pinged
+2015-11-06 15:07:51,661 - INFO - Processing command...
+2015-11-06 15:07:51,661 - INFO - measurement pinged
+2015-11-06 15:07:51,762 - INFO - Processing command...
+2015-11-06 15:07:51,762 - INFO - measurement pinged
+2015-11-06 15:07:51,861 - INFO - Processing command...
+2015-11-06 15:07:51,861 - INFO - measurement pinged
+2015-11-06 15:07:51,961 - INFO - Processing command...
+2015-11-06 15:07:51,961 - INFO - measurement pinged
+2015-11-06 15:07:52,062 - INFO - Processing command...
+2015-11-06 15:07:52,062 - INFO - measurement pinged
+2015-11-06 15:07:52,161 - INFO - Processing command...
+2015-11-06 15:07:52,161 - INFO - measurement pinged
+2015-11-06 15:07:52,262 - INFO - Processing command...
+2015-11-06 15:07:52,262 - INFO - measurement pinged
+2015-11-06 15:07:52,361 - INFO - Processing command...
+2015-11-06 15:07:52,361 - INFO - measurement pinged
+2015-11-06 15:07:52,461 - INFO - Processing command...
+2015-11-06 15:07:52,461 - INFO - measurement pinged
+2015-11-06 15:07:52,562 - INFO - Processing command...
+2015-11-06 15:07:52,562 - INFO - measurement pinged
+2015-11-06 15:07:52,661 - INFO - Processing command...
+2015-11-06 15:07:52,661 - INFO - measurement pinged
+2015-11-06 15:07:52,762 - INFO - Processing command...
+2015-11-06 15:07:52,762 - INFO - measurement pinged
+2015-11-06 15:07:52,861 - INFO - Processing command...
+2015-11-06 15:07:52,861 - INFO - measurement pinged
+2015-11-06 15:07:52,961 - INFO - Processing command...
+2015-11-06 15:07:52,961 - INFO - measurement pinged
+2015-11-06 15:07:53,062 - INFO - Processing command...
+2015-11-06 15:07:53,062 - INFO - measurement pinged
+2015-11-06 15:07:53,161 - INFO - Processing command...
+2015-11-06 15:07:53,161 - INFO - measurement pinged
+2015-11-06 15:07:53,262 - INFO - Processing command...
+2015-11-06 15:07:53,262 - INFO - measurement pinged
+2015-11-06 15:07:53,361 - INFO - Processing command...
+2015-11-06 15:07:53,361 - INFO - measurement pinged
+2015-11-06 15:07:53,461 - INFO - Processing command...
+2015-11-06 15:07:53,461 - INFO - measurement pinged
+2015-11-06 15:07:53,562 - INFO - Processing command...
+2015-11-06 15:07:53,562 - INFO - measurement pinged
+2015-11-06 15:07:53,661 - INFO - Processing command...
+2015-11-06 15:07:53,661 - INFO - measurement pinged
+2015-11-06 15:07:53,762 - INFO - Processing command...
+2015-11-06 15:07:53,762 - INFO - measurement pinged
+2015-11-06 15:07:53,861 - INFO - Processing command...
+2015-11-06 15:07:53,861 - INFO - measurement pinged
+2015-11-06 15:07:53,961 - INFO - Processing command...
+2015-11-06 15:07:53,961 - INFO - measurement pinged
+2015-11-06 15:07:54,062 - INFO - Processing command...
+2015-11-06 15:07:54,062 - INFO - measurement pinged
+2015-11-06 15:07:54,161 - INFO - Processing command...
+2015-11-06 15:07:54,161 - INFO - measurement pinged
+2015-11-06 15:07:54,262 - INFO - Processing command...
+2015-11-06 15:07:54,262 - INFO - measurement pinged
+2015-11-06 15:07:54,361 - INFO - Processing command...
+2015-11-06 15:07:54,361 - INFO - measurement pinged
+2015-11-06 15:07:54,461 - INFO - Processing command...
+2015-11-06 15:07:54,461 - INFO - measurement pinged
+2015-11-06 15:07:54,562 - INFO - Processing command...
+2015-11-06 15:07:54,562 - INFO - measurement pinged
+2015-11-06 15:07:54,661 - INFO - Processing command...
+2015-11-06 15:07:54,661 - INFO - measurement pinged
+2015-11-06 15:07:54,762 - INFO - Processing command...
+2015-11-06 15:07:54,762 - INFO - measurement pinged
+2015-11-06 15:07:54,861 - INFO - Processing command...
+2015-11-06 15:07:54,861 - INFO - measurement pinged
+2015-11-06 15:07:54,961 - INFO - Processing command...
+2015-11-06 15:07:54,961 - INFO - measurement pinged
+2015-11-06 15:07:55,062 - INFO - Processing command...
+2015-11-06 15:07:55,062 - INFO - measurement pinged
+2015-11-06 15:07:55,161 - INFO - Processing command...
+2015-11-06 15:07:55,161 - INFO - measurement pinged
+2015-11-06 15:07:55,262 - INFO - Processing command...
+2015-11-06 15:07:55,262 - INFO - measurement pinged
+2015-11-06 15:07:55,361 - INFO - Processing command...
+2015-11-06 15:07:55,361 - INFO - measurement pinged
+2015-11-06 15:07:55,461 - INFO - Processing command...
+2015-11-06 15:07:55,461 - INFO - measurement pinged
+2015-11-06 15:07:55,562 - INFO - Processing command...
+2015-11-06 15:07:55,562 - INFO - measurement pinged
+2015-11-06 15:08:09,648 - INFO - Logging initialized
+2015-11-06 15:08:09,648 - INFO - Measurement kernel switched on
+2015-11-06 15:08:09,750 - INFO - Processing command...
+2015-11-06 15:08:09,750 - INFO - measurement pinged
+2015-11-06 15:08:15,250 - INFO - Processing command...
+2015-11-06 15:08:15,250 - INFO - measurement pinged
+2015-11-06 15:08:19,351 - INFO - Processing command...
+2015-11-06 15:08:19,351 - INFO - measurement pinged
+2015-11-06 15:08:20,750 - INFO - Processing command...
+2015-11-06 15:08:20,750 - INFO - measurement pinged
+2015-11-06 15:08:22,151 - INFO - Processing command...
+2015-11-06 15:08:22,151 - INFO - measurement pinged
+2015-11-06 15:08:24,851 - INFO - Processing command...
+2015-11-06 15:08:24,851 - INFO - measurement pinged
+2015-11-06 15:08:28,851 - INFO - Processing command...
+2015-11-06 15:08:28,851 - INFO - measurement pinged
+2015-11-06 15:08:29,051 - INFO - Processing command...
+2015-11-06 15:08:29,051 - INFO - measurement pinged
+2015-11-06 15:08:47,151 - INFO - Processing command...
+2015-11-06 15:08:47,151 - INFO - Logging initialized
+2015-11-06 15:08:47,151 - INFO - Logging initialized
+2015-11-06 15:08:47,151 - INFO - SingleTone measurent switched on
+2015-11-06 15:08:47,151 - INFO - SingleTone measurent switched on
+2015-11-06 15:08:53,752 - INFO - Processing command...
+2015-11-06 15:08:53,752 - INFO - Processing command...
+2015-11-06 15:09:11,453 - INFO - Processing command...
+2015-11-06 15:09:11,453 - INFO - Processing command...
+2015-11-06 15:09:11,453 - INFO - Aborting measurement...
+2015-11-06 15:09:11,453 - INFO - Aborting measurement...
+2015-11-06 15:09:11,453 - INFO - aborting measurement, class name: SingleTone
+2015-11-06 15:09:11,453 - INFO - aborting measurement, class name: SingleTone
+2015-11-06 15:09:11,453 - INFO - Measurement aborted
+2015-11-06 15:09:11,453 - INFO - Measurement aborted
+2015-11-06 15:09:11,453 - INFO - Measurent switched off
+2015-11-06 15:09:11,453 - INFO - Measurent switched off
+2015-11-06 15:09:11,453 - INFO - Back to measurement kernel
+2015-11-06 15:09:11,453 - INFO - Back to measurement kernel
+2015-11-06 15:09:18,154 - INFO - Processing command...
+2015-11-06 15:09:18,154 - INFO - Processing command...
+2015-11-06 15:09:18,154 - INFO - measurement pinged
+2015-11-06 15:09:18,154 - INFO - measurement pinged
+2015-11-06 15:09:18,954 - INFO - Processing command...
+2015-11-06 15:09:18,954 - INFO - Processing command...
+2015-11-06 15:09:18,954 - INFO - measurement pinged
+2015-11-06 15:09:18,954 - INFO - measurement pinged
+2015-11-06 15:09:19,655 - INFO - Processing command...
+2015-11-06 15:09:19,655 - INFO - Processing command...
+2015-11-06 15:09:19,655 - INFO - measurement pinged
+2015-11-06 15:09:19,655 - INFO - measurement pinged
+2015-11-06 15:09:20,556 - INFO - Processing command...
+2015-11-06 15:09:20,556 - INFO - Processing command...
+2015-11-06 15:09:20,556 - INFO - measurement pinged
+2015-11-06 15:09:20,556 - INFO - measurement pinged
+2015-11-06 15:09:20,858 - INFO - Processing command...
+2015-11-06 15:09:20,858 - INFO - Processing command...
+2015-11-06 15:09:20,858 - INFO - measurement pinged
+2015-11-06 15:09:20,858 - INFO - measurement pinged
+2015-11-06 15:09:21,157 - INFO - Processing command...
+2015-11-06 15:09:21,157 - INFO - Processing command...
+2015-11-06 15:09:21,157 - INFO - measurement pinged
+2015-11-06 15:09:21,157 - INFO - measurement pinged
+2015-11-06 15:09:21,358 - INFO - Processing command...
+2015-11-06 15:09:21,358 - INFO - Processing command...
+2015-11-06 15:09:21,358 - INFO - measurement pinged
+2015-11-06 15:09:21,358 - INFO - measurement pinged
+2015-11-06 15:09:21,559 - INFO - Processing command...
+2015-11-06 15:09:21,559 - INFO - Processing command...
+2015-11-06 15:09:21,559 - INFO - measurement pinged
+2015-11-06 15:09:21,559 - INFO - measurement pinged
+2015-11-06 15:09:21,960 - INFO - Processing command...
+2015-11-06 15:09:21,960 - INFO - Processing command...
+2015-11-06 15:09:21,960 - INFO - measurement pinged
+2015-11-06 15:09:21,960 - INFO - measurement pinged
+2015-11-06 15:09:22,562 - INFO - Processing command...
+2015-11-06 15:09:22,562 - INFO - Processing command...
+2015-11-06 15:09:22,562 - INFO - measurement pinged
+2015-11-06 15:09:22,562 - INFO - measurement pinged
+2015-11-06 15:09:22,763 - INFO - Processing command...
+2015-11-06 15:09:22,763 - INFO - Processing command...
+2015-11-06 15:09:22,763 - INFO - measurement pinged
+2015-11-06 15:09:22,763 - INFO - measurement pinged
+2015-11-06 15:09:28,463 - INFO - Processing command...
+2015-11-06 15:09:28,463 - INFO - Processing command...
+2015-11-06 15:09:28,463 - INFO - measurement pinged
+2015-11-06 15:09:28,463 - INFO - measurement pinged
+2015-11-06 15:09:41,802 - INFO - Logging initialized
+2015-11-06 15:09:41,802 - INFO - Measurement kernel switched on
+2015-11-06 15:09:44,703 - INFO - Processing command...
+2015-11-06 15:09:44,703 - INFO - measurement pinged
+2015-11-06 15:09:53,203 - INFO - Processing command...
+2015-11-06 15:09:53,203 - INFO - Logging initialized
+2015-11-06 15:09:53,203 - INFO - Logging initialized
+2015-11-06 15:09:53,203 - INFO - SingleTone measurent switched on
+2015-11-06 15:09:53,203 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 159            2015-11-06 15:16:04,355 - INFO - Logging initialized
+measurement.py - in idle - line 33            2015-11-06 15:16:04,355 - INFO - Measurement kernel switched on
+measurement.py - in setup_logging - line 159
+            2015-11-06 15:16:15,545 - INFO - Logging initialized
+measurement.py - in idle - line 33
+            2015-11-06 15:16:15,545 - INFO - Measurement kernel switched on
+2015-11-06 15:16:49,009 - INFO - Processing command...
+2015-11-06 15:16:49,009 - INFO - Processing command...
+measurement.py - in setup_logging - line 160
+            2015-11-06 15:18:47,654 - INFO - Logging initialized
+measurement.py - in idle - line 33
+            2015-11-06 15:18:47,655 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 70
+            2015-11-06 15:18:52,244 - INFO - Processing command...
+measurement.py - in setup_logging - line 159
+            2015-11-06 15:18:52,246 - INFO - Logging initialized
+measurement.py - in setup_logging - line 159
+            2015-11-06 15:18:52,246 - INFO - Logging initialized
+measurement.py - in idle - line 35
+            2015-11-06 15:18:52,246 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 35
+            2015-11-06 15:18:52,246 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 160
+            2015-11-06 15:19:04,953 - INFO - Logging initialized
+measurement.py - in idle - line 33
+            2015-11-06 15:19:04,953 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 71
+            2015-11-06 15:19:06,852 - INFO - Processing command...
+measurement.py - in setup_logging - line 160
+            2015-11-06 15:19:06,854 - INFO - Logging initialized
+measurement.py - in setup_logging - line 160
+            2015-11-06 15:19:06,854 - INFO - Logging initialized
+measurement.py - in idle - line 35
+            2015-11-06 15:19:06,854 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 35
+            2015-11-06 15:19:06,854 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 160
+            2015-11-06 15:19:23,694 - INFO - Logging initialized
+measurement.py - in idle - line 33
+            2015-11-06 15:19:23,694 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 71
+            2015-11-06 15:19:25,655 - INFO - Processing command...
+measurement.py - in process_command - line 70            2015-11-06 15:19:25,655 - INFO - Processing command...
+measurement.py - in setup_logging - line 160
+            2015-11-06 15:19:25,657 - INFO - Logging initialized
+measurement.py - in setup_logging - line 160
+            2015-11-06 15:19:25,657 - INFO - Logging initialized
+measurement.py - in setup_logging - line 159            2015-11-06 15:19:25,657 - INFO - Logging initialized
+measurement.py - in idle - line 35
+            2015-11-06 15:19:25,657 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 159            2015-11-06 15:19:25,657 - INFO - Logging initialized
+measurement.py - in idle - line 35
+            2015-11-06 15:19:25,657 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 35            2015-11-06 15:19:25,657 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 35            2015-11-06 15:19:25,657 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 160
+            2015-11-06 15:19:48,413 - INFO - Logging initialized
+measurement.py - in idle - line 33
+            2015-11-06 15:19:48,413 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 71
+            2015-11-06 15:19:50,413 - INFO - Processing command...
+measurement.py - in setup_logging - line 160
+            2015-11-06 15:19:50,414 - INFO - Logging initialized
+measurement.py - in setup_logging - line 160
+            2015-11-06 15:19:50,414 - INFO - Logging initialized
+measurement.py - in idle - line 35
+            2015-11-06 15:19:50,414 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 35
+            2015-11-06 15:19:50,414 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 160
+            2015-11-06 15:21:14,361 - INFO - Logging initialized
+measurement.py - in idle - line 33
+            2015-11-06 15:21:14,361 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 71
+            2015-11-06 15:21:19,062 - INFO - Processing command...
+measurement.py - in ping - line 44
+            2015-11-06 15:21:19,062 - INFO - measurement pinged
+measurement.py - in setup_logging - line 160
+            2015-11-06 15:47:03,154 - INFO - Logging initialized
+measurement.py - in idle - line 33
+            2015-11-06 15:47:03,154 - INFO - Measurement kernel switched on
+measurement.py - in setup_logging - line 161
+            2015-11-06 15:47:29,365 - INFO - Logging initialized
+measurement.py - in idle - line 33
+            2015-11-06 15:47:29,365 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 71
+            2015-11-06 15:47:54,660 - INFO - Processing command...
+measurement.py - in ping - line 44
+            2015-11-06 15:47:54,660 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-06 15:48:03,934 - INFO - Processing command...
+measurement.py - in ping - line 44
+            2015-11-06 15:48:03,934 - INFO - measurement pinged
+measurement.py - in setup_logging - line 161
+            2015-11-06 15:48:31,556 - INFO - Logging initialized
+measurement.py - in idle - line 33
+            2015-11-06 15:48:31,556 - INFO - Measurement kernel switched on
+measurement.py - in setup_logging - line 161
+            2015-11-06 15:48:36,884 - INFO - Logging initialized
+measurement.py - in idle - line 33
+            2015-11-06 15:48:36,884 - INFO - Measurement kernel switched on
+measurement.py - in setup_logging - line 161
+            2015-11-06 15:48:48,605 - INFO - Logging initialized
+measurement.py - in idle - line 33
+            2015-11-06 15:48:48,605 - INFO - Measurement kernel switched on
+measurement.py - in setup_logging - line 160
+            2015-11-06 16:10:48,207 - INFO - Logging initialized
+measurement.py - in idle - line 32
+            2015-11-06 16:10:48,207 - INFO - Measurement kernel switched on
+measurement.py - in setup_logging - line 160
+            2015-11-06 16:13:45,329 - INFO - Logging initialized
+measurement.py - in idle - line 32
+            2015-11-06 16:13:45,329 - INFO - Measurement kernel switched on
+measurement.py - in setup_logging - line 160
+            2015-11-06 16:13:48,963 - INFO - Logging initialized
+measurement.py - in idle - line 32
+            2015-11-06 16:13:48,963 - INFO - Measurement kernel switched on
+measurement.py - in setup_logging - line 160
+            2015-11-06 16:17:58,036 - INFO - Logging initialized
+measurement.py - in idle - line 32
+            2015-11-06 16:17:58,036 - INFO - Measurement kernel switched on
+measurement.py - in setup_logging - line 160
+            2015-11-06 16:25:49,059 - INFO - Logging initialized
+measurement.py - in idle - line 32
+            2015-11-06 16:25:49,059 - INFO - Measurement kernel switched on
+measurement.py - in setup_logging - line 160
+            2015-11-06 16:27:47,924 - INFO - Logging initialized
+measurement.py - in idle - line 32
+            2015-11-06 16:27:47,926 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 71
+            2015-11-06 16:28:22,573 - INFO - Processing command...
+measurement.py - in ping - line 43
+            2015-11-06 16:29:16,431 - INFO - measurement pinged
+measurement.py - in setup_logging - line 160
+            2015-11-06 16:33:08,378 - INFO - Logging initialized
+measurement.py - in idle - line 32
+            2015-11-06 16:33:08,378 - INFO - Measurement kernel switched on
+measurement.py - in setup_logging - line 159
+            2015-11-06 16:33:22,025 - INFO - Logging initialized
+measurement.py - in idle - line 32
+            2015-11-06 16:33:22,026 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 70
+            2015-11-06 16:33:39,927 - INFO - Processing command...
+measurement.py - in ping - line 43
+            2015-11-06 16:33:39,927 - INFO - measurement pinged
+measurement.py - in process_command - line 70
+            2015-11-06 16:33:42,927 - INFO - Processing command...
+measurement.py - in ping - line 43
+            2015-11-06 16:33:42,927 - INFO - measurement pinged
+measurement.py - in process_command - line 70
+            2015-11-06 16:33:44,128 - INFO - Processing command...
+measurement.py - in ping - line 43
+            2015-11-06 16:33:44,128 - INFO - measurement pinged
+measurement.py - in process_command - line 70
+            2015-11-06 16:33:45,528 - INFO - Processing command...
+measurement.py - in ping - line 43
+            2015-11-06 16:33:45,528 - INFO - measurement pinged
+measurement.py - in process_command - line 70
+            2015-11-06 16:33:46,427 - INFO - Processing command...
+measurement.py - in ping - line 43
+            2015-11-06 16:33:46,427 - INFO - measurement pinged
+measurement.py - in process_command - line 70
+            2015-11-06 16:33:47,128 - INFO - Processing command...
+measurement.py - in ping - line 43
+            2015-11-06 16:33:47,128 - INFO - measurement pinged
+measurement.py - in process_command - line 70
+            2015-11-06 16:33:53,428 - INFO - Processing command...
+measurement.py - in setup_logging - line 159
+            2015-11-06 16:33:53,430 - INFO - Logging initialized
+measurement.py - in setup_logging - line 159
+            2015-11-06 16:33:53,430 - INFO - Logging initialized
+measurement.py - in idle - line 34
+            2015-11-06 16:33:53,430 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 34
+            2015-11-06 16:33:53,430 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 154
+            2015-11-10 18:09:00,618 - INFO - Logging initialized
+measurement.py - in setup_logging - line 154
+            2015-11-10 18:09:29,453 - INFO - Logging initialized
+measurement.py - in idle - line 35
+            2015-11-10 18:09:29,457 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 71
+            2015-11-10 18:09:35,611 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-10 18:09:35,611 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-10 18:09:37,513 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-10 18:09:37,515 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-10 18:09:38,714 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-10 18:09:38,714 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-10 18:09:39,482 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-10 18:09:39,482 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-10 18:09:40,322 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-10 18:09:40,322 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-10 18:09:51,144 - INFO - Applying self.set_state("OFF")
+measurement.py - in set_state - line 100
+            2015-11-10 18:09:51,145 - INFO - Aborting measurement...
+measurement.py - in abort - line 52
+            2015-11-10 18:09:51,145 - INFO - aborting measurement, class name: Measurement
+measurement.py - in abort - line 54
+            2015-11-10 18:09:51,147 - WARNING - Tried to initialize measurement from out of kernel (from class:Measurement)
+measurement.py - in set_state - line 108
+            2015-11-10 18:09:51,147 - ERROR - Abort failed with error: Measurement kernel cannot be aborted, use ctrl+c if you really want to abort
+measurement.py - in process_command - line 80
+            2015-11-10 18:09:51,148 - INFO - Error in self.set_state("OFF")
+Failed with error: Measurement kernel cannot be aborted, use ctrl+c if you really want to abort
+
+measurement.py - in process_command - line 71
+            2015-11-10 18:10:19,773 - INFO - Applying self.set_state("OFF")
+measurement.py - in set_state - line 100
+            2015-11-10 18:10:19,773 - INFO - Aborting measurement...
+measurement.py - in abort - line 52
+            2015-11-10 18:10:19,773 - INFO - aborting measurement, class name: Measurement
+measurement.py - in abort - line 54
+            2015-11-10 18:10:19,773 - WARNING - Tried to initialize measurement from out of kernel (from class:Measurement)
+measurement.py - in set_state - line 108
+            2015-11-10 18:10:19,773 - ERROR - Abort failed with error: Measurement kernel cannot be aborted, use ctrl+c if you really want to abort
+measurement.py - in process_command - line 80
+            2015-11-10 18:10:19,775 - INFO - Error in self.set_state("OFF")
+Failed with error: Measurement kernel cannot be aborted, use ctrl+c if you really want to abort
+
+measurement.py - in process_command - line 71
+            2015-11-10 18:10:27,980 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 154
+            2015-11-10 18:10:27,980 - INFO - Logging initialized
+measurement.py - in setup_logging - line 154
+            2015-11-10 18:10:27,980 - INFO - Logging initialized
+measurement.py - in process_command - line 80
+            2015-11-10 18:10:27,983 - INFO - Error in self.initialize_measurement()
+Failed with error: Address in use
+
+measurement.py - in process_command - line 80
+            2015-11-10 18:10:27,983 - INFO - Error in self.initialize_measurement()
+Failed with error: Address in use
+
+measurement.py - in setup_logging - line 154
+            2015-11-11 09:59:27,381 - INFO - Logging initialized
+measurement.py - in idle - line 35
+            2015-11-11 09:59:27,381 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 71
+            2015-11-11 10:00:02,438 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-11 10:00:02,438 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-11 10:00:03,648 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-11 10:00:03,648 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-11 10:00:04,999 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-11 10:00:04,999 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-11 10:00:06,219 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-11 10:00:06,219 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-11 10:00:07,158 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-11 10:00:07,158 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-11 10:00:08,009 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-11 10:00:08,009 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-11 10:00:09,914 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-11 10:00:09,914 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-11 10:00:13,045 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-11 10:00:13,045 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-11 10:00:13,946 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-11 10:00:13,946 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-11 10:00:14,625 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-11 10:00:14,625 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-11 10:00:15,206 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-11 10:00:15,206 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-11 10:00:15,736 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-11 10:00:15,736 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-11 10:00:16,206 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-11 10:00:16,206 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-11 10:00:16,736 - INFO - Applying self.ping()
+measurement.py - in ping - line 46
+            2015-11-11 10:00:16,736 - INFO - measurement pinged
+measurement.py - in process_command - line 71
+            2015-11-11 10:00:37,414 - INFO - Applying self.set_state("OFF")
+measurement.py - in set_state - line 100
+            2015-11-11 10:00:37,414 - INFO - Aborting measurement...
+measurement.py - in abort - line 52
+            2015-11-11 10:00:37,414 - INFO - aborting measurement, class name: Measurement
+measurement.py - in abort - line 54
+            2015-11-11 10:00:37,414 - WARNING - Tried to initialize measurement from out of kernel (from class:Measurement)
+measurement.py - in set_state - line 108
+            2015-11-11 10:00:37,414 - ERROR - Abort failed with error: Measurement kernel cannot be aborted, use ctrl+c if you really want to abort
+measurement.py - in process_command - line 80
+            2015-11-11 10:00:37,414 - INFO - Error in self.set_state("OFF")
+Failed with error: Measurement kernel cannot be aborted, use ctrl+c if you really want to abort
+
+measurement.py - in process_command - line 71
+            2015-11-11 10:01:00,842 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 154
+            2015-11-11 10:01:00,842 - INFO - Logging initialized
+measurement.py - in setup_logging - line 154
+            2015-11-11 10:01:00,842 - INFO - Logging initialized
+measurement.py - in process_command - line 80
+            2015-11-11 10:01:00,842 - INFO - Error in self.initialize_measurement()
+Failed with error: Address in use
+
+measurement.py - in process_command - line 80
+            2015-11-11 10:01:00,842 - INFO - Error in self.initialize_measurement()
+Failed with error: Address in use
+
+measurement.py - in process_command - line 71
+            2015-11-11 10:01:44,734 - INFO - Applying self.initialize_measurement()
+measurement.py - in process_command - line 71
+            2015-11-11 10:01:44,734 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 154
+            2015-11-11 10:01:44,734 - INFO - Logging initialized
+measurement.py - in setup_logging - line 154
+            2015-11-11 10:01:44,734 - INFO - Logging initialized
+measurement.py - in setup_logging - line 154
+            2015-11-11 10:01:44,734 - INFO - Logging initialized
+measurement.py - in process_command - line 80
+            2015-11-11 10:01:44,734 - INFO - Error in self.initialize_measurement()
+Failed with error: Address in use
+
+measurement.py - in process_command - line 80
+            2015-11-11 10:01:44,734 - INFO - Error in self.initialize_measurement()
+Failed with error: Address in use
+
+measurement.py - in process_command - line 80
+            2015-11-11 10:01:44,734 - INFO - Error in self.initialize_measurement()
+Failed with error: Address in use
+
+measurement.py - in process_command - line 71
+            2015-11-11 10:01:46,585 - INFO - Applying self.initialize_measurement()
+measurement.py - in process_command - line 71
+            2015-11-11 10:01:46,585 - INFO - Applying self.initialize_measurement()
+measurement.py - in process_command - line 71
+            2015-11-11 10:01:46,585 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 154
+            2015-11-11 10:01:46,585 - INFO - Logging initialized
+measurement.py - in setup_logging - line 154
+            2015-11-11 10:01:46,585 - INFO - Logging initialized
+measurement.py - in setup_logging - line 154
+            2015-11-11 10:01:46,585 - INFO - Logging initialized
+measurement.py - in setup_logging - line 154
+            2015-11-11 10:01:46,585 - INFO - Logging initialized
+measurement.py - in process_command - line 80
+            2015-11-11 10:01:46,585 - INFO - Error in self.initialize_measurement()
+Failed with error: Address in use
+
+measurement.py - in process_command - line 80
+            2015-11-11 10:01:46,585 - INFO - Error in self.initialize_measurement()
+Failed with error: Address in use
+
+measurement.py - in process_command - line 80
+            2015-11-11 10:01:46,585 - INFO - Error in self.initialize_measurement()
+Failed with error: Address in use
+
+measurement.py - in process_command - line 80
+            2015-11-11 10:01:46,585 - INFO - Error in self.initialize_measurement()
+Failed with error: Address in use
+
+measurement.py - in setup_logging - line 154
+            2015-11-11 10:04:08,030 - INFO - Logging initialized
+measurement.py - in idle - line 35
+            2015-11-11 10:04:08,030 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 71
+            2015-11-11 10:04:11,526 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 154
+            2015-11-11 10:04:11,526 - INFO - Logging initialized
+measurement.py - in setup_logging - line 154
+            2015-11-11 10:04:11,526 - INFO - Logging initialized
+measurement.py - in process_command - line 80
+            2015-11-11 10:04:11,526 - INFO - Error in self.initialize_measurement()
+Failed with error: Address in use
+
+measurement.py - in process_command - line 80
+            2015-11-11 10:04:11,526 - INFO - Error in self.initialize_measurement()
+Failed with error: Address in use
+
+measurement.py - in setup_logging - line 154
+            2015-11-11 10:05:32,049 - INFO - Logging initialized
+measurement.py - in setup_logging - line 154
+            2015-11-11 10:05:47,562 - INFO - Logging initialized
+measurement.py - in setup_communication - line 181
+            2015-11-11 10:05:47,562 - DEBUG - hasattr(self,'socket') = False
+measurement.py - in idle - line 35
+            2015-11-11 10:05:47,572 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 71
+            2015-11-11 10:06:11,941 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 154
+            2015-11-11 10:06:11,941 - INFO - Logging initialized
+measurement.py - in setup_logging - line 154
+            2015-11-11 10:06:11,941 - INFO - Logging initialized
+measurement.py - in setup_communication - line 181
+            2015-11-11 10:06:11,941 - DEBUG - hasattr(self,'socket') = False
+measurement.py - in setup_communication - line 181
+            2015-11-11 10:06:11,941 - DEBUG - hasattr(self,'socket') = False
+measurement.py - in process_command - line 80
+            2015-11-11 10:06:11,941 - INFO - Error in self.initialize_measurement()
+Failed with error: Address in use
+
+measurement.py - in process_command - line 80
+            2015-11-11 10:06:11,941 - INFO - Error in self.initialize_measurement()
+Failed with error: Address in use
+
+measurement.py - in setup_logging - line 155
+            2015-11-11 10:10:24,598 - INFO - Logging initialized
+measurement.py - in idle - line 36
+            2015-11-11 10:10:24,598 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 72
+            2015-11-11 10:10:24,858 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 155
+            2015-11-11 10:10:24,858 - INFO - Logging initialized
+measurement.py - in setup_logging - line 155
+            2015-11-11 10:10:24,858 - INFO - Logging initialized
+measurement.py - in process_command - line 81
+            2015-11-11 10:10:24,858 - INFO - Error in self.initialize_measurement()
+Failed with error: Address in use
+
+measurement.py - in process_command - line 81
+            2015-11-11 10:10:24,858 - INFO - Error in self.initialize_measurement()
+Failed with error: Address in use
+
+measurement.py - in setup_logging - line 155
+            2015-11-11 10:14:48,362 - INFO - Logging initialized
+measurement.py - in idle - line 36
+            2015-11-11 10:14:48,362 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 72
+            2015-11-11 10:14:52,444 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 155
+            2015-11-11 10:14:52,444 - INFO - Logging initialized
+measurement.py - in setup_logging - line 155
+            2015-11-11 10:14:52,444 - INFO - Logging initialized
+measurement.py - in setup_communication - line 188
+            2015-11-11 10:14:52,453 - DEBUG - Tried to re-bind the socket, but it appears to be still connected
+measurement.py - in setup_communication - line 188
+            2015-11-11 10:14:52,453 - DEBUG - Tried to re-bind the socket, but it appears to be still connected
+measurement.py - in idle - line 38
+            2015-11-11 10:14:52,453 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 38
+            2015-11-11 10:14:52,453 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 161
+            2015-11-11 10:33:50,940 - INFO - Logging initialized
+measurement.py - in setup_communication - line 193
+            2015-11-11 10:33:50,940 - INFO - Communication socket connected
+measurement.py - in idle - line 36
+            2015-11-11 10:33:50,940 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 72
+            2015-11-11 10:34:29,569 - INFO - Applying self.ping()
+measurement.py - in ping - line 47
+            2015-11-11 10:34:29,569 - INFO - measurement pinged
+measurement.py - in process_command - line 72
+            2015-11-11 10:34:30,380 - INFO - Applying self.ping()
+measurement.py - in ping - line 47
+            2015-11-11 10:34:30,380 - INFO - measurement pinged
+measurement.py - in process_command - line 72
+            2015-11-11 10:34:39,003 - INFO - Applying self.initialize_measurement()
+measurement.py - in process_command - line 81
+            2015-11-11 10:34:39,003 - INFO - Error in self.initialize_measurement()
+Failed with error: No such file or directory
+
+measurement.py - in setup_logging - line 166
+            2015-11-11 10:37:46,118 - INFO - Logging initialized
+measurement.py - in setup_communication - line 198
+            2015-11-11 10:37:46,118 - INFO - Communication socket connected
+measurement.py - in idle - line 36
+            2015-11-11 10:37:46,118 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 72
+            2015-11-11 10:37:52,677 - INFO - Applying self.initialize_measurement()
+measurement.py - in process_command - line 81
+            2015-11-11 10:37:52,677 - INFO - Error in self.initialize_measurement()
+Failed with error: No such file or directory
+
+measurement.py - in setup_logging - line 166
+            2015-11-11 10:38:32,719 - INFO - Logging initialized
+measurement.py - in setup_communication - line 198
+            2015-11-11 10:38:32,719 - INFO - Communication socket connected
+measurement.py - in idle - line 36
+            2015-11-11 10:38:32,719 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 72
+            2015-11-11 10:38:35,779 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 166
+            2015-11-11 10:41:59,611 - INFO - Logging initialized
+measurement.py - in setup_communication - line 198
+            2015-11-11 10:41:59,611 - INFO - Communication socket connected
+measurement.py - in idle - line 36
+            2015-11-11 10:41:59,611 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 72
+            2015-11-11 10:42:02,232 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 162
+            2015-11-11 10:58:44,578 - INFO - Logging initialized
+measurement.py - in setup_communication - line 197
+            2015-11-11 10:58:44,588 - DEBUG - Tried to re-bind the socket, but it appears to be still connected
+measurement.py - in idle - line 36
+            2015-11-11 10:58:44,588 - INFO - Measurement kernel switched on
+measurement.py - in setup_logging - line 162
+            2015-11-11 10:59:08,956 - INFO - Logging initialized
+measurement.py - in setup_communication - line 195
+            2015-11-11 10:59:08,966 - INFO - Communication socket connected
+measurement.py - in idle - line 36
+            2015-11-11 10:59:08,966 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 72
+            2015-11-11 10:59:18,588 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 162
+            2015-11-11 10:59:18,588 - INFO - Logging initialized
+measurement.py - in setup_logging - line 162
+            2015-11-11 10:59:18,588 - INFO - Logging initialized
+measurement.py - in setup_communication - line 197
+            2015-11-11 10:59:18,588 - DEBUG - Tried to re-bind the socket, but it appears to be still connected
+measurement.py - in setup_communication - line 197
+            2015-11-11 10:59:18,588 - DEBUG - Tried to re-bind the socket, but it appears to be still connected
+measurement.py - in idle - line 38
+            2015-11-11 10:59:18,588 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 38
+            2015-11-11 10:59:18,588 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 162
+            2015-11-11 11:20:22,594 - INFO - Logging initialized
+measurement.py - in setup_communication - line 195
+            2015-11-11 11:20:22,604 - INFO - Communication socket connected
+measurement.py - in idle - line 36
+            2015-11-11 11:20:22,604 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 72
+            2015-11-11 11:20:40,448 - INFO - Applying self.ping()
+measurement.py - in ping - line 47
+            2015-11-11 11:20:40,448 - INFO - measurement pinged
+measurement.py - in process_command - line 72
+            2015-11-11 11:20:59,203 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 162
+            2015-11-11 11:20:59,203 - INFO - Logging initialized
+measurement.py - in setup_logging - line 162
+            2015-11-11 11:20:59,203 - INFO - Logging initialized
+measurement.py - in setup_communication - line 195
+            2015-11-11 11:20:59,203 - INFO - Communication socket connected
+measurement.py - in setup_communication - line 195
+            2015-11-11 11:20:59,203 - INFO - Communication socket connected
+measurement.py - in idle - line 38
+            2015-11-11 11:20:59,203 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 38
+            2015-11-11 11:20:59,203 - INFO - SingleTone measurent switched on
+measurement.py - in process_command - line 72
+            2015-11-11 11:21:10,253 - INFO - Applying self.set_state("OFF")
+measurement.py - in process_command - line 72
+            2015-11-11 11:21:10,253 - INFO - Applying self.set_state("OFF")
+measurement.py - in set_state - line 108
+            2015-11-11 11:21:10,253 - INFO - Aborting measurement...
+measurement.py - in set_state - line 108
+            2015-11-11 11:21:10,253 - INFO - Aborting measurement...
+measurement.py - in abort - line 53
+            2015-11-11 11:21:10,253 - INFO - aborting measurement, class name: SingleTone
+measurement.py - in abort - line 53
+            2015-11-11 11:21:10,253 - INFO - aborting measurement, class name: SingleTone
+measurement.py - in set_state - line 112
+            2015-11-11 11:21:10,253 - INFO - Measurement aborted
+measurement.py - in set_state - line 112
+            2015-11-11 11:21:10,253 - INFO - Measurement aborted
+measurement.py - in set_state - line 114
+            2015-11-11 11:21:10,253 - INFO - Measurent switched off
+measurement.py - in set_state - line 114
+            2015-11-11 11:21:10,253 - INFO - Measurent switched off
+measurement.py - in initialize_measurement - line 94
+            2015-11-11 11:21:10,253 - INFO - Back to measurement kernel
+measurement.py - in initialize_measurement - line 94
+            2015-11-11 11:21:10,253 - INFO - Back to measurement kernel
+measurement.py - in process_command - line 72
+            2015-11-11 11:21:20,188 - INFO - Applying self.ping()
+measurement.py - in process_command - line 72
+            2015-11-11 11:21:20,188 - INFO - Applying self.ping()
+measurement.py - in ping - line 47
+            2015-11-11 11:21:20,188 - INFO - measurement pinged
+measurement.py - in ping - line 47
+            2015-11-11 11:21:20,188 - INFO - measurement pinged
+measurement.py - in process_command - line 72
+            2015-11-11 11:21:33,259 - INFO - Applying self.initialize_measurement()
+measurement.py - in process_command - line 72
+            2015-11-11 11:21:33,259 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 162
+            2015-11-11 11:21:33,259 - INFO - Logging initialized
+measurement.py - in setup_logging - line 162
+            2015-11-11 11:21:33,259 - INFO - Logging initialized
+measurement.py - in setup_logging - line 162
+            2015-11-11 11:21:33,259 - INFO - Logging initialized
+measurement.py - in setup_communication - line 195
+            2015-11-11 11:21:33,259 - INFO - Communication socket connected
+measurement.py - in setup_communication - line 195
+            2015-11-11 11:21:33,259 - INFO - Communication socket connected
+measurement.py - in setup_communication - line 195
+            2015-11-11 11:21:33,259 - INFO - Communication socket connected
+measurement.py - in idle - line 38
+            2015-11-11 11:21:33,259 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 38
+            2015-11-11 11:21:33,259 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 38
+            2015-11-11 11:21:33,259 - INFO - SingleTone measurent switched on
+measurement.py - in process_command - line 72
+            2015-11-11 11:21:37,249 - INFO - Applying self.initialize_measurement()
+measurement.py - in process_command - line 72
+            2015-11-11 11:21:37,249 - INFO - Applying self.initialize_measurement()
+measurement.py - in process_command - line 72
+            2015-11-11 11:21:37,249 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 162
+            2015-11-11 11:22:08,694 - INFO - Logging initialized
+measurement.py - in setup_communication - line 195
+            2015-11-11 11:22:08,694 - INFO - Communication socket connected
+measurement.py - in idle - line 36
+            2015-11-11 11:22:08,694 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 72
+            2015-11-11 11:22:13,414 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 162
+            2015-11-11 11:22:13,414 - INFO - Logging initialized
+measurement.py - in setup_logging - line 162
+            2015-11-11 11:22:13,414 - INFO - Logging initialized
+measurement.py - in setup_communication - line 195
+            2015-11-11 11:22:13,414 - INFO - Communication socket connected
+measurement.py - in setup_communication - line 195
+            2015-11-11 11:22:13,414 - INFO - Communication socket connected
+measurement.py - in idle - line 38
+            2015-11-11 11:22:13,414 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 38
+            2015-11-11 11:22:13,414 - INFO - SingleTone measurent switched on
+measurement.py - in process_command - line 72
+            2015-11-11 11:22:17,055 - INFO - Applying self.initialize_measurement()
+measurement.py - in process_command - line 72
+            2015-11-11 11:22:17,055 - INFO - Applying self.initialize_measurement()
+measurement.py - in process_command - line 81
+            2015-11-11 11:22:17,055 - INFO - Error in self.initialize_measurement()
+Failed with error: Measurements can only be initialized from the kernel.
+
+measurement.py - in process_command - line 81
+            2015-11-11 11:22:17,055 - INFO - Error in self.initialize_measurement()
+Failed with error: Measurements can only be initialized from the kernel.
+
+measurement.py - in setup_logging - line 162
+            2015-11-11 11:30:39,786 - INFO - Logging initialized
+measurement.py - in setup_communication - line 195
+            2015-11-11 11:30:39,786 - INFO - Communication socket connected
+measurement.py - in idle - line 36
+            2015-11-11 11:30:39,786 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 72
+            2015-11-11 11:30:50,387 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 162
+            2015-11-11 11:30:50,387 - INFO - Logging initialized
+measurement.py - in setup_logging - line 162
+            2015-11-11 11:30:50,387 - INFO - Logging initialized
+measurement.py - in setup_communication - line 195
+            2015-11-11 11:30:50,387 - INFO - Communication socket connected
+measurement.py - in setup_communication - line 195
+            2015-11-11 11:30:50,387 - INFO - Communication socket connected
+measurement.py - in idle - line 38
+            2015-11-11 11:30:50,387 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 38
+            2015-11-11 11:30:50,387 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 165
+            2015-11-11 11:32:04,176 - INFO - Logging initialized
+measurement.py - in setup_communication - line 198
+            2015-11-11 11:32:04,186 - INFO - Communication socket connected
+measurement.py - in idle - line 36
+            2015-11-11 11:32:04,186 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 72
+            2015-11-11 11:32:07,855 - INFO - Applying self.initialize_measurement()
+measurement.py - in initialize_measurement - line 97
+            2015-11-11 11:32:07,855 - INFO - Back to measurement kernel
+measurement.py - in setup_logging - line 165
+            2015-11-11 11:32:36,187 - INFO - Logging initialized
+measurement.py - in setup_communication - line 198
+            2015-11-11 11:32:36,187 - INFO - Communication socket connected
+measurement.py - in idle - line 36
+            2015-11-11 11:32:36,187 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 72
+            2015-11-11 11:32:39,138 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 165
+            2015-11-11 11:32:39,138 - INFO - Logging initialized
+measurement.py - in setup_logging - line 165
+            2015-11-11 11:32:39,138 - INFO - Logging initialized
+measurement.py - in setup_communication - line 198
+            2015-11-11 11:32:39,138 - INFO - Communication socket connected
+measurement.py - in setup_communication - line 198
+            2015-11-11 11:32:39,138 - INFO - Communication socket connected
+measurement.py - in idle - line 38
+            2015-11-11 11:32:39,138 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 38
+            2015-11-11 11:32:39,138 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 165
+            2015-11-11 11:39:30,664 - INFO - Logging initialized
+measurement.py - in setup_communication - line 198
+            2015-11-11 11:39:30,664 - INFO - Communication socket connected
+measurement.py - in idle - line 36
+            2015-11-11 11:39:30,664 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 72
+            2015-11-11 11:39:33,892 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 165
+            2015-11-11 11:39:33,892 - INFO - Logging initialized
+measurement.py - in setup_logging - line 165
+            2015-11-11 11:39:33,892 - INFO - Logging initialized
+measurement.py - in setup_communication - line 198
+            2015-11-11 11:39:33,892 - INFO - Communication socket connected
+measurement.py - in setup_communication - line 198
+            2015-11-11 11:39:33,892 - INFO - Communication socket connected
+measurement.py - in idle - line 38
+            2015-11-11 11:39:33,892 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 38
+            2015-11-11 11:39:33,892 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 165
+            2015-11-11 11:44:05,835 - INFO - Logging initialized
+measurement.py - in setup_communication - line 198
+            2015-11-11 11:44:05,845 - INFO - Communication socket connected
+measurement.py - in idle - line 36
+            2015-11-11 11:44:05,845 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 72
+            2015-11-11 11:44:10,085 - INFO - Applying self.initialize_measurement()
+measurement.py - in initialize_measurement - line 97
+            2015-11-11 11:44:10,085 - INFO - Back to measurement kernel
+measurement.py - in process_command - line 72
+            2015-11-11 11:44:38,288 - INFO - Applying self.initialize_measurement()
+measurement.py - in initialize_measurement - line 97
+            2015-11-11 11:44:38,288 - INFO - Back to measurement kernel
+measurement.py - in setup_logging - line 165
+            2015-11-11 11:44:51,704 - INFO - Logging initialized
+measurement.py - in setup_communication - line 198
+            2015-11-11 11:44:51,704 - INFO - Communication socket connected
+measurement.py - in idle - line 36
+            2015-11-11 11:44:51,704 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 72
+            2015-11-11 11:44:56,055 - INFO - Applying self.initialize_measurement()
+measurement.py - in initialize_measurement - line 97
+            2015-11-11 11:44:56,055 - INFO - Back to measurement kernel
+measurement.py - in setup_logging - line 166
+            2015-11-11 11:46:35,184 - INFO - Logging initialized
+measurement.py - in setup_communication - line 199
+            2015-11-11 11:46:35,184 - INFO - Communication socket connected
+measurement.py - in idle - line 37
+            2015-11-11 11:46:35,184 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 73
+            2015-11-11 11:46:38,604 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 166
+            2015-11-11 11:46:38,604 - INFO - Logging initialized
+measurement.py - in setup_logging - line 166
+            2015-11-11 11:46:38,604 - INFO - Logging initialized
+measurement.py - in setup_communication - line 199
+            2015-11-11 11:46:38,604 - INFO - Communication socket connected
+measurement.py - in setup_communication - line 199
+            2015-11-11 11:46:38,604 - INFO - Communication socket connected
+measurement.py - in idle - line 39
+            2015-11-11 11:46:38,604 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 39
+            2015-11-11 11:46:38,604 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 166
+            2015-11-11 11:47:32,773 - INFO - Logging initialized
+measurement.py - in setup_communication - line 199
+            2015-11-11 11:47:32,782 - INFO - Communication socket connected
+measurement.py - in idle - line 37
+            2015-11-11 11:47:32,782 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 73
+            2015-11-11 11:47:36,862 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 166
+            2015-11-11 11:47:36,862 - INFO - Logging initialized
+measurement.py - in setup_logging - line 166
+            2015-11-11 11:47:36,862 - INFO - Logging initialized
+measurement.py - in setup_communication - line 199
+            2015-11-11 11:47:36,862 - INFO - Communication socket connected
+measurement.py - in setup_communication - line 199
+            2015-11-11 11:47:36,862 - INFO - Communication socket connected
+measurement.py - in idle - line 39
+            2015-11-11 11:47:36,862 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 39
+            2015-11-11 11:47:36,862 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 166
+            2015-11-11 11:47:53,062 - INFO - Logging initialized
+measurement.py - in setup_communication - line 199
+            2015-11-11 11:47:53,072 - INFO - Communication socket connected
+measurement.py - in idle - line 37
+            2015-11-11 11:47:53,072 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 73
+            2015-11-11 11:47:57,303 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 166
+            2015-11-11 11:47:57,303 - INFO - Logging initialized
+measurement.py - in setup_logging - line 166
+            2015-11-11 11:47:57,303 - INFO - Logging initialized
+measurement.py - in setup_communication - line 199
+            2015-11-11 11:47:57,303 - INFO - Communication socket connected
+measurement.py - in setup_communication - line 199
+            2015-11-11 11:47:57,303 - INFO - Communication socket connected
+measurement.py - in idle - line 39
+            2015-11-11 11:47:57,303 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 39
+            2015-11-11 11:47:57,303 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 166
+            2015-11-11 11:48:25,971 - INFO - Logging initialized
+measurement.py - in setup_communication - line 199
+            2015-11-11 11:48:25,982 - INFO - Communication socket connected
+measurement.py - in idle - line 36
+            2015-11-11 11:48:25,982 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 73
+            2015-11-11 11:48:30,592 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 166
+            2015-11-11 11:48:30,592 - INFO - Logging initialized
+measurement.py - in setup_logging - line 166
+            2015-11-11 11:48:30,592 - INFO - Logging initialized
+measurement.py - in setup_communication - line 199
+            2015-11-11 11:48:30,592 - INFO - Communication socket connected
+measurement.py - in setup_communication - line 199
+            2015-11-11 11:48:30,592 - INFO - Communication socket connected
+measurement.py - in idle - line 38
+            2015-11-11 11:48:30,592 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 38
+            2015-11-11 11:48:30,592 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 166
+            2015-11-11 11:49:38,141 - INFO - Logging initialized
+measurement.py - in setup_communication - line 199
+            2015-11-11 11:49:38,151 - INFO - Communication socket connected
+measurement.py - in idle - line 36
+            2015-11-11 11:49:38,151 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 73
+            2015-11-11 11:49:43,970 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_logging - line 166
+            2015-11-11 11:49:43,970 - INFO - Logging initialized
+measurement.py - in setup_logging - line 166
+            2015-11-11 11:49:43,970 - INFO - Logging initialized
+measurement.py - in setup_communication - line 199
+            2015-11-11 11:49:43,970 - INFO - Communication socket connected
+measurement.py - in setup_communication - line 199
+            2015-11-11 11:49:43,970 - INFO - Communication socket connected
+measurement.py - in idle - line 38
+            2015-11-11 11:49:43,970 - INFO - SingleTone measurent switched on
+measurement.py - in idle - line 38
+            2015-11-11 11:49:43,970 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 166
+                2015-11-11 11:58:46,299 - INFO - Logging initialized
+measurement.py - in setup_communication - line 198
+                2015-11-11 11:58:46,299 - INFO - Communication socket connected
+measurement.py - in idle - line 36
+                2015-11-11 11:58:46,299 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 73
+                2015-11-11 11:58:49,819 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_communication - line 198
+                2015-11-11 11:58:49,819 - INFO - Communication socket connected
+measurement.py - in idle - line 38
+                2015-11-11 11:58:49,819 - INFO - SingleTone measurent switched on
+measurement.py - in setup_logging - line 165
+                2015-11-11 11:59:34,801 - INFO - Logging initialized
+measurement.py - in setup_communication - line 197
+                2015-11-11 11:59:34,801 - INFO - Communication socket connected
+measurement.py - in idle - line 36
+                2015-11-11 11:59:34,801 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 72
+                2015-11-11 11:59:50,740 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_communication - line 197
+                2015-11-11 11:59:50,740 - INFO - Communication socket connected
+measurement.py - in idle - line 38
+                2015-11-11 11:59:50,740 - INFO - SingleTone measurent switched on
+measurement.py - in process_command - line 72
+                2015-11-11 12:00:10,611 - INFO - Applying self.ping()
+measurement.py - in ping - line 47
+                2015-11-11 12:00:10,611 - INFO - measurement pinged
+measurement.py - in process_command - line 72
+                2015-11-11 12:00:13,492 - INFO - Applying self.ping()
+measurement.py - in ping - line 47
+                2015-11-11 12:00:13,492 - INFO - measurement pinged
+measurement.py - in process_command - line 72
+                2015-11-11 12:00:50,631 - INFO - Applying self.ping()
+measurement.py - in ping - line 47
+                2015-11-11 12:00:50,631 - INFO - measurement pinged
+measurement.py - in process_command - line 72
+                2015-11-11 12:00:54,680 - INFO - Applying self.ping()
+measurement.py - in ping - line 47
+                2015-11-11 12:00:54,680 - INFO - measurement pinged
+measurement.py - in process_command - line 72
+                2015-11-11 12:01:20,740 - INFO - Applying self.set_state("OFF")
+measurement.py - in set_state - line 111
+                2015-11-11 12:01:20,740 - INFO - Aborting measurement...
+measurement.py - in abort - line 53
+                2015-11-11 12:01:20,740 - INFO - aborting measurement, class name: SingleTone
+measurement.py - in set_state - line 115
+                2015-11-11 12:01:20,740 - INFO - Measurement aborted
+measurement.py - in set_state - line 117
+                2015-11-11 12:01:20,740 - INFO - Measurent switched off
+measurement.py - in initialize_measurement - line 97
+                2015-11-11 12:01:20,740 - INFO - Back to measurement kernel
+measurement.py - in process_command - line 72
+                2015-11-11 12:01:24,160 - INFO - Applying self.set_state("OFF")
+measurement.py - in set_state - line 111
+                2015-11-11 12:01:24,160 - INFO - Aborting measurement...
+measurement.py - in abort - line 53
+                2015-11-11 12:01:24,160 - INFO - aborting measurement, class name: Measurement
+measurement.py - in abort - line 55
+                2015-11-11 12:01:24,160 - WARNING - Tried to initialize measurement from out of kernel (from class:Measurement)
+measurement.py - in set_state - line 119
+                2015-11-11 12:01:24,160 - ERROR - Abort failed with error: Measurement kernel cannot be aborted, use ctrl+c if you really want to abort
+measurement.py - in process_command - line 81
+                2015-11-11 12:01:24,160 - INFO - Error in self.set_state("OFF")
+Failed with error: Measurement kernel cannot be aborted, use ctrl+c if you really want to abort
+
+measurement.py - in process_command - line 72
+                2015-11-11 12:01:44,930 - INFO - Applying self.ping()
+measurement.py - in ping - line 47
+                2015-11-11 12:01:44,930 - INFO - measurement pinged
+measurement.py - in process_command - line 72
+                2015-11-11 12:01:47,930 - INFO - Applying self.ping()
+measurement.py - in ping - line 47
+                2015-11-11 12:01:47,930 - INFO - measurement pinged

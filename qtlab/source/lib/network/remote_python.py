@@ -67,7 +67,7 @@ class PythonClient(tcpclient.TCPClient):
 
 def start_server(port=PORT):
     try:
-        qt.server_python = tcpserver.GlibTCPServer(('', port), 
+        qt.server_python = tcpserver.GlibTCPServer(('', port), \
                 PythonServer)
     except Exception, e:
         logging.warning('Failed to start python server: %s', str(e))

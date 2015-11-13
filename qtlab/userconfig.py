@@ -40,7 +40,7 @@ config['scriptdirs'] = [
 #sys.path.append('d:/folder2')
 
 # Whether to start the GUI automatically
-config['startgui'] = True
+config['startgui'] = False
 
 # Default gnuplot terminal
 #config['gnuplot_terminal'] = 'x11'

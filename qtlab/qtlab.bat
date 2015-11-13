@@ -32,34 +32,18 @@ IF EXIST c:\python26\python.exe (
     GOTO mark1
 )
 :mark1
-
 :: Run QTlab
 :: check if version < 0.11
 IF EXIST "%PYTHON_PATH%\scripts\ipython.py" (
     start Console -w "QTLab" -r "/k %PYTHON_PATH%\python.exe %PYTHON_PATH%\scripts\ipython.py -gthread -p sh source/qtlab_shell.py"
     GOTO EOF
 )
+start Console -w "QTLab" -r "/k %PYTHON_PATH%\python.exe qtlab.py"
 :: check if version >= 0.11
 IF EXIST "%PYTHON_PATH%\scripts\ipython-script.py" (
-    start Console -w "QTLab" -r "/k %PYTHON_PATH%\python.exe %PYTHON_PATH%\scripts\ipython-script.py --gui=gtk -i source/qtlab_shell.py"
+    start Console -w "QTLab" -r "/k %PYTHON_PATH%\python.exe qtlab.py"
     GOTO EOF
 )
-
-:: papyllon extension (for ipython version 4.*)
-
-:: corrects an jupyter bug 
-:: Details: jupyter console -f 'file.json' needs file.json to exist
-::          yet when one closes the console. file.json is deleted.
-::          So we have to create it everytime...
-echo { > kernel.json
-echo } >> kernel.json
-
-IF EXIST "kernel.json"  (
-    ipython kernel
-    start cmd.exe /k "jupyter console --existing"
-    ::start cmd.exe /k "jupyter console --JupyterConsoleApp.connection_file='%cd%\kernel.json' -i --ZMQTerminalIPythonApp.module_to_run='source/qtlab_shell.py'"
-    GOTO EOF
-    )
 
 echo Failed to run qtlab.bat
 pause
