@@ -1209,3 +1209,87 @@ measurement.py - in process_command - line 72
                 2015-11-11 12:01:47,930 - INFO - Applying self.ping()
 measurement.py - in ping - line 47
                 2015-11-11 12:01:47,930 - INFO - measurement pinged
+measurement.py - in setup_logging - line 166
+                2015-11-16 14:42:42,915 - INFO - Logging initialized
+measurement.py - in setup_communication - line 198
+                2015-11-16 14:42:42,918 - INFO - Communication socket connected
+measurement.py - in idle - line 37
+                2015-11-16 14:42:42,920 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 73
+                2015-11-16 14:43:24,029 - INFO - Applying self.ping()
+measurement.py - in ping - line 48
+                2015-11-16 14:43:24,029 - INFO - measurement pinged
+measurement.py - in process_command - line 73
+                2015-11-16 14:43:28,305 - INFO - Applying self.ping()
+measurement.py - in ping - line 48
+                2015-11-16 14:43:28,306 - INFO - measurement pinged
+measurement.py - in process_command - line 73
+                2015-11-16 14:43:45,726 - INFO - Applying self.set_state("OFF")
+measurement.py - in set_state - line 112
+                2015-11-16 14:43:45,726 - INFO - Aborting measurement...
+measurement.py - in abort - line 54
+                2015-11-16 14:43:45,726 - INFO - aborting measurement, class name: Measurement
+measurement.py - in abort - line 56
+                2015-11-16 14:43:45,727 - WARNING - Tried to initialize measurement from out of kernel (from class:Measurement)
+measurement.py - in set_state - line 120
+                2015-11-16 14:43:45,727 - ERROR - Abort failed with error: Measurement kernel cannot be aborted, use ctrl+c if you really want to abort
+measurement.py - in process_command - line 82
+                2015-11-16 14:43:45,729 - INFO - Error in self.set_state("OFF")
+Failed with error: Measurement kernel cannot be aborted, use ctrl+c if you really want to abort
+
+measurement.py - in process_command - line 73
+                2015-11-16 14:44:12,198 - INFO - Applying self.initialize_measurement()
+measurement.py - in process_command - line 82
+                2015-11-16 14:44:12,214 - INFO - Error in self.initialize_measurement()
+Failed with error: Attempted relative import beyond toplevel package
+
+measurement.py - in setup_logging - line 166
+                2015-11-16 14:46:14,838 - INFO - Logging initialized
+measurement.py - in setup_communication - line 198
+                2015-11-16 14:46:14,842 - INFO - Communication socket connected
+measurement.py - in idle - line 37
+                2015-11-16 14:46:14,842 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 73
+                2015-11-16 14:46:20,252 - INFO - Applying self.initialize_measurement()
+measurement.py - in setup_communication - line 198
+                2015-11-16 14:46:20,255 - INFO - Communication socket connected
+measurement.py - in idle - line 39
+                2015-11-16 14:46:20,256 - INFO - SingleTone measurent switched on
+measurement.py - in process_command - line 73
+                2015-11-16 14:46:29,289 - INFO - Applying self.ping()
+measurement.py - in ping - line 48
+                2015-11-16 14:46:29,289 - INFO - measurement pinged
+measurement.py - in process_command - line 73
+                2015-11-16 14:46:36,990 - INFO - Applying self.set_state("OFF")
+measurement.py - in set_state - line 112
+                2015-11-16 14:46:36,992 - INFO - Aborting measurement...
+measurement.py - in abort - line 54
+                2015-11-16 14:46:36,992 - INFO - aborting measurement, class name: SingleTone
+measurement.py - in set_state - line 116
+                2015-11-16 14:46:36,993 - INFO - Measurement aborted
+measurement.py - in set_state - line 118
+                2015-11-16 14:46:36,993 - INFO - Measurent switched off
+measurement.py - in initialize_measurement - line 98
+                2015-11-16 14:46:36,993 - INFO - Back to measurement kernel
+measurement.py - in setup_logging - line 171
+                2015-11-16 15:17:32,095 - INFO - Logging initialized
+measurement.py - in setup_communication - line 205
+                2015-11-16 15:17:32,098 - INFO - Communication socket connected
+connect.py - in load_connection_file - line 391
+                2015-11-16 15:17:32,127 - DEBUG - Loading connection file C:\papyllon\papyllon\qtlab\kernel.json
+client.py - in shell_channel - line 140
+                2015-11-16 15:17:32,128 - DEBUG - connecting shell channel to tcp://127.0.0.1:60729
+connect.py - in _create_connected_socket - line 426
+                2015-11-16 15:17:32,128 - DEBUG - Connecting to: tcp://127.0.0.1:60729
+measurement.py - in idle - line 42
+                2015-11-16 15:17:32,130 - INFO - Measurement kernel switched on
+measurement.py - in process_command - line 78
+                2015-11-16 15:18:01,753 - INFO - Applying self.send_to_qtlab('a = 203'')
+measurement.py - in process_command - line 87
+                2015-11-16 15:18:01,755 - INFO - Error in self.send_to_qtlab('a = 203'')
+Failed with error: EOL while scanning string literal (<string>, line 1)
+
+measurement.py - in process_command - line 78
+                2015-11-16 15:18:58,036 - INFO - Applying self.send_to_qtlab('a = 203')
+measurement.py - in process_command - line 78
+                2015-11-16 15:22:23,483 - INFO - Applying self.send_to_qtlab('a = 1234')

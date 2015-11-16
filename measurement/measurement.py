@@ -3,14 +3,14 @@ import json
 import pdb
 import logging
 import zmq
-import qt 
 import numpy as np
+from jupyter_client import KernelClient
 
 class Measurement(object):
     """docstring for Measurement"""
     def __init__(self, arg_list = ["measurement_type","measurement_name"], opt_arg_list = []):
         self.state = "ON"
-        self.qtlab_folder_adress = self.get_qtlab_folder_adress()
+        self.papyllon_folder_adress = self.get_papyllon_folder_adress()
         self.settings_file_adress = self.get_settings_file_adress()
 
         self.arg_list = arg_list
@@ -18,10 +18,14 @@ class Measurement(object):
         self.settings = self.get_settings()
         self.apply_settings()
 
-        self.socket = None
         self.setup_logging(level=logging.DEBUG)
 
+        # For communication from operator
+        self.socket = None
         self.communication_port="5556"
+        # For communication to QTlab
+        self.qtlabAPI = None
+
         self.setup_communication()
 
         self.idle()
@@ -80,7 +84,7 @@ class Measurement(object):
             # Failing to execute a command will not stop the measurement from running
             except Exception, e:
                 error_message = 'Error in '+method_to_apply+'\nFailed with error: ' + str(e) + '\n'
-                logging.info(error_message)
+                logging.error(error_message)
 
     def initialize_measurement(self):
         if self.get_name() == 'Measurement': 
@@ -153,7 +157,7 @@ class Measurement(object):
             formatter = logging.Formatter('%(filename)s - in %(funcName)s - line %(lineno)d\n\
                 %(asctime)s - %(levelname)s - %(message)s')
 
-            log_adress = self.qtlab_folder_adress+'\\measurement'
+            log_adress = self.papyllon_folder_adress+'\\measurement'
             fh = logging.FileHandler(log_adress+'\\measurement_log.txt')
             fh.setLevel(level)
             fh.setFormatter(formatter)
@@ -170,17 +174,17 @@ class Measurement(object):
     #    Utility    #
     #################
 
-    def get_qtlab_folder_adress(self):
+    def get_papyllon_folder_adress(self):
         module_adress = __file__
 
         # extracts the adress of the communication log from that
-        qtlab_folder_adress = module_adress.replace('\\measurement\\measurement.pyc','')
-        qtlab_folder_adress = qtlab_folder_adress.replace('\\measurement\\measurement.py','')
+        papyllon_folder_adress = module_adress.replace('\\measurement\\measurement.pyc','')
+        papyllon_folder_adress = papyllon_folder_adress.replace('\\measurement\\measurement.py','')
 
-        return qtlab_folder_adress
+        return papyllon_folder_adress
 
     def get_settings_file_adress(self):
-        return self.qtlab_folder_adress+'\\measurement\\settings.json'
+        return self.papyllon_folder_adress+'\\measurement\\settings.json'
     
     def get_name(self):
         return self.__class__.__name__
@@ -190,13 +194,19 @@ class Measurement(object):
     # Communication #
     #################
 
-    def setup_communication(self, forced = False):
+    def setup_communication(self):
+
+        # From operator
         context = zmq.Context()
         self.socket = context.socket(zmq.SUB)
         self.socket.connect("tcp://localhost:%s" % self.communication_port)
-        self.socket.setsockopt(zmq.SUBSCRIBE,'') # TO DO
+        self.socket.setsockopt(zmq.SUBSCRIBE,'') # Maybe set up filters?
         self.socket.RCVTIMEO = 1000
         logging.info("Communication socket connected")
+
+        # To QTlab
+        communication_file = self.papyllon_folder_adress+'\\qtlab\\kernel.json'
+        self.qtlabAPI = QTLabKernelAPI(communication_file)
 
     def get_latest_entry(self):
 
@@ -205,3 +215,96 @@ class Measurement(object):
             return message
         except zmq.error.Again:
             return None
+
+    def send_to_qtlab(self, code):
+        self.qtlabAPI.send(code)
+
+
+class QTLabKernelAPI(object):
+    """docstring for IpythonKernelAPI"""
+    def __init__(self, connection_file, username = 'TUD202834'):
+        self.username = username
+        self.session = int(self.time_stamp()) 
+        self.msg_id = 0
+
+        client = KernelClient(connection_file = connection_file)
+        blocking_client = client.blocking_client()
+        blocking_client.connection_file='C:\papyllon\papyllon\qtlab\kernel.json'
+        blocking_client.load_connection_file()
+        self.channel = blocking_client.shell_channel
+
+    def build_message(self, code):
+
+        # Information from http://jupyter-client.readthedocs.org/en/latest/messaging.html
+        # May change with different versions of ipython
+        # ==> need to get it working via the API to garantee compatibility with later versions
+
+        msg = {
+        # The message header contains a pair of unique identifiers for the
+        # originating session and the actual message id, in addition to the
+        # username for the process that generated the message. This is useful in
+        # collaborative settings where multiple users may be interacting with the
+        # same kernel simultaneously, so that frontends can label the various
+        # messages in a meaningful way.
+        'header' : {
+                    'msg_id' : self.msg_id,
+                    'username' : self.username,
+                    'session' : self.session,
+                    # ISO 8601 timestamp for when the message is created
+                    'date': self.time_stamp(),
+                    # All recognized message type strings are listed below.
+                    'msg_type' : 'execute_request',
+                    # the message protocol version
+                    'version' : '5.0',
+                    },
+        # In a chain of messages, the header from the parent is copied so that
+        # clients can track where messages come from.
+        'parent_header' : {},
+        # Any metadata associated with the message.
+        'metadata' : {},
+        # The actual content of the message must be a dict, whose structure
+        # depends on the message type.
+
+        'content' : {
+                    # Source code to be executed by the kernel, one or more lines.
+                    'code' : code,
+                    # A boolean flag which, if True, signals the kernel to execute
+                    # this code as quietly as possible.
+                    # silent=True forces store_history to be False,
+                    # and will *not*:
+                    # - broadcast output on the IOPUB channel
+                    # - have an execute_result
+                    # The default is False.
+                    'silent' : False,
+                    # A boolean flag which, if True, signals the kernel to populate history
+                    # The default is True if silent is False. If silent is True, store_history
+                    # is forced to be False.
+                    'store_history' : True,
+                    # A dict mapping names to expressions to be evaluated in the
+                    # user's dict. The rich display-data representation of each will be evaluated after execution.
+                    # See the display_data content for the structure of the representation data.
+                    'user_expressions' : {},
+                    # Some frontends do not support stdin requests.
+                    # If raw_input is called from code executed from such a frontend,
+                    # a StdinNotImplementedError will be raised.
+                    'allow_stdin' : True,
+                    # A boolean flag, which, if True, does not abort the execution queue, if an exception is encountered.
+                    # This allows the queued execution of multiple execute_requests, even if they generate exceptions.
+                    'stop_on_error' : False,
+                    }
+        }
+        self.msg_id += 1
+        return msg
+
+    def send(self,code):
+        msg = self.build_message(code)
+        self.channel.send(msg)
+
+    def time_stamp(self):
+        t = time.gmtime()
+        return str(t.tm_year)+\
+                str(t.tm_mon)+\
+                str(t.tm_mday)+\
+                str(t.tm_hour)+\
+                str(t.tm_min)+\
+                str(t.tm_sec)

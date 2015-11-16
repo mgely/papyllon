@@ -38,10 +38,14 @@ class Operator(object):
     def run_measurement_method(self,function):
         self.socket.send (function)
 
+    def run_in_qtlab(self,code):
+        self.run_measurement_method("send_to_qtlab('"+code+"')")
+
 
 
 
 o = Operator()
-o.ping_measurement()
+# o.ping_measurement()
 # o.initialize_measurement()
 # o.switch_measurement_off()
+o.run_in_qtlab('a = 1234')
