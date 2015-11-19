@@ -52,11 +52,6 @@ class SingleTone(measurement.Measurement):
         print self.Y_start,self.Y_stop,self.Y_points
         self.Y_list=np.linspace(self.Y_start,self.Y_stop,self.Y_points) 
 
-    def abort(self):
-        super(SingleTone, self).initialize_data_acquisition(filename, directory)
-
-
-
 
     def initialize_instruments(self):
         # Create all instruments
