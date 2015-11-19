@@ -1,7 +1,7 @@
 import time
 import zmq
 
-class Operator(object):
+class Op(object):
     """docstring for Operator"""
     def __init__(self):
         self.measurement_communication_port="5556"
@@ -48,14 +48,21 @@ class Operator(object):
         self.run_measurement_method("test_measurement()")
 
     def start(self):
-        self.run_measurement_method("start_measurement()")
+        name = raw_input('Your name: ')
+        device = raw_input('Device name: ')
+        detail = raw_input('Measurement details (ex: S21_XYZ_mag_pow): ')
+        self.run_measurement_method("start_measurement('"+name+"','"+device+"','"+detail+"')")
+
+    def stop(self):
+        self.run_measurement_method("stop()")
 
 
 
-o = Operator()
-# o.ping_measurement()
-o.initialize_measurement()
-time.sleep(0.5)
-# o.switch_measurement_off()
-# o.test()
-o.start()
+
+# o = Operator()
+# # o.ping_measurement()
+# o.initialize_measurement()
+# time.sleep(0.5)
+# # o.switch_measurement_off()
+# # o.test()
+# o.start()

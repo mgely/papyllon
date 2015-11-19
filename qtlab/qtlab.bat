@@ -51,7 +51,7 @@ IF EXIST "%PYTHON_PATH%\scripts\ipython-script.py" (
 )
 
 :: papyllon extension to allow communication with qtlab kernel
-start Console -w "QTLab" -r "/k %PYTHON_PATH%\python.exe qtlab.py"
+start Console -w "QTLab console" -r "/k %PYTHON_PATH%\python.exe start_kernel.py"
 GOTO EOF
 
 echo Failed to run qtlab.bat

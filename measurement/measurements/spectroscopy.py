@@ -1,5 +1,5 @@
-from .. import measurement
-from .. import qtlabAPI
+import measurement
+import qtlabAPI
 import numpy as np
 import imp
 
@@ -119,17 +119,18 @@ class SingleTone(measurement.Measurement):
 
         new_outermostblockval_flag=True
         for Y in self.Y_list:
-            self.curr_source.do('set_bias_current',Y) 
-
             if self.MEASURE == True:
+                self.curr_source.do('set_bias_current',Y) 
+
+                
                 self.acquire_trace(Y,Z)
-            
-            self.spyview.do(self.data,
-                            self.X_start, self.X_stop,
-                            self.Y_stop,  self.Y_start,
-                            Z, 'newoutermostblockval='+str(new_outermostblockval_flag))
-            new_outermostblockval_flag=False
-            self.qt.do('qt','msleep',0.01) #wait 10 usec so save etc
+                
+                self.spyview.do(self.data,
+                                self.X_start, self.X_stop,
+                                self.Y_stop,  self.Y_start,
+                                Z, 'newoutermostblockval='+str(new_outermostblockval_flag))
+                new_outermostblockval_flag=False
+                self.qt.do('qt','msleep',0.01) #wait 10 usec so save etc
 
     def acquire_trace(self,Y,Z):
 
@@ -139,10 +140,10 @@ class SingleTone(measurement.Measurement):
 
         # Sweep 
         for i in ave_list:
+            if self.MEASURE == True:
 
-            # Listen for commands from the operator
-            self.process_command()
-            if self.MEASURE ==True:
+                # Listen for commands from the operator
+                self.process_command()
                 self.pna.do('sweep')
                 self.pna.do('auto_scale')
 

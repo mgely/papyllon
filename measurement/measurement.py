@@ -101,8 +101,8 @@ class Measurement(object):
 
     def terminate_instruments(self):
         for attr, value in self.__dict__.iteritems():
-            if isinstance(value, Instrument):
-                attr.remove()
+            if isinstance(value, qtlabAPI.Instrument):
+                eval('self.'+attr+'.remove()')
 
 
 
@@ -119,10 +119,7 @@ class Measurement(object):
     def measure(self, directory):
         pass
 
-    def start_measurement(self):
-        name = raw_input('Your name: ')
-        device = raw_input('Device name: ')
-        detail = raw_input('Measurement details (ex: S21_XYZ_mag_pow): ')
+    def start_measurement(self,name,device,detail):
 
         now=time.localtime()
         date_path = str(now.tm_year) + '_' +\
