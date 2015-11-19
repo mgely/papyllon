@@ -26,6 +26,7 @@ class Measurement(object):
         self.state = "ON"
         self.papyllon_folder_address = self.get_papyllon_folder_address()
         self.settings_file_address = self.get_settings_file_address()
+        self.data_address = self.get_date_file_address()
         self.setup_logging(level=logging.DEBUG)
 
         self.settings = self.get_settings()
@@ -124,7 +125,7 @@ class Measurement(object):
 
     def test_measurement(self):
 
-        folder = self.papyllon_folder_address + "\\measurement\\testing"
+        folder = self.data_address + "\\_testing"
 
         self.MEASURE = True
         self.measure('data', folder)
@@ -259,6 +260,10 @@ class Measurement(object):
         papyllon_folder_address = papyllon_folder_address.replace('\\measurement\\measurement.py','')
 
         return papyllon_folder_address
+
+    def get_date_file_address(self):
+        return self.papyllon_folder_address.replace('\\papyllon\\papyllon','\\papyllon\\data')
+
 
     def get_settings_file_address(self):
         return self.papyllon_folder_address+'\\measurement\\settings.json'

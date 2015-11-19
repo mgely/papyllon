@@ -2,7 +2,7 @@
     "X_instrument": null,
     "X_instrument_var": null,
     "X_name": "Cavity Frequency [Hz]",
-    "X_points": 2801,
+    "X_points": 201,
     "X_start": 3.90e9,
     "X_stop": 5.3e9,
     "Y_instrument": null,
