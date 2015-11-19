@@ -1412,3 +1412,449 @@ qtlabAPI.py - in send - line 92 - pna.sweep()
 qtlabAPI.py - in send - line 92 - pna.auto_scale()
 qtlabAPI.py - in send - line 92 - trace = pna.fetch_data(polar=True)
 qtlabAPI.py - in send - line 92 - tr2 = pna.data_f()
+measurement.py - in setup_logging - line 249 - Logging initialized
+measurement.py - in setup_communication - line 313 - Communication socket connected
+connect.py - in load_connection_file - line 391 - Loading connection file C:\papyllon\papyllon\qtlab\kernel.json
+client.py - in shell_channel - line 140 - connecting shell channel to tcp://127.0.0.1:60729
+connect.py - in _create_connected_socket - line 426 - Connecting to: tcp://127.0.0.1:60729
+qtlabAPI.py - in send - line 92 - execfile('C:\papyllon\papyllon\measurement\spyview\metagen.py')
+qtlabAPI.py - in send - line 92 - import numpy as np
+qtlabAPI.py - in send - line 92 - import qt
+qtlabAPI.py - in send - line 92 - import time
+measurement.py - in idle - line 59 - Measurement kernel switched on
+measurement.py - in process_command - line 148 - Applying self.initialize_measurement()
+measurement.py - in setup_communication - line 313 - Communication socket connected
+connect.py - in load_connection_file - line 391 - Loading connection file C:\papyllon\papyllon\qtlab\kernel.json
+client.py - in shell_channel - line 140 - connecting shell channel to tcp://127.0.0.1:60729
+connect.py - in _create_connected_socket - line 426 - Connecting to: tcp://127.0.0.1:60729
+qtlabAPI.py - in send - line 92 - execfile('C:\papyllon\papyllon\measurement\spyview\metagen.py')
+qtlabAPI.py - in send - line 92 - X_list = np.linspace(3900000000.0,5300000000.0,201)
+measurement.py - in idle - line 61 - SingleTone measurent switched on
+measurement.py - in process_command - line 148 - Applying self.test_measurement()
+measurement.py - in process_command - line 158 - Error in self.test_measurement()
+Failed with error: [Error 32] The process cannot access the file because it is being used by another process: 'C:\\papyllon\\data\\_testing\\20151119114013_data.dat'
+
+Traceback (most recent call last):
+  File "C:\papyllon\papyllon\measurement\measurement.py", line 152, in process_command
+    eval(method_to_apply)
+  File "<string>", line 1, in <module>
+  File "C:\papyllon\papyllon\measurement\measurement.py", line 128, in test_measurement
+    shutil.rmtree(folder)
+  File "C:\Python27\lib\shutil.py", line 249, in rmtree
+    onerror(os.remove, fullname, sys.exc_info())
+  File "C:\Python27\lib\shutil.py", line 247, in rmtree
+    os.remove(fullname)
+WindowsError: [Error 32] The process cannot access the file because it is being used by another process: 'C:\\papyllon\\data\\_testing\\20151119114013_data.dat'
+
+measurement.py - in setup_logging - line 253 - Logging initialized
+measurement.py - in setup_communication - line 317 - Communication socket connected
+connect.py - in load_connection_file - line 391 - Loading connection file C:\papyllon\papyllon\qtlab\kernel.json
+client.py - in shell_channel - line 140 - connecting shell channel to tcp://127.0.0.1:60729
+connect.py - in _create_connected_socket - line 426 - Connecting to: tcp://127.0.0.1:60729
+qtlabAPI.py - in send - line 92 - execfile('C:\papyllon\papyllon\measurement\spyview\metagen.py')
+qtlabAPI.py - in send - line 92 - import numpy as np
+qtlabAPI.py - in send - line 92 - import qt
+qtlabAPI.py - in send - line 92 - import time
+measurement.py - in idle - line 59 - Measurement kernel switched on
+measurement.py - in process_command - line 152 - Applying self.initialize_measurement()
+measurement.py - in setup_communication - line 317 - Communication socket connected
+connect.py - in load_connection_file - line 391 - Loading connection file C:\papyllon\papyllon\qtlab\kernel.json
+client.py - in shell_channel - line 140 - connecting shell channel to tcp://127.0.0.1:60729
+connect.py - in _create_connected_socket - line 426 - Connecting to: tcp://127.0.0.1:60729
+qtlabAPI.py - in send - line 92 - execfile('C:\papyllon\papyllon\measurement\spyview\metagen.py')
+qtlabAPI.py - in send - line 92 - X_list = np.linspace(3900000000.0,5300000000.0,201)
+measurement.py - in idle - line 61 - SingleTone measurent switched on
+measurement.py - in process_command - line 152 - Applying self.test_measurement()
+measurement.py - in test_measurement - line 132 - Previous test data could not be removed because a file is bein gused by another process
+qtlabAPI.py - in send - line 92 - pna = qt.instruments.create('pna','PNA_N5221A',address = 'TCPIP::192.168.1.42::INSTR')
+qtlabAPI.py - in send - line 92 - curr_source = qt.instruments.create('curr_source','keysight_source_B2961A',address = 'TCPIP::192.168.1.56::INSTR')
+qtlabAPI.py - in send - line 92 - var_att = qt.instruments.create('var_att','agilent_var_attenuator',address = 'TCPIP::192.168.1.113::INSTR')
+qtlabAPI.py - in send - line 92 - pna.reset()
+qtlabAPI.py - in send - line 92 - pna.setup(start_frequency = 3900000000.0,stop_frequency = 5300000000.0,measurement_format = 'MLOG')
+qtlabAPI.py - in send - line 92 - pna.set_power(0)
+qtlabAPI.py - in send - line 92 - pna.set_resolution_bandwidth(50)
+qtlabAPI.py - in send - line 92 - pna.set_sweeppoints(201)
+qtlabAPI.py - in send - line 92 - pna.set_averages_on()
+qtlabAPI.py - in send - line 92 - pna.set_averages(1)
+qtlabAPI.py - in send - line 92 - curr_source.set_output_type('CURR')
+qtlabAPI.py - in send - line 92 - curr_source.set_voltage_protection(0.1)
+qtlabAPI.py - in send - line 92 - curr_source.set_protection_state(True)
+qtlabAPI.py - in send - line 92 - curr_source.set_state(True)
+qtlabAPI.py - in send - line 92 - qt.mstart()
+qtlabAPI.py - in send - line 92 - data = qt.Data(name='data')
+qtlabAPI.py - in send - line 92 - data.create_file(datadirs=r'C:\papyllon\data\_testing')
+qtlabAPI.py - in send - line 92 - spyview_process_3D(reset=True)
+qtlabAPI.py - in send - line 92 - data.add_coordinate('Cavity Frequency [Hz]')
+qtlabAPI.py - in send - line 92 - data.add_coordinate('I_coil [A]')
+qtlabAPI.py - in send - line 92 - data.add_coordinate('no Z coordinate')
+qtlabAPI.py - in send - line 92 - data.add_value('Transmission (dBm)')
+qtlabAPI.py - in send - line 92 - data.add_value('f_data [dBm]')
+qtlabAPI.py - in send - line 92 - data.add_value('Phase')
+qtlabAPI.py - in send - line 92 - curr_source.set_bias_current(-0.002)
+qtlabAPI.py - in send - line 92 - pna.reset_averaging()
+qtlabAPI.py - in send - line 92 - pna.sweep()
+qtlabAPI.py - in send - line 92 - pna.auto_scale()
+qtlabAPI.py - in send - line 92 - trace = pna.fetch_data(polar=True)
+qtlabAPI.py - in send - line 92 - tr2 = pna.data_f()
+qtlabAPI.py - in send - line 92 - data.add_data_point(X_list, list(-0.002*ones(len(X_list))),list(1.0*ones(len(X_list))),trace[0], tr2, np.unwrap(trace[1]))
+qtlabAPI.py - in send - line 92 - data.new_block()
+qtlabAPI.py - in send - line 92 - spyview_process_3D(data,3900000000.0,5300000000.0,0.002,-0.002,1.0,newoutermostblockval=True)
+qtlabAPI.py - in send - line 92 - qt.msleep(0.01)
+qtlabAPI.py - in send - line 92 - curr_source.set_bias_current(-0.00199875)
+qtlabAPI.py - in send - line 92 - pna.reset_averaging()
+measurement.py - in setup_logging - line 253 - Logging initialized
+measurement.py - in setup_communication - line 317 - Communication socket connected
+connect.py - in load_connection_file - line 391 - Loading connection file C:\papyllon\papyllon\qtlab\kernel.json
+client.py - in shell_channel - line 140 - connecting shell channel to tcp://127.0.0.1:60729
+connect.py - in _create_connected_socket - line 426 - Connecting to: tcp://127.0.0.1:60729
+qtlabAPI.py - in send - line 92 - execfile('C:\papyllon\papyllon\measurement\spyview\metagen.py')
+qtlabAPI.py - in send - line 92 - import numpy as np
+qtlabAPI.py - in send - line 92 - import qt
+qtlabAPI.py - in send - line 92 - import time
+measurement.py - in idle - line 59 - Measurement kernel switched on
+measurement.py - in process_command - line 152 - Applying self.initialize_measurement()
+measurement.py - in setup_communication - line 317 - Communication socket connected
+connect.py - in load_connection_file - line 391 - Loading connection file C:\papyllon\papyllon\qtlab\kernel.json
+client.py - in shell_channel - line 140 - connecting shell channel to tcp://127.0.0.1:60729
+connect.py - in _create_connected_socket - line 426 - Connecting to: tcp://127.0.0.1:60729
+qtlabAPI.py - in send - line 92 - execfile('C:\papyllon\papyllon\measurement\spyview\metagen.py')
+qtlabAPI.py - in send - line 92 - X_list = np.linspace(3900000000.0,5300000000.0,201)
+measurement.py - in idle - line 61 - SingleTone measurent switched on
+measurement.py - in process_command - line 152 - Applying self.test_measurement()
+measurement.py - in test_measurement - line 132 - Previous test data could not be removed because a file is bein gused by another process
+qtlabAPI.py - in send - line 92 - pna = qt.instruments.create('pna','PNA_N5221A',address = 'TCPIP::192.168.1.42::INSTR')
+qtlabAPI.py - in send - line 92 - curr_source = qt.instruments.create('curr_source','keysight_source_B2961A',address = 'TCPIP::192.168.1.56::INSTR')
+qtlabAPI.py - in send - line 92 - var_att = qt.instruments.create('var_att','agilent_var_attenuator',address = 'TCPIP::192.168.1.113::INSTR')
+qtlabAPI.py - in send - line 92 - pna.reset()
+qtlabAPI.py - in send - line 92 - pna.setup(start_frequency = 3900000000.0,stop_frequency = 5300000000.0,measurement_format = 'MLOG')
+qtlabAPI.py - in send - line 92 - pna.set_power(0)
+qtlabAPI.py - in send - line 92 - pna.set_resolution_bandwidth(50)
+measurement.py - in setup_logging - line 253 - Logging initialized
+measurement.py - in setup_communication - line 317 - Communication socket connected
+connect.py - in load_connection_file - line 391 - Loading connection file C:\papyllon\papyllon\qtlab\kernel.json
+client.py - in shell_channel - line 140 - connecting shell channel to tcp://127.0.0.1:60729
+connect.py - in _create_connected_socket - line 426 - Connecting to: tcp://127.0.0.1:60729
+qtlabAPI.py - in send - line 92 - execfile('C:\papyllon\papyllon\measurement\spyview\metagen.py')
+qtlabAPI.py - in send - line 92 - import numpy as np
+qtlabAPI.py - in send - line 92 - import qt
+qtlabAPI.py - in send - line 92 - import time
+measurement.py - in idle - line 59 - Measurement kernel switched on
+measurement.py - in process_command - line 152 - Applying self.initialize_measurement()
+measurement.py - in setup_communication - line 317 - Communication socket connected
+connect.py - in load_connection_file - line 391 - Loading connection file C:\papyllon\papyllon\qtlab\kernel.json
+client.py - in shell_channel - line 140 - connecting shell channel to tcp://127.0.0.1:60729
+connect.py - in _create_connected_socket - line 426 - Connecting to: tcp://127.0.0.1:60729
+qtlabAPI.py - in send - line 92 - execfile('C:\papyllon\papyllon\measurement\spyview\metagen.py')
+qtlabAPI.py - in send - line 92 - X_list = np.linspace(3900000000.0,5300000000.0,201)
+measurement.py - in idle - line 61 - SingleTone measurent switched on
+measurement.py - in process_command - line 152 - Applying self.test_measurement()
+measurement.py - in test_measurement - line 132 - Previous test data could not be removed because a file is being used by another process
+qtlabAPI.py - in send - line 92 - pna = qt.instruments.create('pna','PNA_N5221A',address = 'TCPIP::192.168.1.42::INSTR')
+qtlabAPI.py - in send - line 92 - curr_source = qt.instruments.create('curr_source','keysight_source_B2961A',address = 'TCPIP::192.168.1.56::INSTR')
+qtlabAPI.py - in send - line 92 - var_att = qt.instruments.create('var_att','agilent_var_attenuator',address = 'TCPIP::192.168.1.113::INSTR')
+qtlabAPI.py - in send - line 92 - pna.reset()
+qtlabAPI.py - in send - line 92 - pna.setup(start_frequency = 3900000000.0,stop_frequency = 5300000000.0,measurement_format = 'MLOG')
+qtlabAPI.py - in send - line 92 - pna.set_power(0)
+qtlabAPI.py - in send - line 92 - pna.set_resolution_bandwidth(50)
+qtlabAPI.py - in send - line 92 - pna.set_sweeppoints(201)
+qtlabAPI.py - in send - line 92 - pna.set_averages_on()
+qtlabAPI.py - in send - line 92 - pna.set_averages(1)
+qtlabAPI.py - in send - line 92 - curr_source.set_output_type('CURR')
+qtlabAPI.py - in send - line 92 - curr_source.set_voltage_protection(0.1)
+qtlabAPI.py - in send - line 92 - curr_source.set_protection_state(True)
+qtlabAPI.py - in send - line 92 - curr_source.set_state(True)
+qtlabAPI.py - in send - line 92 - qt.mstart()
+qtlabAPI.py - in send - line 92 - data = qt.Data(name='data')
+qtlabAPI.py - in send - line 92 - data.create_file(datadirs=r'C:\papyllon\data\_testing')
+qtlabAPI.py - in send - line 92 - spyview_process_3D(reset=True)
+qtlabAPI.py - in send - line 92 - data.add_coordinate('Cavity Frequency [Hz]')
+qtlabAPI.py - in send - line 92 - data.add_coordinate('I_coil [A]')
+qtlabAPI.py - in send - line 92 - data.add_coordinate('no Z coordinate')
+qtlabAPI.py - in send - line 92 - data.add_value('Transmission (dBm)')
+measurement.py - in setup_logging - line 253 - Logging initialized
+measurement.py - in setup_communication - line 317 - Communication socket connected
+connect.py - in load_connection_file - line 391 - Loading connection file C:\papyllon\papyllon\qtlab\kernel.json
+client.py - in shell_channel - line 140 - connecting shell channel to tcp://127.0.0.1:60729
+connect.py - in _create_connected_socket - line 426 - Connecting to: tcp://127.0.0.1:60729
+qtlabAPI.py - in send - line 92 - execfile('C:\papyllon\papyllon\measurement\spyview\metagen.py')
+qtlabAPI.py - in send - line 92 - import numpy as np
+qtlabAPI.py - in send - line 92 - import qt
+qtlabAPI.py - in send - line 92 - import time
+measurement.py - in idle - line 59 - Measurement kernel switched on
+measurement.py - in process_command - line 152 - Applying self.initialize_measurement()
+measurement.py - in setup_communication - line 317 - Communication socket connected
+connect.py - in load_connection_file - line 391 - Loading connection file C:\papyllon\papyllon\qtlab\kernel.json
+client.py - in shell_channel - line 140 - connecting shell channel to tcp://127.0.0.1:60729
+connect.py - in _create_connected_socket - line 426 - Connecting to: tcp://127.0.0.1:60729
+qtlabAPI.py - in send - line 92 - execfile('C:\papyllon\papyllon\measurement\spyview\metagen.py')
+qtlabAPI.py - in send - line 92 - X_list = np.linspace(3900000000.0,5300000000.0,201)
+measurement.py - in idle - line 61 - SingleTone measurent switched on
+measurement.py - in process_command - line 152 - Applying self.test_measurement()
+measurement.py - in test_measurement - line 132 - Previous test data could not be removed because a file is being used by another process
+qtlabAPI.py - in send - line 92 - pna = qt.instruments.create('pna','PNA_N5221A',address = 'TCPIP::192.168.1.42::INSTR')
+qtlabAPI.py - in send - line 92 - curr_source = qt.instruments.create('curr_source','keysight_source_B2961A',address = 'TCPIP::192.168.1.56::INSTR')
+qtlabAPI.py - in send - line 92 - var_att = qt.instruments.create('var_att','agilent_var_attenuator',address = 'TCPIP::192.168.1.113::INSTR')
+qtlabAPI.py - in send - line 92 - pna.reset()
+qtlabAPI.py - in send - line 92 - pna.setup(start_frequency = 3900000000.0,stop_frequency = 5300000000.0,measurement_format = 'MLOG')
+qtlabAPI.py - in send - line 92 - pna.set_power(0)
+qtlabAPI.py - in send - line 92 - pna.set_resolution_bandwidth(50)
+qtlabAPI.py - in send - line 92 - pna.set_sweeppoints(201)
+measurement.py - in setup_logging - line 253 - Logging initialized
+measurement.py - in setup_communication - line 317 - Communication socket connected
+connect.py - in load_connection_file - line 391 - Loading connection file C:\papyllon\papyllon\qtlab\kernel.json
+client.py - in shell_channel - line 140 - connecting shell channel to tcp://127.0.0.1:60729
+connect.py - in _create_connected_socket - line 426 - Connecting to: tcp://127.0.0.1:60729
+qtlabAPI.py - in send - line 92 - execfile('C:\papyllon\papyllon\measurement\spyview\metagen.py')
+qtlabAPI.py - in send - line 92 - import numpy as np
+qtlabAPI.py - in send - line 92 - import qt
+qtlabAPI.py - in send - line 92 - import time
+measurement.py - in idle - line 59 - Measurement kernel switched on
+measurement.py - in process_command - line 152 - Applying self.initialize_measurement()
+measurement.py - in setup_communication - line 317 - Communication socket connected
+connect.py - in load_connection_file - line 391 - Loading connection file C:\papyllon\papyllon\qtlab\kernel.json
+client.py - in shell_channel - line 140 - connecting shell channel to tcp://127.0.0.1:60729
+connect.py - in _create_connected_socket - line 426 - Connecting to: tcp://127.0.0.1:60729
+qtlabAPI.py - in send - line 92 - execfile('C:\papyllon\papyllon\measurement\spyview\metagen.py')
+qtlabAPI.py - in send - line 92 - X_list = np.linspace(3900000000.0,5300000000.0,201)
+measurement.py - in idle - line 61 - SingleTone measurent switched on
+measurement.py - in process_command - line 152 - Applying self.test_measurement()
+measurement.py - in test_measurement - line 132 - Previous test data could not be removed because a file is being used by another process
+qtlabAPI.py - in send - line 92 - pna = qt.instruments.create('pna','PNA_N5221A',address = 'TCPIP::192.168.1.42::INSTR')
+qtlabAPI.py - in send - line 92 - curr_source = qt.instruments.create('curr_source','keysight_source_B2961A',address = 'TCPIP::192.168.1.56::INSTR')
+qtlabAPI.py - in send - line 92 - var_att = qt.instruments.create('var_att','agilent_var_attenuator',address = 'TCPIP::192.168.1.113::INSTR')
+qtlabAPI.py - in send - line 92 - pna.reset()
+qtlabAPI.py - in send - line 92 - pna.setup(start_frequency = 3900000000.0,stop_frequency = 5300000000.0,measurement_format = 'MLOG')
+qtlabAPI.py - in send - line 92 - pna.set_power(0)
+qtlabAPI.py - in send - line 92 - pna.set_resolution_bandwidth(50)
+qtlabAPI.py - in send - line 92 - pna.set_sweeppoints(201)
+qtlabAPI.py - in send - line 92 - pna.set_averages_on()
+qtlabAPI.py - in send - line 92 - pna.set_averages(1)
+qtlabAPI.py - in send - line 92 - curr_source.set_output_type('CURR')
+qtlabAPI.py - in send - line 92 - curr_source.set_voltage_protection(0.1)
+qtlabAPI.py - in send - line 92 - curr_source.set_protection_state(True)
+qtlabAPI.py - in send - line 92 - curr_source.set_state(True)
+qtlabAPI.py - in send - line 92 - qt.mstart()
+qtlabAPI.py - in send - line 92 - data = qt.Data(name='data')
+qtlabAPI.py - in send - line 92 - data.create_file(datadirs=r'C:\papyllon\data\_testing')
+qtlabAPI.py - in send - line 92 - spyview_process_3D(reset=True)
+qtlabAPI.py - in send - line 92 - data.add_coordinate('Cavity Frequency [Hz]')
+qtlabAPI.py - in send - line 92 - data.add_coordinate('I_coil [A]')
+qtlabAPI.py - in send - line 92 - data.add_coordinate('no Z coordinate')
+qtlabAPI.py - in send - line 92 - data.add_value('Transmission (dBm)')
+qtlabAPI.py - in send - line 92 - data.add_value('f_data [dBm]')
+qtlabAPI.py - in send - line 92 - data.add_value('Phase')
+qtlabAPI.py - in send - line 92 - curr_source.set_bias_current(-0.002)
+qtlabAPI.py - in send - line 92 - pna.reset_averaging()
+measurement.py - in setup_logging - line 253 - Logging initialized
+measurement.py - in setup_communication - line 317 - Communication socket connected
+connect.py - in load_connection_file - line 391 - Loading connection file C:\papyllon\papyllon\qtlab\kernel.json
+client.py - in shell_channel - line 140 - connecting shell channel to tcp://127.0.0.1:60729
+connect.py - in _create_connected_socket - line 426 - Connecting to: tcp://127.0.0.1:60729
+qtlabAPI.py - in send - line 92 - execfile('C:\papyllon\papyllon\measurement\spyview\metagen.py')
+qtlabAPI.py - in send - line 92 - import numpy as np
+qtlabAPI.py - in send - line 92 - import qt
+qtlabAPI.py - in send - line 92 - import time
+measurement.py - in idle - line 59 - Measurement kernel switched on
+measurement.py - in process_command - line 152 - Applying self.initialize_measurement()
+measurement.py - in setup_communication - line 317 - Communication socket connected
+connect.py - in load_connection_file - line 391 - Loading connection file C:\papyllon\papyllon\qtlab\kernel.json
+client.py - in shell_channel - line 140 - connecting shell channel to tcp://127.0.0.1:60729
+connect.py - in _create_connected_socket - line 426 - Connecting to: tcp://127.0.0.1:60729
+qtlabAPI.py - in send - line 92 - execfile('C:\papyllon\papyllon\measurement\spyview\metagen.py')
+qtlabAPI.py - in send - line 92 - X_list = np.linspace(3900000000.0,5300000000.0,201)
+measurement.py - in idle - line 61 - SingleTone measurent switched on
+measurement.py - in process_command - line 152 - Applying self.test_measurement()
+measurement.py - in test_measurement - line 132 - Previous test data could not be removed because [Error 32] The process cannot access the file because it is being used by another process: 'C:\\papyllon\\data\\_testing\\20151119114013_data.dat'
+qtlabAPI.py - in send - line 92 - pna = qt.instruments.create('pna','PNA_N5221A',address = 'TCPIP::192.168.1.42::INSTR')
+qtlabAPI.py - in send - line 92 - curr_source = qt.instruments.create('curr_source','keysight_source_B2961A',address = 'TCPIP::192.168.1.56::INSTR')
+qtlabAPI.py - in send - line 92 - var_att = qt.instruments.create('var_att','agilent_var_attenuator',address = 'TCPIP::192.168.1.113::INSTR')
+qtlabAPI.py - in send - line 92 - pna.reset()
+qtlabAPI.py - in send - line 92 - pna.setup(start_frequency = 3900000000.0,stop_frequency = 5300000000.0,measurement_format = 'MLOG')
+qtlabAPI.py - in send - line 92 - pna.set_power(0)
+qtlabAPI.py - in send - line 92 - pna.set_resolution_bandwidth(50)
+qtlabAPI.py - in send - line 92 - pna.set_sweeppoints(201)
+qtlabAPI.py - in send - line 92 - pna.set_averages_on()
+qtlabAPI.py - in send - line 92 - pna.set_averages(1)
+qtlabAPI.py - in send - line 92 - curr_source.set_output_type('CURR')
+qtlabAPI.py - in send - line 92 - curr_source.set_voltage_protection(0.1)
+qtlabAPI.py - in send - line 92 - curr_source.set_protection_state(True)
+qtlabAPI.py - in send - line 92 - curr_source.set_state(True)
+measurement.py - in setup_logging - line 254 - Logging initialized
+measurement.py - in setup_communication - line 318 - Communication socket connected
+connect.py - in load_connection_file - line 391 - Loading connection file C:\papyllon\papyllon\qtlab\kernel.json
+client.py - in shell_channel - line 140 - connecting shell channel to tcp://127.0.0.1:60729
+connect.py - in _create_connected_socket - line 426 - Connecting to: tcp://127.0.0.1:60729
+qtlabAPI.py - in send - line 92 - execfile('C:\papyllon\papyllon\measurement\spyview\metagen.py')
+qtlabAPI.py - in send - line 92 - import numpy as np
+qtlabAPI.py - in send - line 92 - import qt
+qtlabAPI.py - in send - line 92 - import time
+measurement.py - in idle - line 59 - Measurement kernel switched on
+measurement.py - in process_command - line 153 - Applying self.initialize_measurement()
+measurement.py - in setup_communication - line 318 - Communication socket connected
+connect.py - in load_connection_file - line 391 - Loading connection file C:\papyllon\papyllon\qtlab\kernel.json
+client.py - in shell_channel - line 140 - connecting shell channel to tcp://127.0.0.1:60729
+connect.py - in _create_connected_socket - line 426 - Connecting to: tcp://127.0.0.1:60729
+qtlabAPI.py - in send - line 92 - execfile('C:\papyllon\papyllon\measurement\spyview\metagen.py')
+qtlabAPI.py - in send - line 92 - X_list = np.linspace(3900000000.0,5300000000.0,201)
+measurement.py - in idle - line 61 - SingleTone measurent switched on
+measurement.py - in process_command - line 153 - Applying self.test_measurement()
+measurement.py - in test_measurement - line 133 - Previous test data: '20151119114013_data.dat' could not be removed because it is open in another process
+measurement.py - in test_measurement - line 133 - Previous test data: '20151119114514_data.dat' could not be removed because it is open in another process
+measurement.py - in test_measurement - line 133 - Previous test data: '20151119114635_data.dat' could not be removed because it is open in another process
+measurement.py - in test_measurement - line 133 - Previous test data: '20151119122002_data.dat' could not be removed because it is open in another process
+qtlabAPI.py - in send - line 92 - pna = qt.instruments.create('pna','PNA_N5221A',address = 'TCPIP::192.168.1.42::INSTR')
+qtlabAPI.py - in send - line 92 - curr_source = qt.instruments.create('curr_source','keysight_source_B2961A',address = 'TCPIP::192.168.1.56::INSTR')
+qtlabAPI.py - in send - line 92 - var_att = qt.instruments.create('var_att','agilent_var_attenuator',address = 'TCPIP::192.168.1.113::INSTR')
+qtlabAPI.py - in send - line 92 - pna.reset()
+qtlabAPI.py - in send - line 92 - pna.setup(start_frequency = 3900000000.0,stop_frequency = 5300000000.0,measurement_format = 'MLOG')
+qtlabAPI.py - in send - line 92 - pna.set_power(0)
+qtlabAPI.py - in send - line 92 - pna.set_resolution_bandwidth(50)
+qtlabAPI.py - in send - line 92 - pna.set_sweeppoints(201)
+qtlabAPI.py - in send - line 92 - pna.set_averages_on()
+qtlabAPI.py - in send - line 92 - pna.set_averages(1)
+qtlabAPI.py - in send - line 92 - curr_source.set_output_type('CURR')
+qtlabAPI.py - in send - line 92 - curr_source.set_voltage_protection(0.1)
+qtlabAPI.py - in send - line 92 - curr_source.set_protection_state(True)
+qtlabAPI.py - in send - line 92 - curr_source.set_state(True)
+qtlabAPI.py - in send - line 92 - qt.mstart()
+qtlabAPI.py - in send - line 92 - data = qt.Data(name='data')
+qtlabAPI.py - in send - line 92 - data.create_file(datadirs=r'C:\papyllon\data\_testing')
+qtlabAPI.py - in send - line 92 - spyview_process_3D(reset=True)
+qtlabAPI.py - in send - line 92 - data.add_coordinate('Cavity Frequency [Hz]')
+qtlabAPI.py - in send - line 92 - data.add_coordinate('I_coil [A]')
+qtlabAPI.py - in send - line 92 - data.add_coordinate('no Z coordinate')
+qtlabAPI.py - in send - line 92 - data.add_value('Transmission (dBm)')
+qtlabAPI.py - in send - line 92 - data.add_value('f_data [dBm]')
+qtlabAPI.py - in send - line 92 - data.add_value('Phase')
+qtlabAPI.py - in send - line 92 - curr_source.set_bias_current(-0.002)
+qtlabAPI.py - in send - line 92 - pna.reset_averaging()
+qtlabAPI.py - in send - line 92 - pna.sweep()
+qtlabAPI.py - in send - line 92 - pna.auto_scale()
+qtlabAPI.py - in send - line 92 - trace = pna.fetch_data(polar=True)
+qtlabAPI.py - in send - line 92 - tr2 = pna.data_f()
+qtlabAPI.py - in send - line 92 - data.add_data_point(X_list, list(-0.002*ones(len(X_list))),list(1.0*ones(len(X_list))),trace[0], tr2, np.unwrap(trace[1]))
+qtlabAPI.py - in send - line 92 - data.new_block()
+qtlabAPI.py - in send - line 92 - spyview_process_3D(data,3900000000.0,5300000000.0,0.002,-0.002,1.0,newoutermostblockval=True)
+qtlabAPI.py - in send - line 92 - qt.msleep(0.01)
+qtlabAPI.py - in send - line 92 - curr_source.set_bias_current(-0.00199875)
+qtlabAPI.py - in send - line 92 - pna.reset_averaging()
+qtlabAPI.py - in send - line 92 - pna.sweep()
+qtlabAPI.py - in send - line 92 - pna.auto_scale()
+qtlabAPI.py - in send - line 92 - trace = pna.fetch_data(polar=True)
+qtlabAPI.py - in send - line 92 - tr2 = pna.data_f()
+qtlabAPI.py - in send - line 92 - data.add_data_point(X_list, list(-0.00199875*ones(len(X_list))),list(1.0*ones(len(X_list))),trace[0], tr2, np.unwrap(trace[1]))
+qtlabAPI.py - in send - line 92 - data.new_block()
+qtlabAPI.py - in send - line 92 - spyview_process_3D(data,3900000000.0,5300000000.0,0.002,-0.002,1.0,newoutermostblockval=False)
+qtlabAPI.py - in send - line 92 - qt.msleep(0.01)
+qtlabAPI.py - in send - line 92 - curr_source.set_bias_current(-0.0019975)
+qtlabAPI.py - in send - line 92 - pna.reset_averaging()
+qtlabAPI.py - in send - line 92 - pna.sweep()
+qtlabAPI.py - in send - line 92 - pna.auto_scale()
+qtlabAPI.py - in send - line 92 - trace = pna.fetch_data(polar=True)
+qtlabAPI.py - in send - line 92 - tr2 = pna.data_f()
+qtlabAPI.py - in send - line 92 - data.add_data_point(X_list, list(-0.0019975*ones(len(X_list))),list(1.0*ones(len(X_list))),trace[0], tr2, np.unwrap(trace[1]))
+qtlabAPI.py - in send - line 92 - data.new_block()
+qtlabAPI.py - in send - line 92 - spyview_process_3D(data,3900000000.0,5300000000.0,0.002,-0.002,1.0,newoutermostblockval=False)
+qtlabAPI.py - in send - line 92 - qt.msleep(0.01)
+qtlabAPI.py - in send - line 92 - curr_source.set_bias_current(-0.00199625)
+qtlabAPI.py - in send - line 92 - pna.reset_averaging()
+qtlabAPI.py - in send - line 92 - pna.sweep()
+qtlabAPI.py - in send - line 92 - pna.auto_scale()
+qtlabAPI.py - in send - line 92 - trace = pna.fetch_data(polar=True)
+qtlabAPI.py - in send - line 92 - tr2 = pna.data_f()
+qtlabAPI.py - in send - line 92 - data.add_data_point(X_list, list(-0.00199625*ones(len(X_list))),list(1.0*ones(len(X_list))),trace[0], tr2, np.unwrap(trace[1]))
+qtlabAPI.py - in send - line 92 - data.new_block()
+qtlabAPI.py - in send - line 92 - spyview_process_3D(data,3900000000.0,5300000000.0,0.002,-0.002,1.0,newoutermostblockval=False)
+qtlabAPI.py - in send - line 92 - qt.msleep(0.01)
+qtlabAPI.py - in send - line 92 - curr_source.set_bias_current(-0.001995)
+qtlabAPI.py - in send - line 92 - pna.reset_averaging()
+qtlabAPI.py - in send - line 92 - pna.sweep()
+qtlabAPI.py - in send - line 92 - pna.auto_scale()
+qtlabAPI.py - in send - line 92 - trace = pna.fetch_data(polar=True)
+qtlabAPI.py - in send - line 92 - tr2 = pna.data_f()
+qtlabAPI.py - in send - line 92 - data.add_data_point(X_list, list(-0.001995*ones(len(X_list))),list(1.0*ones(len(X_list))),trace[0], tr2, np.unwrap(trace[1]))
+qtlabAPI.py - in send - line 92 - data.new_block()
+qtlabAPI.py - in send - line 92 - spyview_process_3D(data,3900000000.0,5300000000.0,0.002,-0.002,1.0,newoutermostblockval=False)
+qtlabAPI.py - in send - line 92 - qt.msleep(0.01)
+qtlabAPI.py - in send - line 92 - curr_source.set_bias_current(-0.00199375)
+qtlabAPI.py - in send - line 92 - pna.reset_averaging()
+qtlabAPI.py - in send - line 92 - pna.sweep()
+qtlabAPI.py - in send - line 92 - pna.auto_scale()
+qtlabAPI.py - in send - line 92 - trace = pna.fetch_data(polar=True)
+qtlabAPI.py - in send - line 92 - tr2 = pna.data_f()
+qtlabAPI.py - in send - line 92 - data.add_data_point(X_list, list(-0.00199375*ones(len(X_list))),list(1.0*ones(len(X_list))),trace[0], tr2, np.unwrap(trace[1]))
+qtlabAPI.py - in send - line 92 - data.new_block()
+qtlabAPI.py - in send - line 92 - spyview_process_3D(data,3900000000.0,5300000000.0,0.002,-0.002,1.0,newoutermostblockval=False)
+qtlabAPI.py - in send - line 92 - qt.msleep(0.01)
+qtlabAPI.py - in send - line 92 - curr_source.set_bias_current(-0.0019925)
+qtlabAPI.py - in send - line 92 - pna.reset_averaging()
+qtlabAPI.py - in send - line 92 - pna.sweep()
+qtlabAPI.py - in send - line 92 - pna.auto_scale()
+qtlabAPI.py - in send - line 92 - trace = pna.fetch_data(polar=True)
+qtlabAPI.py - in send - line 92 - tr2 = pna.data_f()
+qtlabAPI.py - in send - line 92 - data.add_data_point(X_list, list(-0.0019925*ones(len(X_list))),list(1.0*ones(len(X_list))),trace[0], tr2, np.unwrap(trace[1]))
+qtlabAPI.py - in send - line 92 - data.new_block()
+qtlabAPI.py - in send - line 92 - spyview_process_3D(data,3900000000.0,5300000000.0,0.002,-0.002,1.0,newoutermostblockval=False)
+qtlabAPI.py - in send - line 92 - qt.msleep(0.01)
+qtlabAPI.py - in send - line 92 - curr_source.set_bias_current(-0.00199125)
+qtlabAPI.py - in send - line 92 - pna.reset_averaging()
+qtlabAPI.py - in send - line 92 - pna.sweep()
+qtlabAPI.py - in send - line 92 - pna.auto_scale()
+qtlabAPI.py - in send - line 92 - trace = pna.fetch_data(polar=True)
+qtlabAPI.py - in send - line 92 - tr2 = pna.data_f()
+qtlabAPI.py - in send - line 92 - data.add_data_point(X_list, list(-0.00199125*ones(len(X_list))),list(1.0*ones(len(X_list))),trace[0], tr2, np.unwrap(trace[1]))
+qtlabAPI.py - in send - line 92 - data.new_block()
+qtlabAPI.py - in send - line 92 - spyview_process_3D(data,3900000000.0,5300000000.0,0.002,-0.002,1.0,newoutermostblockval=False)
+qtlabAPI.py - in send - line 92 - qt.msleep(0.01)
+qtlabAPI.py - in send - line 92 - curr_source.set_bias_current(-0.00199)
+qtlabAPI.py - in send - line 92 - pna.reset_averaging()
+qtlabAPI.py - in send - line 92 - pna.sweep()
+qtlabAPI.py - in send - line 92 - pna.auto_scale()
+qtlabAPI.py - in send - line 92 - trace = pna.fetch_data(polar=True)
+qtlabAPI.py - in send - line 92 - tr2 = pna.data_f()
+qtlabAPI.py - in send - line 92 - data.add_data_point(X_list, list(-0.00199*ones(len(X_list))),list(1.0*ones(len(X_list))),trace[0], tr2, np.unwrap(trace[1]))
+qtlabAPI.py - in send - line 92 - data.new_block()
+qtlabAPI.py - in send - line 92 - spyview_process_3D(data,3900000000.0,5300000000.0,0.002,-0.002,1.0,newoutermostblockval=False)
+qtlabAPI.py - in send - line 92 - qt.msleep(0.01)
+qtlabAPI.py - in send - line 92 - curr_source.set_bias_current(-0.00198875)
+qtlabAPI.py - in send - line 92 - pna.reset_averaging()
+qtlabAPI.py - in send - line 92 - pna.sweep()
+qtlabAPI.py - in send - line 92 - pna.auto_scale()
+qtlabAPI.py - in send - line 92 - trace = pna.fetch_data(polar=True)
+qtlabAPI.py - in send - line 92 - tr2 = pna.data_f()
+qtlabAPI.py - in send - line 92 - data.add_data_point(X_list, list(-0.00198875*ones(len(X_list))),list(1.0*ones(len(X_list))),trace[0], tr2, np.unwrap(trace[1]))
+qtlabAPI.py - in send - line 92 - data.new_block()
+qtlabAPI.py - in send - line 92 - spyview_process_3D(data,3900000000.0,5300000000.0,0.002,-0.002,1.0,newoutermostblockval=False)
+qtlabAPI.py - in send - line 92 - qt.msleep(0.01)
+qtlabAPI.py - in send - line 92 - curr_source.set_bias_current(-0.0019875)
+qtlabAPI.py - in send - line 92 - pna.reset_averaging()
+qtlabAPI.py - in send - line 92 - pna.sweep()
+qtlabAPI.py - in send - line 92 - pna.auto_scale()
+qtlabAPI.py - in send - line 92 - trace = pna.fetch_data(polar=True)
+qtlabAPI.py - in send - line 92 - tr2 = pna.data_f()
+qtlabAPI.py - in send - line 92 - data.add_data_point(X_list, list(-0.0019875*ones(len(X_list))),list(1.0*ones(len(X_list))),trace[0], tr2, np.unwrap(trace[1]))
+qtlabAPI.py - in send - line 92 - data.new_block()
+qtlabAPI.py - in send - line 92 - spyview_process_3D(data,3900000000.0,5300000000.0,0.002,-0.002,1.0,newoutermostblockval=False)
+qtlabAPI.py - in send - line 92 - qt.msleep(0.01)
+qtlabAPI.py - in send - line 92 - curr_source.set_bias_current(-0.00198625)
+qtlabAPI.py - in send - line 92 - pna.reset_averaging()
+qtlabAPI.py - in send - line 92 - pna.sweep()
+qtlabAPI.py - in send - line 92 - pna.auto_scale()
+qtlabAPI.py - in send - line 92 - trace = pna.fetch_data(polar=True)
+qtlabAPI.py - in send - line 92 - tr2 = pna.data_f()
+qtlabAPI.py - in send - line 92 - data.add_data_point(X_list, list(-0.00198625*ones(len(X_list))),list(1.0*ones(len(X_list))),trace[0], tr2, np.unwrap(trace[1]))
+qtlabAPI.py - in send - line 92 - data.new_block()
+qtlabAPI.py - in send - line 92 - spyview_process_3D(data,3900000000.0,5300000000.0,0.002,-0.002,1.0,newoutermostblockval=False)
+qtlabAPI.py - in send - line 92 - qt.msleep(0.01)
+qtlabAPI.py - in send - line 92 - curr_source.set_bias_current(-0.001985)
+qtlabAPI.py - in send - line 92 - pna.reset_averaging()
+qtlabAPI.py - in send - line 92 - pna.sweep()
+qtlabAPI.py - in send - line 92 - pna.auto_scale()
+qtlabAPI.py - in send - line 92 - trace = pna.fetch_data(polar=True)
+qtlabAPI.py - in send - line 92 - tr2 = pna.data_f()
+qtlabAPI.py - in send - line 92 - data.add_data_point(X_list, list(-0.001985*ones(len(X_list))),list(1.0*ones(len(X_list))),trace[0], tr2, np.unwrap(trace[1]))
+qtlabAPI.py - in send - line 92 - data.new_block()
+qtlabAPI.py - in send - line 92 - spyview_process_3D(data,3900000000.0,5300000000.0,0.002,-0.002,1.0,newoutermostblockval=False)
+qtlabAPI.py - in send - line 92 - qt.msleep(0.01)
+qtlabAPI.py - in send - line 92 - curr_source.set_bias_current(-0.00198375)
+qtlabAPI.py - in send - line 92 - pna.reset_averaging()

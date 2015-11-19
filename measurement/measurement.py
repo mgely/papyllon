@@ -7,7 +7,7 @@ import numpy as np
 import qtlabAPI
 import sys
 import traceback
-
+import os
 
 class Measurement(object):
 
@@ -124,8 +124,13 @@ class Measurement(object):
         self.MEASURE = True
 
     def test_measurement(self):
-
         folder = self.data_address + "\\_testing"
+        
+        for fileName in os.listdir(folder):
+            try:
+                os.remove(os.path.join(folder,fileName))
+            except WindowsError, e:
+                logging.warning("Previous test data: '"+fileName+"' could not be removed because it is open in another process")
 
         self.MEASURE = True
         self.measure('data', folder)
