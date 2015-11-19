@@ -106,9 +106,9 @@ class Measurement(object):
 
 
 
-    def initialize_data_acquisition(self, filename, directory):
+    def initialize_data_acquisition(self, directory):
         self.qt.do('qt','mstart')
-        self.data = qtlabAPI.Data(self.qt, filename, directory)
+        self.data = qtlabAPI.Data(self.qt, 'data', directory)
 
     def terminate_data_acquisition(self):
         self.data.close()
@@ -116,12 +116,31 @@ class Measurement(object):
 
 
 
-    def measure(self, filename, directory):
+    def measure(self, directory):
         pass
 
-
     def start_measurement(self):
+        name = raw_input('Your name: ')
+        device = raw_input('Device name: ')
+        detail = raw_input('Measurement details (ex: S21_XYZ_mag_pow): ')
+
+        now=time.localtime()
+        date_path = str(now.tm_year) + '_' +\
+                    str(now.tm_mon) + '_' +\
+                    str(now.tm_mday) + '_______' +\
+                    str(now.tm_hour) + '.' +\
+                    str(now.tm_min) + '.' +\
+                    str(now.tm_sec)
+
+        folder = self.data_address + '\\'+\
+                    name + '\\'+\
+                    device + '\\'+\
+                    date_path+'_____'+\
+                    self.measurement_name+'__'+\
+                    detail
+                    
         self.MEASURE = True
+        self.measure(folder)
 
     def test_measurement(self):
         folder = self.data_address + "\\_testing"
@@ -133,7 +152,7 @@ class Measurement(object):
                 logging.warning("Previous test data: '"+fileName+"' could not be removed because it is open in another process")
 
         self.MEASURE = True
-        self.measure('data', folder)
+        self.measure(folder)
 
     def stop(self):
         self.MEASURE = False

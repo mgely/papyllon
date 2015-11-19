@@ -47,6 +47,9 @@ class Operator(object):
     def test(self):
         self.run_measurement_method("test_measurement()")
 
+    def start(self):
+        self.run_measurement_method("start_measurement()")
+
 
 
 o = Operator()
@@ -54,4 +57,5 @@ o = Operator()
 o.initialize_measurement()
 time.sleep(0.5)
 # o.switch_measurement_off()
-o.test()
+# o.test()
+o.start()

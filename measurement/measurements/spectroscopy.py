@@ -86,8 +86,8 @@ class SingleTone(measurement.Measurement):
 
         super(SingleTone, self).terminate_instruments()
 
-    def initialize_data_acquisition(self, filename, directory):
-        super(SingleTone, self).initialize_data_acquisition(filename, directory)
+    def initialize_data_acquisition(self, directory):
+        super(SingleTone, self).initialize_data_acquisition(directory)
 
         self.spyview.name = '3D'
         self.spyview.do('reset=True')
@@ -106,9 +106,9 @@ class SingleTone(measurement.Measurement):
 
 
 
-    def measure(self, filename, directory):
+    def measure(self, directory):
         self.initialize_instruments()
-        self.initialize_data_acquisition(filename, directory)
+        self.initialize_data_acquisition(directory)
 
         self.acquire_frame(Z = 1.)
 
