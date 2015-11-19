@@ -10,7 +10,6 @@ def setup_communication_file():
     pass
 
 def start_ipython():
-    print str('--existing '+os.path.dirname(os.path.realpath(__file__))+'\kernel.json')
     IPython.start_ipython(argv=['console','--existing',os.path.dirname(os.path.realpath(__file__))+'\kernel.json'])
 
 if __name__ == "__main__":

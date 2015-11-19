@@ -46,3 +46,6 @@ Temporary Items
 # Project specific
 # =========================
 qtlab/tmp/
+
+# Compiled python 
+*.pyc

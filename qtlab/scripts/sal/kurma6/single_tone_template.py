@@ -22,8 +22,7 @@
 
 import qt
 import numpy as np
-from numpy import pi, random, arange, size, array, sin, cos, diff, absolute,zeros, sign,ceil,sqrt,absolute
-from time import time, sleep, localtime, strftime
+import time
 #execfile('metagen2D.py')
 execfile('metagen3D.py')
 
@@ -68,25 +67,19 @@ averages=1
 ################################
 #      INSTRUMENTS
 ################################
-
-instlist = qt.instruments.get_instrument_names()
-print "Available instruments: "+" ".join(instlist)
-
-if 'pna' not in instlist:
-    pna = qt.instruments.create('pna','PNA_N5221A', address='TCPIP::192.168.1.42::INSTR')
-
-if 'med' not in instlist:
-    med = qt.instruments.create('med','med')
-
-if 'timing' not in instlist:
-    timing = qt.instruments.create('timing','timing')
-
-if 'curr_source' not in instlist:
-    curr_source = qt.instruments.create('curr_source', 'keysight_source_B2961A', address='TCPIP::192.168.1.56::INSTR')
+pna = qt.instruments.create('pna','PNA_N5221A', address='TCPIP::192.168.1.42::INSTR')
 
 
-if 'var_att' not in instlist:
-    var_att=qt.instruments.create('var_att','agilent_var_att', address='TCPIP::192.168.1.113::INSTR')
+med = qt.instruments.create('med','med')
+
+
+timing = qt.instruments.create('timing','timing')
+
+
+curr_source = qt.instruments.create('curr_source', 'keysight_source_B2961A', address='TCPIP::192.168.1.56::INSTR')
+
+
+var_att=qt.instruments.create('var_att','agilent_var_attenuator', address='TCPIP::192.168.1.113::INSTR')
 
 
 instlist = qt.instruments.get_instrument_names()
@@ -126,7 +119,7 @@ qt.mstart()
 
 base_path = 'D:\\data\\Sal\\KURMA6A_10mK\\'
 
-now=localtime()
+now=time.localtime()
 
 date_path = str(now.tm_year) + '_' + str(now.tm_mon) + '_' + str(now.tm_mday) + '_______' + str(now.tm_hour) + '.' + str(now.tm_min) + '.' + str(now.tm_sec)
 
@@ -165,13 +158,15 @@ for Z in Z_list:
     
     var_att.set_var_att(Z)
     
-    new_outermostblockval_flag=True
+    new_outermostblockval_flag=True ########### !!! Didn't implement this
    
     for Y in Y_list:
         timing.start_trace(Y_value=Y,Z_value=Z,publish=True)
-
         curr_source.set_bias_current(Y)
         
+
+
+
            
         ave_list = np.linspace(1,averages,averages)
         qt.msleep(0.01)
@@ -183,10 +178,15 @@ for Z in Z_list:
 
         trace=pna.fetch_data(polar=True)
         tr2=pna.data_f()
-
         data.add_data_point(X_list, list(Y*ones(len(X_list))),list(Z*ones(len(X_list))),trace[0], tr2, np.unwrap(trace[1]))
-
         data.new_block()
+
+
+
+
+
+
+
         spyview_process(data,X_start,X_stop,Y_stop, Y_start,Z,newoutermostblockval=new_outermostblockval_flag)
         new_outermostblockval_flag=False
         qt.msleep(0.01) #wait 10 usec so save etc

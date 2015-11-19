@@ -39,13 +39,19 @@ class Operator(object):
         self.socket.send (function)
 
     def run_in_qtlab(self,code):
-        self.run_measurement_method("send_to_qtlab('"+code+"')")
+        self.run_measurement_method(code)
 
+    def load_settings(self,measurement_type, measurement_name):
+        self.run_measurement_method("write_blank_settings('"+measurement_type+"', '"+measurement_name+"')")
+
+    def test(self):
+        self.run_measurement_method("test_measurement()")
 
 
 
 o = Operator()
 # o.ping_measurement()
-# o.initialize_measurement()
+o.initialize_measurement()
+time.sleep(0.5)
 # o.switch_measurement_off()
-o.run_in_qtlab('a = 1234')
+o.test()

@@ -1,4 +1,20 @@
 {
-    "measurement_type" : "spectroscopy",
-    "measurement_name" : "SingleTone"
+    "X_instrument": null,
+    "X_instrument_var": null,
+    "X_name": "Cavity Frequency [Hz]",
+    "X_points": 2801,
+    "X_start": 3.90e9,
+    "X_stop": 5.3e9,
+    "Y_instrument": null,
+    "Y_name": "I_coil [A]",
+    "Y_points": 3201,
+    "Y_start": -2.0e-3,
+    "Y_stop": 2.0e-3,
+    "averages": 1,
+    "ifbw": 50,
+    "measurement_name": "SingleTone",
+    "measurement_type": "spectroscopy",
+    "opt": {},
+    "power_pna": 0,
+    "var_att": null
 }
