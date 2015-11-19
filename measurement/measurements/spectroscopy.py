@@ -106,14 +106,8 @@ class SingleTone(measurement.Measurement):
 
 
 
-    def measure(self, directory):
-        self.initialize_instruments()
-        self.initialize_data_acquisition(directory)
-
+    def measure(self):
         self.acquire_frame(Z = 1.)
-
-        self.terminate_data_acquisition()
-        self.terminate_instruments()
 
     def acquire_frame(self,Z):
 

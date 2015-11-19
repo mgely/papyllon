@@ -10,6 +10,8 @@ import traceback
 import os
 
 class Measurement(object):
+    '''Handles communication with the operator and the qtlab kernel.
+    '''
 
     # Define a list of arguments needed in this measurement
     arg_list = ["measurement_type",\
@@ -21,15 +23,13 @@ class Measurement(object):
     # Define a list of used instruments
     inst_list = []
 
-    """docstring for Measurement"""
     def __init__(self):
         self.state = "ON"
         self.papyllon_folder_address = self.get_papyllon_folder_address()
         self.settings_file_address = self.get_settings_file_address()
-        self.data_address = self.get_date_file_address()
+        self.data_address = self.get_data_file_address()
         self.setup_logging(level=logging.DEBUG)
 
-        self.settings = self.get_settings()
         self.apply_settings()
 
         # For communication from operator
@@ -42,10 +42,12 @@ class Measurement(object):
         # For configuring spyview 
         self.spyview = qtlabAPI.SpyviewProcess(self.qt,spyview_folder = self.papyllon_folder_address+'\\measurement\\spyview')
 
-        # Class specific instructions
+        # Class specific instructions => overwritten in each measurement
         self.initialize()
 
         self.MEASURE = False
+
+        # Wait for instructins from the operator
         self.idle()
 
 
@@ -53,53 +55,89 @@ class Measurement(object):
     # Core methods  #
     #################
 
+    def measure(self):
+        '''Run in every measurement or test between data&instrument initialization
+        and termination. This is where you want to sweep over some parameters
+        with your instruments and acquire data.
+
+        Should be overwritten in every measurement class.
+
+        Note:
+         - Add self.process_command() at points where you would like to receive
+        instructions from the operator (for example interrupting the measurement)
+
+         - Add "if self.MEASURE == True" statements for all parts of the script
+         that should be skipped in case of a measurement interruption
+        '''
+        pass
+
     def idle(self):
-        # i = 0
+        '''Whilst the state of the measurement is set to "ON", wait for 
+        instructions from the operator, carry out the instruction, then wait 
+        for a new instruction.
+
+        Exiting this function can only be done by setting the state of the
+        measurement to "OFF" via the set_state method. This is not allowed
+        in the Measurement mother class (this one), but allows one to exit
+        a specific measurement (ex: SingleTone) and return to this class in 
+        order to load a different measurement. That process would look like:
+        > set_state("OFF")
+        change name and type of measurement in settings.json
+        > initialize_measurement
+        '''
         if self.get_name() == "Measurement":
             logging.info("Measurement kernel switched on")
         else:
             logging.info(self.get_name() + " measurent switched on")
         
 
-        while self.state == "ON": #and i<10:
+        while self.state == "ON":
             time.sleep(0.1)
             self.process_command()
-            # i+=1
 
     def ping(self):
+        '''Check if the connection between the operator and this class
+        has been correctly established by logging 'measurement pinged'
+        '''
         logging.info('measurement pinged')
 
 
 
     def initialize(self):
         '''Initialization routine that should be overwritten systematically
-        for class-specific instructions.
+        for class-specific instructions. This method is run at instanciation in __init__
+        or when we run re-initialize a measurement inside a specific class
 
-        For example, below are the instructions that should be called only
-        once, when the Measurement class is first instaciated.
+        Below are the instructions that should be called only
+        once, when the Measurement class is first instaciated 
+        (ie. when one has started the Measurement kernel).
         '''
-        # setting up QTlab
+        # setting up QTlab with some always used modules
         self.qt.import_module('numpy as np')
         self.qt.import_module('qt')
         self.qt.import_module('time')
 
-    def abort(self):
-
-        logging.info('aborting measurement '+self.get_name())
-        if self.get_name() == 'Measurement':
-            logging.warning('Tried to initialize measurement from out of kernel (from class:'+self.get_name()+')')
-            raise RuntimeError('Measurement kernel cannot be aborted, use ctrl+c if you really want to abort')
-            return False
-
-
-
     def initialize_instruments(self):
+        '''Run at the beginning of every measurement or test. It creates qtlab instruments
+        specified in the class variable int_list.
+
+        Should be appended in measurement classes to include instrument-specific
+        initializations.
+        '''
         for inst in self.inst_list:
             if len(inst) == 2:
                 inst.append("")
             setattr(self, inst[0], qtlabAPI.Instrument(self.qt,*inst))
 
     def terminate_instruments(self):
+        '''Run at the end of every measurement or test. It removes
+        all qtlab instruments
+
+        Should be PREpended in measurement classes (write instructions then
+        call super()) to include instrument-specific procedures. 
+        Ex: ramping down slowly a current source to avoid discrete
+        jumps that could harm the experiment
+        '''
         for attr, value in self.__dict__.iteritems():
             if isinstance(value, qtlabAPI.Instrument):
                 eval('self.'+attr+'.remove()')
@@ -107,20 +145,37 @@ class Measurement(object):
 
 
     def initialize_data_acquisition(self, directory):
+        '''Run at the beginning of every measurement or test. It informs
+        qtlab that this is the moment to start acquiring data in the 
+        specified directory.
+
+        Should be appended in measurement classes to include any specific
+        initialization procedure
+        '''
         self.qt.do('qt','mstart')
         self.data = qtlabAPI.Data(self.qt, 'data', directory)
 
     def terminate_data_acquisition(self):
+        '''Run at the end of every measurement or test. It informs
+        qtlab that this is the moment to stop acquiring data.
+
+        Should be PREpended in measurement classes (write instructions then
+        call super()) to include specific procedures. 
+        '''
         self.data.close()
         self.qt.do('qt','mend')
 
 
-
-    def measure(self, directory):
-        pass
-
     def start_measurement(self,name,device,detail):
+        '''Method to call after testing the setup to run a full measurement.
+        Will go through the following procedure:
 
+        1. Initialize measurements
+        2. Initialize data acquisition
+        3. Measures
+        4. Terminates data acquisition
+        5. Removes all instruments
+        '''
         now=time.localtime()
         date_path = str(now.tm_year) + '_' +\
                     str(now.tm_mon) + '_' +\
@@ -135,11 +190,34 @@ class Measurement(object):
                     date_path+'_____'+\
                     self.measurement_name+'__'+\
                     detail
+
+        self.initialize_instruments()
+        self.initialize_data_acquisition(folder)
+
                     
         self.MEASURE = True
-        self.measure(folder)
+        self.measure()
+
+        self.terminate_data_acquisition()
+        self.terminate_instruments()
+
+        logging.info('Measurement stopped.')
 
     def test_measurement(self):
+        '''Method to test the setup before running a full measurement.
+        Will go through the following procedure:
+
+        1. Initialize measurements
+        2. Initialize data acquisition
+        3. Measures
+        4. Terminates data acquisition
+        5. Removes all instruments
+
+        Measurement data will be stored in the data/_testing directory
+
+        Should be PREpended (write instructions then call super()) to, for 
+        example, divide the number of sweep points for a fast scan
+        '''
         folder = self.data_address + "\\_testing"
         
         for fileName in os.listdir(folder):
@@ -148,10 +226,24 @@ class Measurement(object):
             except WindowsError, e:
                 logging.warning("Previous test data: '"+fileName+"' could not be removed because it is open in another process")
 
+        self.initialize_instruments()
+        self.initialize_data_acquisition(folder)
+
+
         self.MEASURE = True
-        self.measure(folder)
+        self.measure()
+
+        self.terminate_data_acquisition()
+        self.terminate_instruments()
+
+        logging.info('Measurement stopped.')
 
     def stop(self):
+        '''Stops the measurement by skipping all the code in the measure method
+        that was put in a "if self.MEASURE == True" statement. 
+
+        Data and instruments are still terminated as in a normal measurement
+        '''
         self.MEASURE = False
 
     #################
@@ -160,6 +252,11 @@ class Measurement(object):
 
 
     def process_command(self):
+        '''Runs any command emitted by the operator.
+        If the command leads to an error, the measurement is not stopped, but 
+        and error message will be printed
+        '''
+
         # Read latest entry
         command = self.get_latest_entry()
 
@@ -179,24 +276,35 @@ class Measurement(object):
                 logging.error(error_message+'\n'+tb+'\n')
 
     def initialize_measurement(self):
-        if self.get_name() == 'Measurement': 
+        '''Loads the settings from settings.json and goes/initializes the measurement
+        class specified by measurement_name and measurement_type.
+        '''
+        if self.get_name() == 'Measurement':
+            self.apply_settings()
+            
+            if self.get_name() == 'Measurement': 
 
-            try:
-                exec("import measurements."+self.measurement_type)
-            except ImportError, e:
-                logging.error("The module measurements."+self.measurement_type+" does not exist.")
-                raise e
+                try:
+                    exec("import measurements."+self.measurement_type)
+                except ImportError, e:
+                    logging.error("The module measurements."+self.measurement_type+" does not exist.")
+                    raise e
 
-            exec("measurements."+self.measurement_type+"."+self.measurement_name+"()")
+                exec("measurements."+self.measurement_type+"."+self.measurement_name+"()")
+                logging.info("Back to measurement kernel")
 
-
-            logging.info("Back to measurement kernel")
+            else:
+                raise RuntimeError('Measurements can only be initialized from the kernel.')
 
         else:
-            raise RuntimeError('Measurements can only be initialized from the kernel.')
+            self.apply_settings()
+            self.initialize()
 
     def set_state(self, state):
-
+        '''Should be used to turn a specific measurement OFF, and thus return 
+        to the idling of the mother Measurement class. This is uselful when changing
+        the type/name of measurement one wants to perform
+        '''
 
         if state == "ON":
             self.state = "ON"
@@ -204,25 +312,26 @@ class Measurement(object):
 
 
         elif state == "OFF":
-            logging.info("Aborting measurement...")
-            
-            try:
-                self.abort()
-                logging.info("Measurement aborted")
+            logging.info("Exiting measurement...")
+
+            if self.get_name() == 'Measurement':
+                logging.warning('Tried to initialize measurement from out of kernel (from class:'+self.get_name()+')')
+                raise RuntimeError('Measurement kernel cannot be aborted, use ctrl+c if you really want to abort')
+
+            else:
                 self.state = "OFF"
-                logging.info("Measurent switched off")
-            except RuntimeError, e:
-                logging.error('Abort failed with error: '+str(e))
-                raise e
+                logging.info("Measurement exited")
 
         else:
             logging.error("Invalid state, available states: \"ON\" and \"OFF\"")
 
-    def get_settings(self):
-        with open(self.settings_file_address,"r") as f:
-            return byteify(json.load(f)) # dictionary "byteified" to parse unicodes to strings
 
     def apply_settings(self):
+        '''Loads and applies the settings specified in the settings.json file
+        '''
+
+        with open(self.settings_file_address,"r") as f:
+            settings =  byteify(json.load(f)) # dictionary "byteified" to parse unicodes to strings
 
         # Apply default settings
         for x in self.opt_arg_list:
@@ -231,7 +340,7 @@ class Measurement(object):
         # Apply optional settings
         for x in self.opt_arg_list:
             try:
-                value = self.settings['opt'][x[0]]
+                value = settings['opt'][x[0]]
                 setattr(self, x[0], value)
             except:
                 # The optional argument was not specified in settings..
@@ -241,13 +350,16 @@ class Measurement(object):
         # Apply specified settings
         for arg in self.arg_list:
             try:
-                value = self.settings[arg]
+                value = settings[arg]
             except:
                 raise KeyError('No value for argument '+arg+' found in arg_list')
 
             setattr(self, arg, value)
 
     def setup_logging(self, level):
+        '''Sets up the logging for this class, the QTlabAPI and all other measurement
+        classes.
+        '''
         logger = logging.getLogger()
         if not logger.handlers:
             logger.setLevel(level)
@@ -282,7 +394,7 @@ class Measurement(object):
 
         return papyllon_folder_address
 
-    def get_date_file_address(self):
+    def get_data_file_address(self):
         return self.papyllon_folder_address.replace('\\papyllon\\papyllon','\\papyllon\\data')
 
 
@@ -290,9 +402,15 @@ class Measurement(object):
         return self.papyllon_folder_address+'\\measurement\\settings.json'
     
     def get_name(self):
+        '''Returns the name of the current class, for exemple 'Measurement'
+        or 'SingleTone'
+        '''
         return self.__class__.__name__
 
     def write_blank_settings(self, measurement_type, measurement_name):
+        '''Creates a settings.json file where all the settings are set to None
+        and all the optional settings are set to their default value
+        '''
         try:
             exec("from measurements."+measurement_type+' import '+measurement_name)
         except ImportError, e:
@@ -338,6 +456,9 @@ class Measurement(object):
         self.qt = qtlabAPI.QTLabKernelAPI(communication_file)
 
     def get_latest_entry(self):
+        '''Returns the latest instruction sent by the operator or 'None' if
+        there is no instruction.
+        '''
 
         try:
             message = self.socket.recv()
@@ -347,6 +468,9 @@ class Measurement(object):
 
 
 def byteify(input):
+    '''Utility function to parse all the unicode expressions in a dictionary
+    to a string
+    '''
     if isinstance(input, dict):
         return {byteify(key):byteify(value) for key,value in input.iteritems()}
     elif isinstance(input, list):
