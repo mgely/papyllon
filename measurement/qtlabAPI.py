@@ -1,13 +1,22 @@
+'''Home built API for qtlab based on the ipython "shell channel" to communicate
+with the qtlab kernel.
+
+Mario Gely - mario.f.gely@gmail.com
+'''
+
 from jupyter_client import KernelClient
 import logging
 import time
 
 class QTLabError(Exception):
+    '''Error raised when a command raises an error in the qtlab kernel
+    '''
     pass
 
 class QTLabKernelAPI(object):
-    """docstring for IpythonKernelAPI"""
+    """Allows the user to send instructions to be executed in the qtlab kernel"""
     def __init__(self, connection_file, username = 'TUD202834'):
+
         self.username = username
         self.session = int(self.time_stamp()) 
         self.msg_id = 0
@@ -17,18 +26,18 @@ class QTLabKernelAPI(object):
         blocking_client.connection_file='C:\papyllon\papyllon\qtlab\kernel.json'
         blocking_client.load_connection_file()
         self.channel = blocking_client.shell_channel
-
+        
+        # The logging is done in measurement_log.txt
         logger = logging.getLogger()
 
-    #################
-    #      Core     #
-    #################    
 
     def build_message(self, code):
+        '''Formats the code to be sent to comply with the jupyter protocol
+        '''
 
         # Information from http://jupyter-client.readthedocs.org/en/latest/messaging.html
         # May change with different versions of ipython
-        # ==> need to get it working via the API to garantee compatibility with later versions
+        # ==> need to get it working via the official API to garantee compatibility with later versions
 
         msg = {
         # The message header contains a pair of unique identifiers for the
@@ -88,6 +97,9 @@ class QTLabKernelAPI(object):
         return msg
 
     def send(self,code):
+        '''Sends a string to be executed in the qtlab kernel, will raise QTLabError
+        if the code raises a qtlab error
+        '''
 
         logging.info(code)
 
@@ -110,8 +122,14 @@ class QTLabKernelAPI(object):
                 if msg['content']['status'] == 'error':
                     raise QTLabError(msg['content']['ename']+': '+msg['content']['evalue']) 
 
-    def do(self, variable, method, *args):
-        code = variable+'.'+method+'(' + parse_args(*args)+')'
+    def do(self, method, *args):
+        ''' Will execute the code "method(*args)" in the qtlab terminal
+
+        Check the docstring for parse_args(*args) for details on how to 
+        enter arguments.
+        '''
+
+        code = method+'(' + parse_args(*args)+')'
 
         try:
             self.send(code)
@@ -119,6 +137,11 @@ class QTLabKernelAPI(object):
             raise e
 
     def time_stamp(self):
+        '''Utility function that will return a string timestamp.
+
+        This method is used a unique ID for the communication with the kernel as no
+        two IDs should be identical in the communication protocol.
+        '''
         t = time.gmtime()
         return str(t.tm_year)+\
                 str(t.tm_mon)+\
@@ -127,19 +150,31 @@ class QTLabKernelAPI(object):
                 str(t.tm_min)+\
                 str(t.tm_sec)
 
-
-
-    #################
-    #   Specific    #
-    ################# 
-
     def import_module(self, module):
+        '''Will import the specified module in qtlab
+        '''
         self.send('import '+module)    
 
-    def variable(self,name,defining_function, *args):
-        return QTLabVariable(self, name, defining_function, *args)
 
 class QTLabVariable(object):
+    '''Creates a qtlab variable.
+
+    Inputs:
+     - qtlabAPI for communication
+
+     - name (str) of the variable in qtlab (should be the same as the local name)
+       For example 'a'
+
+     - defining_function (str)
+       For example 'int'
+
+     - *args (Check the docstring for parse_args(*args) for details on how to enter arguments.)
+       For example '3'
+
+    Will execute "name = defining_function(*args)" in qtlab
+    For example: a = int('3')
+
+    '''
     def __init__(self,qtlabAPI,name,defining_function, *args):
 
         self.name = name
@@ -155,12 +190,22 @@ class QTLabVariable(object):
         return self.name
 
     def do(self,method,*args):
-        self.qtlabAPI.do(self.name, method, *args)
+        '''Will execute a method of the variable: name.method(*args)
+        '''
+        self.qtlabAPI.do(self.name+'.'+method, *args)
 
     
 
 class Data(QTLabVariable):
-    """docstring for Data"""
+    """Analog of the data variable in qtlab. Inherits from QTLabVariable
+    with not much added apart from the close method. 
+
+    Inputs:
+     - qtlabAPI for communication
+     - name of the data file (usually set to 'data')
+     - directory in which to save data
+    """
+
     def __init__(self, qtlabAPI, filename, directory):
         super(Data, self).__init__(qtlabAPI,'data', 'qt.Data',"name='"+filename+"'")
 
@@ -171,7 +216,16 @@ class Data(QTLabVariable):
         self.do('close_file')
 
 class Instrument(QTLabVariable):
-    """docstring for Instrument"""
+    """Analog of an instrument in qtlab. Inherits from QTLabVariable
+    with not much added apart from the remove method.
+
+    Inputs:
+     - qtlabAPI for communication
+     - name of the qtlab variable (str) (should be the same as the local name)
+     - directory in which to save data (str)
+     - (optional) (str) adress needed to communicate with the physical instrument
+    """
+
     def __init__(self, qtlabAPI, local_name, driver_name, address = ''):
         if address == '':
             super(Instrument, self).__init__(qtlabAPI,local_name,'qt.instruments.create', local_name,driver_name)
@@ -182,12 +236,28 @@ class Instrument(QTLabVariable):
         self.do('remove')
 
 class SpyviewProcess(object):
+    """Analog of an instrument in qtlab. Inherits from QTLabVariable
+    with not much added apart from the remove method.
+
+    Inputs:
+     - qtlabAPI for communication
+     - spyview_folder (str) adress of the directory where the metagen.py file
+       is stored
+
+    The name should be set in initialize_data() in measurement classes and 
+    corresponds to the name at the end of the "spyview_process_name" method.
+    For example, if we specify name = '3D', we will be calling 
+    the method 'spyview_process_3D'
+    """
     def __init__(self,qtlabAPI,spyview_folder):
         self.qtlabAPI = qtlabAPI
         self.qtlabAPI.send("execfile('"+spyview_folder+"\\metagen.py')")
         self.name = ""
 
     def do(self,*args):
+        '''Calls the "spyview_process_name" method with the given arguments.
+        (Check the docstring for parse_args(*args) for details on how to enter arguments)
+        '''
         self.qtlabAPI.send('spyview_process_'+self.name+'('+parse_args(*args)+')')
 
 
@@ -196,6 +266,19 @@ class SpyviewProcess(object):
 #####################
 
 def parse_args(*args):
+    '''Parses arguments when sending instructions to the qtlab kernel.
+
+    - int, strings, floats should be entered un-altered
+    - QTLabVariable as well (the method __str__ takes care of yielding the right expression)
+    - larger data structures such as arrays should not be entered but a qtlab variable should
+        be used instead (otherwise all the variables in the array have to be sent via the comunication
+        channel with the kernel and this could lead to bugs)
+    - IMPORTANT: keyword arguments have to be entered as strings.
+        arg1 = 3 should be entered as "arg1 = 3"
+        arg2 = my_float should be enetered as "arg2 = "+str(my_float)
+        arg3 = 'hello' should be entered as "arg3 = 'hello'"
+        arg4 = my_string should be entered as "arg4 = '"+my_string+"'"
+    '''
 
     parsed_args = ""
     for arg in args:

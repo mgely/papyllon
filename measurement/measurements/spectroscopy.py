@@ -1,7 +1,6 @@
 import measurement
 import qtlabAPI
 import numpy as np
-import imp
 
 class SingleTone(measurement.Measurement):
     """docstring for SingleTone"""
@@ -37,7 +36,9 @@ class SingleTone(measurement.Measurement):
     def __init__(self):
         super(SingleTone, self).__init__()
 
-
+    ##################
+    # Initialization #
+    ##################
 
     def initialize(self):
         """Overwrites some of the initialization procedures
@@ -46,12 +47,10 @@ class SingleTone(measurement.Measurement):
         """
 
         # Used by the sweeping instrument => defined in QTlab
-        self.X_list = self.qt.variable('X_list', 'np.linspace',self.X_start,self.X_stop,self.X_points)
+        self.X_list = qtlabAPI.QTLabVariable(self.qt,'X_list', 'np.linspace',self.X_start,self.X_stop,self.X_points)
 
         # Used to control the measurement => defined here
-        print self.Y_start,self.Y_stop,self.Y_points
         self.Y_list=np.linspace(self.Y_start,self.Y_stop,self.Y_points) 
-
 
     def initialize_instruments(self):
         # Create all instruments
@@ -75,12 +74,6 @@ class SingleTone(measurement.Measurement):
         self.curr_source.do("set_protection_state",     True)
         self.curr_source.do("set_state",                True)
 
-    def terminate_instruments(self):
-        self.curr_source.do('set_bias_current',0.0)
-        self.curr_source.do('set_state',False)
-
-        super(SingleTone, self).terminate_instruments()
-
     def initialize_data_acquisition(self, directory):
         super(SingleTone, self).initialize_data_acquisition(directory)
 
@@ -95,11 +88,10 @@ class SingleTone(measurement.Measurement):
         self.data.do('add_value',       'f_data [dBm]')
         self.data.do('add_value',       'Phase')
 
-    def terminate_data_acquisition(self):
-        super(SingleTone, self).terminate_data_acquisition()
 
-
-
+    ##################
+    #   Measurement  #
+    ##################
 
     def measure(self):
         self.acquire_frame(Z = 1.)
@@ -119,7 +111,7 @@ class SingleTone(measurement.Measurement):
                                 self.Y_stop,  self.Y_start,
                                 Z, 'newoutermostblockval='+str(new_outermostblockval_flag))
                 new_outermostblockval_flag=False
-                self.qt.do('qt','msleep',0.01) #wait 10 usec so save etc
+                self.qt.do('qt.msleep',0.01) #wait 10 usec so save etc
 
     def acquire_trace(self,Y,Z):
 
@@ -136,9 +128,22 @@ class SingleTone(measurement.Measurement):
                 self.pna.do('sweep')
                 self.pna.do('auto_scale')
 
-        self.trace = self.qt.variable('trace', 'pna.fetch_data', 'polar=True')
-        self.tr2 = self.qt.variable('tr2', 'pna.data_f')
+        self.trace = qtlabAPI.QTLabVariable(self.qt,'trace', 'pna.fetch_data', 'polar=True')
+        self.tr2 = qtlabAPI.QTLabVariable(self.qt,'tr2', 'pna.data_f')
 
         # Too complicated, has to be a send statement
         self.qt.send('data.add_data_point(X_list, list('+str(Y)+'*ones(len(X_list))),list('+str(Z)+'*ones(len(X_list))),trace[0], tr2, np.unwrap(trace[1]))')
         self.data.do('new_block')
+
+    ##################
+    #    Terminate   #
+    ##################
+
+    def terminate_instruments(self):
+        self.curr_source.do('set_bias_current',0.0)
+        self.curr_source.do('set_state',False)
+
+        super(SingleTone, self).terminate_instruments()
+
+    def terminate_data_acquisition(self):
+        super(SingleTone, self).terminate_data_acquisition()

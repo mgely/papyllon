@@ -1,3 +1,8 @@
+'''Class for handling communication between the operator and the qtlab kernel
+
+Mario Gely - mario.f.gely@gmail.com
+'''
+
 import time 
 import json
 import pdb
@@ -109,7 +114,7 @@ class Measurement(object):
         Should be appended in measurement classes to include any specific
         initialization procedure
         '''
-        self.qt.do('qt','mstart')
+        self.qt.do('qt.mstart')
         self.data = qtlabAPI.Data(self.qt, 'data', directory)
 
     # Overwrite
@@ -152,7 +157,7 @@ class Measurement(object):
         call super()) to include specific procedures. 
         '''
         self.data.close()
-        self.qt.do('qt','mend')
+        self.qt.do('qt.mend')
 
     ############################################
     # Methods called by user with the operator #
