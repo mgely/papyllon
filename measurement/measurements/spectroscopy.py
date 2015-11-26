@@ -74,14 +74,17 @@ class SingleTone(measurement.Measurement):
         self.curr_source.do("set_protection_state",     True)
         self.curr_source.do("set_state",                True)
 
+        # Var_attenuation
+        self.var_att.do("set_var_att",  self.var_att)
+
     def initialize_data_acquisition(self, directory):
         super(SingleTone, self).initialize_data_acquisition(directory)
 
         self.spyview.name = '3D'
         self.spyview.do('reset=True')
 
-        self.data.do('add_coordinate',  self.X_name)
-        self.data.do('add_coordinate',  self.Y_name)
+        self.data.do('add_coordinate',  "Cavity Frequency [Hz]")
+        self.data.do('add_coordinate',  "I_coil [A]")
         self.data.do('add_coordinate',  'no Z coordinate')
 
         self.data.do('add_value',       'Transmission (dBm)')
@@ -101,6 +104,8 @@ class SingleTone(measurement.Measurement):
         new_outermostblockval_flag=True
         for Y in self.Y_list:
             if self.MEASURE == True:
+
+                self.Y = Y # Needed to compute the progress               
                 self.curr_source.do('set_bias_current',Y) 
 
                 
@@ -112,6 +117,8 @@ class SingleTone(measurement.Measurement):
                                 Z, 'newoutermostblockval='+str(new_outermostblockval_flag))
                 new_outermostblockval_flag=False
                 self.qt.do('qt.msleep',0.01) #wait 10 usec so save etc
+
+                self.print_progress()
 
     def acquire_trace(self,Y,Z):
 
@@ -147,3 +154,17 @@ class SingleTone(measurement.Measurement):
 
     def terminate_data_acquisition(self):
         super(SingleTone, self).terminate_data_acquisition()
+
+    ##################
+    #    Timing      #
+    ##################
+
+    def compute_progress(self):
+        self.progress = (self.Y - self.Y_start) / (self.Y_stop - self.Y_start)
+
+    def compute_measurement_time(self):
+        self.measurement_time = self.X_points * self.Y_points * 1 / float(self.ifbw)
+
+    def print_progress(self):
+        super(SingleTone, self).print_progress()
+        print "Magnet : %f Amps" % (self.Y)

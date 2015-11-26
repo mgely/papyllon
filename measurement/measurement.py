@@ -13,6 +13,7 @@ import qtlabAPI
 import sys
 import traceback
 import os
+import datetime
 
 class Measurement(object):
     '''Handles communication with the operator and the qtlab kernel.
@@ -64,6 +65,10 @@ class Measurement(object):
 
         # For configuring spyview 
         self.spyview = qtlabAPI.SpyviewProcess(self.qt,spyview_folder = self.papyllon_folder_address+'\\measurement\\spyview')
+
+        # Measurement timing
+        self.measurement_time = 0 # in seconds
+        self.progress = 0 # between 0 and 1
 
         # Class specific instructions => overwritten in each measurement
         self.initialize()
@@ -159,6 +164,16 @@ class Measurement(object):
         self.data.close()
         self.qt.do('qt.mend')
 
+    # Overwrite
+    def compute_progress(self):
+        logging.warning("\nMethod to compute progress not overwritten in \
+            measurement class or you havn't initialized the measurement")
+
+    # Overwrite
+    def compute_measurement_time(self):
+        logging.warning("\nMethod to compute measurement time not overwritten in \
+            measurement class")
+
     ############################################
     # Methods called by user with the operator #
     ############################################
@@ -198,12 +213,17 @@ class Measurement(object):
         '''Method to call after testing the setup to run a full measurement.
         Will go through the following procedure:
 
-        1. Initialize measurements
+        0. Initialize measurement (load settings)
+        1. Initialize instruments
         2. Initialize data acquisition
         3. Measures
         4. Terminates data acquisition
         5. Removes all instruments
         '''
+
+        start = time.time()
+        logging.info("Measurement started")
+        self.print_measurement_time()
         now=time.localtime()
         date_path = str(now.tm_year) + '_' +\
                     str(now.tm_mon) + '_' +\
@@ -219,6 +239,7 @@ class Measurement(object):
                     self.measurement_name+'__'+\
                     detail
 
+        self.initialize_measurement()
         self.initialize_instruments()
         self.initialize_data_acquisition(folder)
 
@@ -228,14 +249,17 @@ class Measurement(object):
 
         self.terminate_data_acquisition()
         self.terminate_instruments()
+        end = time.time()
 
-        logging.info('Measurement stopped.')
+        logging.info('Measurement ended.')
+        print "Measurement time: "+str(datetime.timedelta(seconds=end - start))
 
     def test_measurement(self):
         '''Method to test the setup before running a full measurement.
         Will go through the following procedure:
 
-        1. Initialize measurements
+        0. Initialize measurement (load settings)
+        1. Initialize instruments
         2. Initialize data acquisition
         3. Measures
         4. Terminates data acquisition
@@ -246,6 +270,8 @@ class Measurement(object):
         Should be PREpended (write instructions then call super()) to, for 
         example, divide the number of sweep points for a fast scan
         '''
+        start = time.time()
+        
         folder = self.data_address + "\\_testing"
         
         for fileName in os.listdir(folder):
@@ -254,6 +280,7 @@ class Measurement(object):
             except WindowsError, e:
                 logging.warning("Previous test data: '"+fileName+"' could not be removed because it is open in another process")
 
+        self.initialize_measurement()
         self.initialize_instruments()
         self.initialize_data_acquisition(folder)
 
@@ -263,8 +290,10 @@ class Measurement(object):
 
         self.terminate_data_acquisition()
         self.terminate_instruments()
+        end = time.time()
 
-        logging.info('Measurement stopped.')
+        logging.info('Measurement ended.')
+        print "Measurement time: "+str(datetime.timedelta(seconds=end - start))
 
     def stop(self):
         '''Stops the measurement by skipping all the code in the measure method
@@ -479,6 +508,46 @@ class Measurement(object):
         while self.state == "ON":
             time.sleep(0.1)
             self.process_command()
+
+    def print_measurement_time(self):
+        self.apply_settings()
+        self.compute_measurement_time()
+
+        print "Expected time of measurement: \t"+\
+            str(datetime.timedelta(seconds=self.measurement_time))
+
+        print "Expected end of measurement: \t"+\
+            str(datetime.datetime.now()+datetime.timedelta(seconds=self.measurement_time))
+
+    # Append in measurement class to include additional information about progress
+    def print_progress(self):
+
+        # Calculating progress
+        self.compute_progress()
+
+        # Building the progress bar
+        prog_bar = ""
+        i = 0.05
+        while i<self.progress:
+            prog_bar += "="
+            i += 0.05
+        prog_bar += ">"
+        while i<1.:
+            prog_bar += " "
+            i += 0.05
+
+        # Calculating finishing time
+        self.compute_measurement_time()
+        time_left = (1-self.progress)*self.measurement_time
+        end_time = str(datetime.datetime.now()+datetime.timedelta(seconds=time_left))
+
+
+        print "-----------------------------------------------"
+        print "[" + prog_bar + "] (%2.f %%)" % (self.progress * 100)
+        print "Finished at "+end_time
+        print "-----------------------------------------------"
+
+
 
 
 def byteify(input):

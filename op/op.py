@@ -56,6 +56,10 @@ class Op(object):
     def stop(self):
         self.run_measurement_method("stop()")
 
+    def time(self):
+        self.run_measurement_method("print_measurement_time()")
+        
+
 
 
 
