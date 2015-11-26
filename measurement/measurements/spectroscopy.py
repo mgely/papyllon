@@ -14,8 +14,10 @@ class SingleTone(measurement.Measurement):
                 'Y_start',\
                 'Y_stop',\
                 'Y_points',\
+                'Z_start',\
+                'Z_stop',\
+                'Z_points',\
                 'var_att',\
-                'power_pna',\
                 'ifbw',\
                 'averages']
 
@@ -46,6 +48,7 @@ class SingleTone(measurement.Measurement):
 
         # Used to control the measurement => defined here
         self.Y_list=np.linspace(self.Y_start,self.Y_stop,self.Y_points) 
+        self.Z_list=np.linspace(self.Z_start,self.Z_stop,self.Z_points) 
 
     def initialize_instruments(self):
         # Create all instruments
@@ -57,7 +60,6 @@ class SingleTone(measurement.Measurement):
         self.pna.do(        "setup",                    "start_frequency = "+str(self.X_start), \
                                                         "stop_frequency = " +str(self.X_stop), \
                                                         "measurement_format = 'MLOG'")
-        self.pna.do(        "set_power",                self.power_pna)
         self.pna.do(        "set_resolution_bandwidth", self.ifbw)
         self.pna.do(        "set_sweeppoints",          self.X_points)
         self.pna.do(        "set_averages_on")
@@ -92,7 +94,9 @@ class SingleTone(measurement.Measurement):
     ##################
 
     def measure(self):
-        self.acquire_frame(Z = 1.)
+        for Z in self.Z_list:
+            self.pna.do("set_power",Z)
+            self.acquire_frame(Z)
 
     def acquire_frame(self,Z):
 
@@ -158,7 +162,7 @@ class SingleTone(measurement.Measurement):
         self.progress = (self.Y - self.Y_start) / (self.Y_stop - self.Y_start)
 
     def compute_measurement_time(self):
-        self.measurement_time = self.X_points * self.Y_points * 1 / float(self.ifbw)
+        self.measurement_time = self.X_points * self.Y_points * self.Z_points / float(self.ifbw)
 
     def print_progress(self):
         super(SingleTone, self).print_progress()

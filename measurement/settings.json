@@ -1,15 +1,17 @@
 {
-    "X_points": 1001,
-    "X_start": 4.1e9,
+    "X_points": 701,
+    "X_start": 4.05e9,
     "X_stop": 4.4e9,
-    "Y_points": 10,
+    "Y_points": 201,
     "Y_start": -0.7e-3,
-    "Y_stop": -0.2e-3,
+    "Y_stop": -0.25e-3,
+    "Z_points": 1,
+    "Z_start": 0,
+    "Z_stop": 0,
     "averages": 1,
-    "ifbw": 100,
+    "ifbw": 50,
     "measurement_name": "SingleTone",
     "measurement_type": "spectroscopy",
     "opt": {},
-    "power_pna": 0,
     "var_att": 80
 }
