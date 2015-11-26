@@ -1,10 +1,7 @@
 {
-    "X_instrument": null,
-    "X_instrument_var": null,
     "X_points": 1001,
     "X_start": 4.1e9,
     "X_stop": 4.4e9,
-    "Y_instrument": null,
     "Y_points": 10,
     "Y_start": -0.7e-3,
     "Y_stop": -0.2e-3,

@@ -8,17 +8,12 @@ class SingleTone(measurement.Measurement):
     # Define a list of arguments needed in this measurement
     arg_list = ["measurement_type",\
                 "measurement_name",\
-                'X_name',\
                 'X_start',\
                 'X_stop',\
                 'X_points',\
-                'X_instrument',\
-                'X_instrument_var',\
-                'Y_name',\
                 'Y_start',\
                 'Y_stop',\
                 'Y_points',\
-                'Y_instrument',\
                 'var_att',\
                 'power_pna',\
                 'ifbw',\
