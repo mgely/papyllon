@@ -252,6 +252,8 @@ class Measurement(object):
         end = time.time()
 
         logging.info('Measurement ended.')
+        print "Started: "+str(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(start)))
+        print "Ended: "+str(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(end)))
         print "Measurement time: "+str(datetime.timedelta(seconds=end - start))
 
     def test_measurement(self):
