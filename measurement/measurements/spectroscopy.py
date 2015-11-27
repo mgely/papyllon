@@ -2,23 +2,25 @@ import measurement
 import qtlabAPI
 import numpy as np
 
+
 class SingleTone(measurement.Measurement):
     """docstring for SingleTone"""
 
     # Define a list of arguments needed in this measurement
     arg_list = ["measurement_type",\
                 "measurement_name",\
-                'X_start',\
-                'X_stop',\
-                'X_points',\
-                'Y_start',\
-                'Y_stop',\
-                'Y_points',\
-                'Z_start',\
-                'Z_stop',\
-                'Z_points',\
+                'f_start',\
+                'f_stop',\
+                'f_points',\
+                'I_start',\
+                'I_stop',\
+                'I_points',\
+                'power_start',\
+                'power_stop',\
+                'power_points',\
                 'var_att',\
-                'ifbw',\
+                'ifbw_first_power_frame',\
+                "adaptive_ifbw",\
                 'averages']
 
     # Define a list of optional arguments needed in this measurement
@@ -29,6 +31,12 @@ class SingleTone(measurement.Measurement):
                 ['curr_source',     'keysight_source_B2961A',   'TCPIP::192.168.1.56::INSTR'],\
                 ['var_att',         'agilent_var_attenuator',   'TCPIP::192.168.1.113::INSTR']]
 
+
+    bandwidth = [1,2,3,5,7,10,15,20,30,50,70,100,
+                        150,200,300,500,700,1000,1.5e3,2e3,3e3,5e3,
+                        7e3,10e3,15e3,20e3,30e3,50e3,70e3,100e3,
+                        150e3,200e3,280e3,360e3,600e3,1e6,1.5e6,
+                        2e6,3e6,5e6,7e6,10e6,15e6]
 
     def __init__(self):
         super(SingleTone, self).__init__()
@@ -43,12 +51,19 @@ class SingleTone(measurement.Measurement):
         Will be called in __init__ automatically.
         """
 
+        if self.ifbw_first_power_frame not in self.bandwidth:
+            raise Error('ifbw_first_power_frame is not in the available bandwidth of the PNA.\
+            Please choose from the following list: \n'+str(self.bandwidth))
+
         # Used by the sweeping instrument => defined in QTlab
-        self.X_list = qtlabAPI.QTLabVariable(self.qt,'X_list', 'np.linspace',self.X_start,self.X_stop,self.X_points)
+        self.f_list = qtlabAPI.QTLabVariable(self.qt,'f_list', 'np.linspace',self.f_start,self.f_stop,self.f_points)
 
         # Used to control the measurement => defined here
-        self.Y_list=np.linspace(self.Y_start,self.Y_stop,self.Y_points) 
-        self.Z_list=np.linspace(self.Z_start,self.Z_stop,self.Z_points) 
+        self.I_list=np.linspace(self.I_start,self.I_stop,self.I_points) 
+        self.power_list=np.linspace(self.power_start,self.power_stop,self.power_points) 
+
+        # Used to indicate frame progress
+        self.frame_progress = 0
 
     def initialize_instruments(self):
         # Create all instruments
@@ -57,11 +72,11 @@ class SingleTone(measurement.Measurement):
         # Additional procedures
         # PNA
         self.pna.do(        "reset")    
-        self.pna.do(        "setup",                    "start_frequency = "+str(self.X_start), \
-                                                        "stop_frequency = " +str(self.X_stop), \
+        self.pna.do(        "setup",                    "start_frequency = "+str(self.f_start), \
+                                                        "stop_frequency = " +str(self.f_stop), \
                                                         "measurement_format = 'MLOG'")
-        self.pna.do(        "set_resolution_bandwidth", self.ifbw)
-        self.pna.do(        "set_sweeppoints",          self.X_points)
+        self.pna.do(        "set_resolution_bandwidth", self.ifbw_first_power_frame)
+        self.pna.do(        "set_sweeppoints",          self.f_points)
         self.pna.do(        "set_averages_on")
         self.pna.do(        "set_averages",             self.averages)
 
@@ -94,14 +109,16 @@ class SingleTone(measurement.Measurement):
     ##################
 
     def measure(self):
-        for Z in self.Z_list:
+        for Z in self.power_list:
+            self.Z = Z # Needed to compute the progress     
             self.pna.do("set_power",Z)
+            self.adapt_power(Z)
             self.acquire_frame(Z)
 
     def acquire_frame(self,Z):
 
         new_outermostblockval_flag=True
-        for Y in self.Y_list:
+        for Y in self.I_list:
             if self.MEASURE == True:
 
                 self.Y = Y # Needed to compute the progress               
@@ -111,8 +128,8 @@ class SingleTone(measurement.Measurement):
                 self.acquire_trace(Y,Z)
                 
                 self.spyview.do(self.data,
-                                self.X_start, self.X_stop,
-                                self.Y_stop,  self.Y_start,
+                                self.f_start, self.f_stop,
+                                self.I_stop,  self.I_start,
                                 Z, 'newoutermostblockval='+str(new_outermostblockval_flag))
                 new_outermostblockval_flag=False
                 self.qt.do('qt.msleep',0.01) #wait 10 usec so save etc
@@ -138,8 +155,25 @@ class SingleTone(measurement.Measurement):
         self.tr2 = qtlabAPI.QTLabVariable(self.qt,'tr2', 'pna.data_f')
 
         # Too complicated, has to be a send statement
-        self.qt.send('data.add_data_point(X_list, list('+str(Y)+'*ones(len(X_list))),list('+str(Z)+'*ones(len(X_list))),trace[0], tr2, np.unwrap(trace[1]))')
+        self.qt.send('data.add_data_point(f_list, list('+str(Y)+'*ones(len(f_list))),list('+str(Z)+'*ones(len(f_list))),trace[0], tr2, np.unwrap(trace[1]))')
         self.data.do('new_block')
+
+    def adapt_power(self,Z):
+        if self.adaptive_ifbw == True:
+            new_bandwidth = self.compute_bandwidth(Z)
+            self.pna.do("set_resolution_bandwidth", new_bandwidth)
+
+    def compute_bandwidth(self,power):
+        index = self.bandwidth.index(self.ifbw_first_power_frame) + int((power - self.power_list[0])/3)
+
+        # Add bounds to the bandwidth
+        if index < 0:
+            index = 0
+        elif index >= len(self.bandwidth):
+            index = len(self.bandwidth) -1
+
+        return float(self.bandwidth[index])
+
 
     ##################
     #    Terminate   #
@@ -159,11 +193,42 @@ class SingleTone(measurement.Measurement):
     ##################
 
     def compute_progress(self):
-        self.progress = (self.Y - self.Y_start) / (self.Y_stop - self.Y_start)
+        self.frame_progress = (self.Y - self.I_start) / (self.I_stop - self.I_start)
+
+        i = 0
+        power = self.power_list[0]
+        numerator = 0
+        denominator = 0
+        while power != self.Z:
+            bw = self.compute_bandwidth(power)
+            numerator += 1/bw
+            denominator += 1/bw
+            i += 1
+            power  = self.power_list[i]
+
+        power  = self.power_list[i]
+        bw = self.compute_bandwidth(power)
+        numerator += self.frame_progress * 1/bw
+        denominator += 1/bw
+        i += 1
+
+        while i<len(self.power_list):
+            power  = self.power_list[i]
+            bw = self.compute_bandwidth(power)
+            denominator += 1/bw
+            i += 1
+
+        self.progress = numerator/denominator
+        
 
     def compute_measurement_time(self):
-        self.measurement_time = self.X_points * self.Y_points * self.Z_points / float(self.ifbw)
+        self.measurement_time = 0
+        for Z in self.power_list:
+            bw = self.compute_bandwidth(Z)
+            self.measurement_time += self.f_points * self.I_points / bw
+
 
     def print_progress(self):
         super(SingleTone, self).print_progress()
+        print "Power : %f dBm" % (self.Z)
         print "Magnet : %f Amps" % (self.Y)

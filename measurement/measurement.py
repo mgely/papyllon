@@ -510,7 +510,7 @@ class Measurement(object):
             self.process_command()
 
     def print_measurement_time(self):
-        self.apply_settings()
+        self.initialize_measurement()
         self.compute_measurement_time()
 
         print "Expected time of measurement: \t"+\
