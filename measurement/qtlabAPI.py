@@ -26,6 +26,9 @@ class QTLabKernelAPI(object):
         blocking_client.connection_file='C:\papyllon\papyllon\qtlab\kernel.json'
         blocking_client.load_connection_file()
         self.channel = blocking_client.shell_channel
+
+        self.SCRIPT = False
+        self.script_adress = None
         
         # The logging is done in measurement_log.txt
         logger = logging.getLogger()
@@ -102,6 +105,10 @@ class QTLabKernelAPI(object):
         '''
 
         logging.info(code)
+
+        if self.SCRIPT == True:
+            with open(self.script_adress,"a") as s:
+                s.write("\n"+code)
 
         # build message
         msg = self.build_message(code)

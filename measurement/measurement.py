@@ -14,6 +14,7 @@ import sys
 import traceback
 import os
 import datetime
+from shutil import copy
 
 class Measurement(object):
     '''Handles communication with the operator and the qtlab kernel.
@@ -209,7 +210,7 @@ class Measurement(object):
             self.apply_settings()
             self.initialize()
 
-    def start_measurement(self,name,device,detail):
+    def start_measurement(self,name,device,detail,testing = False):
         '''Method to call after testing the setup to run a full measurement.
         Will go through the following procedure:
 
@@ -224,6 +225,8 @@ class Measurement(object):
         start = time.time()
         logging.info("Measurement started")
         self.print_measurement_time()
+
+        # Create data folder
         now=time.localtime()
         date_path = str(now.tm_year) + '_' +\
                     str(now.tm_mon) + '_' +\
@@ -231,30 +234,51 @@ class Measurement(object):
                     str(now.tm_hour) + '.' +\
                     str(now.tm_min) + '.' +\
                     str(now.tm_sec)
+        if testing == False:
+            folder = self.data_address + '\\'+\
+                        name + '\\'+\
+                        device + '\\'+\
+                        date_path+'_____'+\
+                        self.measurement_name+'__'+\
+                        detail
+        elif testing == True:
+            folder = self.data_address + '\\'+\
+                        "_testing" + '\\'+\
+                        date_path
 
-        folder = self.data_address + '\\'+\
-                    name + '\\'+\
-                    device + '\\'+\
-                    date_path+'_____'+\
-                    self.measurement_name+'__'+\
-                    detail
 
-        self.initialize_measurement()
-        self.initialize_instruments()
+        # Initialization
         self.initialize_data_acquisition(folder)
 
-                    
+        # Prepare sript
+        self.qt.SCRIPT = True
+        self.qt.script_adress = self.papyllon_folder_address+'\\measurement\\script.py'
+        with open(self.qt.script_adress,'w') as s:
+            s.write('# measurement script')
+
+            
+        self.initialize_measurement()
+        self.initialize_instruments()
+
+        # Measurement                
         self.MEASURE = True
         self.measure()
 
+        # Stopping everything
         self.terminate_data_acquisition()
         self.terminate_instruments()
         end = time.time()
+        self.qt.SCRIPT = False
 
         logging.info('Measurement ended.')
         print "Started: "+str(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(start)))
         print "Ended: "+str(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(end)))
         print "Measurement time: "+str(datetime.timedelta(seconds=end - start))
+
+        # Save settings
+        copy(self.settings_file_address, folder)
+        copy(self.qt.script_adress, folder)
+        os.remove(self.qt.script_adress)
 
     def test_measurement(self):
         '''Method to test the setup before running a full measurement.
@@ -272,30 +296,7 @@ class Measurement(object):
         Should be PREpended (write instructions then call super()) to, for 
         example, divide the number of sweep points for a fast scan
         '''
-        start = time.time()
-        
-        folder = self.data_address + "\\_testing"
-        
-        for fileName in os.listdir(folder):
-            try:
-                os.remove(os.path.join(folder,fileName))
-            except WindowsError, e:
-                logging.warning("Previous test data: '"+fileName+"' could not be removed because it is open in another process")
-
-        self.initialize_measurement()
-        self.initialize_instruments()
-        self.initialize_data_acquisition(folder)
-
-
-        self.MEASURE = True
-        self.measure()
-
-        self.terminate_data_acquisition()
-        self.terminate_instruments()
-        end = time.time()
-
-        logging.info('Measurement ended.')
-        print "Measurement time: "+str(datetime.timedelta(seconds=end - start))
+        self.start_measurement(None,None,None, testing = True)
 
     def stop(self):
         '''Stops the measurement by skipping all the code in the measure method
