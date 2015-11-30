@@ -248,7 +248,6 @@ class Measurement(object):
 
 
         # Initialization
-        self.initialize_data_acquisition(folder)
 
         # Prepare sript
         self.qt.SCRIPT = True
@@ -259,6 +258,7 @@ class Measurement(object):
             
         self.initialize_measurement()
         self.initialize_instruments()
+        self.initialize_data_acquisition(folder)
 
         # Measurement                
         self.MEASURE = True

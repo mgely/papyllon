@@ -125,6 +125,8 @@ class PNA_N5221A_sal(Instrument):
         self.add_function('setup')
         self.add_function('reset_averaging')
         self.add_function('peak_track')
+        self.add_function('setup_two_tone')
+        self.add_function('reset_two_tone_cavity')
 
         # Connect to measurement flow to detect start and stop of measurement
         qt.flow.connect('measurement-start', self._measurement_start_cb)
@@ -133,6 +135,134 @@ class PNA_N5221A_sal(Instrument):
 # --------------------------------------
 #           functions
 # --------------------------------------
+
+    def reset_two_tone_cavity(self,averages=1):
+        #set continuous off 
+        self._visainstrument.write("SENS1:SWE:MODE HOLD")
+        self._visainstrument.write("INIT:CONT OFF")
+
+        self.reset_averaging()
+            
+        for i in np.linspace(1,1,averages):
+            self.trigger(channel=1)
+            self.auto_scale(window=1,trace=1)
+
+        self._visainstrument.write("CALC1:MARK2:FUNC MIN")
+
+        peak=eval(self._visainstrument.ask("CALC1:MARK2:X?"))
+
+        self._visainstrument.write("SENS2:FOM:RANG3:FREQ:CW %s" %(peak)) #set cw freq to receivers
+        self._visainstrument.write("SENS2:FOM:RANG2:FREQ:CW %s" %(peak)) #set cw freq to source1
+
+        
+    def setup_two_tone(self,
+                        bias_start_cav,
+                        bias_stop_cav,
+                        bias_f_points,
+                        bias_aver_cav,
+                        bias_ifbw,
+                        bias_pow,
+                        start_probe,
+                        stop_probe,
+                        f_points_probe,
+                        aver_probe,
+                        ifbw_probe,
+                        pow_probe,
+                        w_bare,
+                        f_cw,
+                        pow_cw):
+        #setup two windows
+        self.reset()
+
+
+        #setup two displays
+        self._visainstrument.write("DISP:WIND1:STATE ON")
+        self._visainstrument.write("DISP:WIND2:STATE ON")
+
+        ###setup cavity scan (magnitude)
+        self._visainstrument.write("CALC1:PAR:DEF:EXT 'CH1_S21_S1', 'B,1'")
+        self._visainstrument.write("DISP:WIND1:TRACE1:FEED 'CH1_S21_S1'")
+        self._visainstrument.write("CALC1:PAR:SEL 'CH1_S21_S1'")
+        self._visainstrument.write("CALC1:FORM MLOG")
+
+        #setup triggering per channel
+        self._visainstrument.write("INIT:CONT OFF")
+        self._visainstrument.write("SENS1:SWE:MODE HOLD")
+        self._visainstrument.write("TRIG:SCOP CURR")
+
+
+        #do settings for the bias monitor)
+        self._visainstrument.write("SENS:FREQ:START %s" % (bias_start_cav))
+        self._visainstrument.write("SENS:FREQ:STOP %s" % (bias_stop_cav))
+        self._visainstrument.write("SENS:SWE:POIN %s" % (bias_f_points))
+        self._visainstrument.write("SENS:BWID %s" % (bias_ifbw))
+        self._visainstrument.write("SOUR:POW1 %s" %(bias_pow))
+
+        #do settings for Marker for the bias monitor
+        self._visainstrument.write("CALC1:MARK:REF ON")
+        self._visainstrument.write("CALC1:MARK:REF:X " + str(w_bare))
+        self._visainstrument.write("CALC1:MARK1 ON")
+        self._visainstrument.write("CALC1:MARK1:FUNC MIN")
+        self._visainstrument.write("CALC1:MARK1:FUNC:TRAC ON")
+        self._visainstrument.write("CALC1:MARK1:DELT ON")
+        self._visainstrument.write("CALC1:MARK2 ON")
+        self._visainstrument.write("CALC1:MARK2:FUNC MIN")
+        self._visainstrument.write("CALC1:MARK2:FUNC:TRAC ON")
+
+        #do settings for averaging of bias monitor
+        self._visainstrument.write("SENS1:AVER 1")
+        self._visainstrument.write("SENS1:AVER:MODE SWE")
+        self._visainstrument.write("SENS1:AVER:COUN %s" % (bias_aver_cav))
+
+        ###setup cavity (real)
+        ##self._visainstrument.write("CALC1:PAR:DEF:EXT 'CH1_S21_REAL','S21'")
+        ##self._visainstrument.write("DISP:WIND1:TRACE2:FEED 'CH1_S21_REAL'")
+        ##self._visainstrument.write("CALC1:PAR:SEL 'CH1_S21_REAL'")
+        ##self._visainstrument.write("CALC1:FORM REAL")
+        #qt.msleep(20)       #wait for first trace to complete
+        ##self._visainstrument.write("DISP:WIND1:TRACE2:Y:SCAL:AUTO")
+        ##self._visainstrument.write("DISP:WIND1:TRACE1:Y:SCAL:AUTO")
+
+        ##
+        ###setup two tone scan
+        self._visainstrument.write("CALC2:PAR:DEF:EXT 'CH2_S21_S1', 'B,1'")
+        self._visainstrument.write("DISP:WIND2:TRACE1:FEED 'CH2_S21_S1'")
+        self._visainstrument.write("CALC2:PAR:SEL 'CH2_S21_S1'")
+        self._visainstrument.write("CALC2:FORM MLOG")
+        ##
+        self._visainstrument.write("SENS2:FREQ:START %s" % (start_probe))
+        self._visainstrument.write("SENS2:FREQ:STOP %s" % (stop_probe))
+        self._visainstrument.write("SENS2:SWE:POIN %s" % (f_points_probe))
+        self._visainstrument.write("SENS2:BWID %s" % (ifbw_probe))
+
+        ###still switch averaging on
+        ##
+        ##
+        self._visainstrument.write("SENS2:FOM:STATE 1")      #switch on Frequency Offset Module
+        self._visainstrument.write("SENS2:FOM:RANG3:COUP 0")     #decouple Receivers
+        self._visainstrument.write("SENS2:FOM:RANG2:COUP 0")     #decouple Source 
+        ##
+        self._visainstrument.write("SENS2:FOM:RANG3:SWE:TYPE CW")    #set Receivers in CW mode
+        self._visainstrument.write("SENS2:FOM:RANG2:SWE:TYPE CW")    #set Source in CW mode
+        ##
+        self._visainstrument.write("SENS2:FOM:RANG3:FREQ:CW %s" %(f_cw)) #set cw freq to receivers
+        self._visainstrument.write("SENS2:FOM:RANG2:FREQ:CW %s" %(f_cw)) #set cw freq to source1
+        ##
+        self._visainstrument.write("SENS2:FOM:DISP:SEL 'Primary'")       #set x-axis to primary 
+        ##
+        self._visainstrument.write("SOUR2:POW:COUP 0")                   #decouple powers
+        self._visainstrument.write("SOUR2:POW1 %s" %(pow_cw))
+        self._visainstrument.write("SOUR2:POW3 %s" %(pow_probe))
+        self._visainstrument.write("SOUR2:POW3:MODE ON")                 #switch on port3
+
+        self._visainstrument.write("SENS2:AVER 1")
+        self._visainstrument.write("SENS2:AVER:MODE SWEEP")
+        #self._visainstrument.write("SENS2:AVER:MODE POIN")
+        self._visainstrument.write("SENS2:AVER:COUN %s" % (aver_probe))
+
+        self._visainstrument.write("CALC2:MARK1 ON")
+        self._visainstrument.write("CALC2:MARK1:FUNC MAX")
+        self._visainstrument.write("CALC2:MARK1:FUNC:TRAC ON")
     def peak_track(self, dip=True):
 
         self._visainstrument.write("CALC1:MARK1 ON")
