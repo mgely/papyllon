@@ -154,7 +154,7 @@ class PNA_N5221A_sal(Instrument):
         self._visainstrument.write("SENS2:FOM:RANG3:FREQ:CW %s" %(peak)) #set cw freq to receivers
         self._visainstrument.write("SENS2:FOM:RANG2:FREQ:CW %s" %(peak)) #set cw freq to source1
 
-        
+
     def setup_two_tone(self,
                         bias_start_cav,
                         bias_stop_cav,
@@ -260,9 +260,12 @@ class PNA_N5221A_sal(Instrument):
         #self._visainstrument.write("SENS2:AVER:MODE POIN")
         self._visainstrument.write("SENS2:AVER:COUN %s" % (aver_probe))
 
+        # Setup marker to qubit maximum 
         self._visainstrument.write("CALC2:MARK1 ON")
         self._visainstrument.write("CALC2:MARK1:FUNC MAX")
         self._visainstrument.write("CALC2:MARK1:FUNC:TRAC ON")
+
+
     def peak_track(self, dip=True):
 
         self._visainstrument.write("CALC1:MARK1 ON")
@@ -847,8 +850,7 @@ class PNA_N5221A_sal(Instrument):
     def do_get_sweeptime(self):
         '''Gets the sweeptime in ms, the PNA automatically sets it to the fastest possible value, but it
         is very useful to query how long qtlab has to sleep before a sweep is performed
-        '''
-        return self._visainstrument.ask("SENS1:SWE:TIME?")
+        ''' 
 
     def do_set_sweeptime(self,sweeptime):
         '''Sets the sweeptime, not very useful inless measuring in CW-mode'''

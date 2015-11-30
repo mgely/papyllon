@@ -1,14 +1,14 @@
 {
-    "I_points": 8,
-    "I_start": 0,
-    "I_stop": 0.1,
+    "I_points": 1,
+    "I_start": 0e-3,
+    "I_stop": 0e-3,
     "averages": 1,
     "cav_averaging": 1,
     "cav_ifbw": 50,
-    "cav_points": 401,
-    "cav_power": 0,
-    "cav_start": 3.9e9,
-    "cav_stop": 4.2e9,
+    "cav_points": 10,
+    "cav_power": 10,
+    "cav_start": 3.971e9,
+    "cav_stop": 4.071e9,
     "measurement_name": "TwoTone",
     "measurement_type": "spectroscopy",
     "opt": {
@@ -17,10 +17,10 @@
         "w_bare": 4601000000.0
     },
     "qubit_averaging": 1,
-    "qubit_ifbw": 50,
-    "qubit_points": 401,
-    "qubit_power": 0,
-    "qubit_start": 7e9,
-    "qubit_stop": 8e9,
-    "var_att": 80
+    "qubit_ifbw": 10,
+    "qubit_points": 10,
+    "qubit_power": 15,
+    "qubit_start": 11.5e9,
+    "qubit_stop": 13e9,
+    "var_att_attenuation": 80
 }

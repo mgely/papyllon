@@ -18,11 +18,11 @@ execfile('metagen3D.py')
 # var_att is 80dB
 # probe attenuation is 20dB
 #Cavity monitor
-bias_start_cav = 4.1e9
-bias_stop_cav = 4.5e9
-bias_f_points =20
+bias_start_cav = 3.971e9
+bias_stop_cav = 4.071e9
+bias_f_points =201
 bias_ifbw = 20
-bias_pow=-9
+bias_pow=10
 bias_aver_cav=1 # NOT IMPLEMENTED
 aver_cav=1
 w_bare=4.601e9
@@ -32,23 +32,23 @@ execfile('setup_S21_twotone_XYZ.py')
 
 #Core variables
 X_name='Probe Frequency [Hz]'
-X_start=7.0e9
-X_stop=15.e9
-X_points=100
+X_start=11e9
+X_stop=13.e9
+X_points=401
 X_list=np.linspace(X_start,X_stop,X_points)
 
 
 X_name_cav='Cavity Frequency [Hz]'
-X_start_cav = 4.6e9
-X_stop_cav= 4.7e9
-X_points_cav= 20
+X_start_cav = 3.971e9
+X_stop_cav= 4.071e9
+X_points_cav= 201
 X_list_cav=np.linspace(X_start_cav,X_stop_cav,X_points_cav)
 
 
 Y_name='I coil [mA]'
-Y_start=0.5
-Y_stop=1.7
-Y_points=501
+Y_start=0.1
+Y_stop=0.1
+Y_points=1
 Y_list=np.linspace(Y_start,Y_stop,Y_points)
 
 # Y_name='Probe power [dBm]'
@@ -180,7 +180,7 @@ def set_probe_power(I):
 
 
 #pna_set_2tone_cw_power(-6)
-pow_cav = -18.
+pow_cav = 10.
 aver_probe=8
 ifbw_probe=50
 aver_probe=1
@@ -191,7 +191,7 @@ pna_set_2tone_probe_frequency(start_frequency=X_start,stop_frequency=X_stop, poi
 pna.w("SENS2:AVER:COUN %s" % (aver_probe))
 
 timing.start()
-pna_set_2tone_probe_power(0)
+pna_set_2tone_probe_power(10)
 
 #set cavity power
 
@@ -224,7 +224,8 @@ for Z in Z_list:
         #set magnet
         curr_source.ramp_source_curr(Y*1e-3,10e-3,1e-6)
         #set probe power
-        probe_att = set_probe_power(Y)
+        # probe_att = set_probe_power(Y)
+        probe_att = 0
         print "probe attenuation set to: ", probe_att
         pna_set_2tone_probe_power(probe_att)
 
@@ -257,7 +258,7 @@ for Z in Z_list:
         
 # curr_source.set_bias_current(0)
 curr_source.ramp_source_curr(0.,10e-3,1e-6)
-source.set_state(False)
+curr_source.set_state(False)
 
 data.close_file()
 timing.stop(publish=True)

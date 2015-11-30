@@ -122,7 +122,7 @@ class SingleTone(measurement.Measurement):
             if self.MEASURE == True:
 
                 self.Y = Y # Needed to compute the progress               
-                self.curr_source.do('set_bias_current',Y) 
+                self.curr_source.do('ramp_source_curr',Y) 
 
                 
                 self.acquire_trace(Y,Z)
@@ -179,7 +179,7 @@ class SingleTone(measurement.Measurement):
     ##################
 
     def terminate_instruments(self):
-        self.curr_source.do('set_bias_current',0.0)
+        self.curr_source.do('ramp_source_curr',0.0)
         self.curr_source.do('set_state',False)
 
         super(SingleTone, self).terminate_instruments()
@@ -253,7 +253,7 @@ class TwoTone(measurement.Measurement):
                 'I_start',\
                 'I_stop',\
                 'I_points',\
-                'var_att',\
+                'var_att_attenuation',\
                 'averages']
 
     # Define a list of optional arguments needed in this measurement
@@ -319,7 +319,7 @@ class TwoTone(measurement.Measurement):
         self.curr_source.do("set_state",                True)
 
         # Var_attenuation
-        self.var_att.do("set_var_att",  self.var_att)
+        self.var_att.do("set_var_att",  self.var_att_attenuation)
 
     def initialize_data_acquisition(self, directory):
         super(TwoTone, self).initialize_data_acquisition(directory)
@@ -350,7 +350,7 @@ class TwoTone(measurement.Measurement):
             if self.MEASURE == True:
 
                 self.Y = Y # Needed to compute the progress               
-                self.curr_source.do('set_bias_current',Y) 
+                self.curr_source.do('ramp_source_curr',Y) 
 
                 
                 self.acquire_trace(Y,Z)
@@ -375,9 +375,8 @@ class TwoTone(measurement.Measurement):
         if self.MEASURE == True:
             self.pna.do('reset_two_tone_cavity')
 
-        # Autoscale
+        # Autoscale first screen
         self.pna.do('w',"DISP:WIND1:TRAC1:Y:SCAL:AUTO")
-        self.pna.do('w',"DISP:WIND2:TRAC1:Y:SCAL:AUTO")
 
         # Sweep Qubit
         for i in ave_list:
@@ -385,8 +384,7 @@ class TwoTone(measurement.Measurement):
             if self.MEASURE == True:
                 self.pna.do('trigger','channel = %s' % (2))
 
-                # Autoscale
-                self.pna.do('w',"DISP:WIND1:TRAC1:Y:SCAL:AUTO")
+                # Autoscale second screen
                 self.pna.do('w',"DISP:WIND2:TRAC1:Y:SCAL:AUTO")
 
 
@@ -403,7 +401,7 @@ class TwoTone(measurement.Measurement):
     ##################
 
     def terminate_instruments(self):
-        self.curr_source.do('set_bias_current',0.0)
+        self.curr_source.do('ramp_source_curr',0.0)
         self.curr_source.do('set_state',False)
 
         super(TwoTone, self).terminate_instruments()
@@ -416,7 +414,10 @@ class TwoTone(measurement.Measurement):
     ##################
 
     def compute_progress(self):
-        self.progress = (self.Y - self.I_start) / (self.I_stop - self.I_start)
+        if self.I_stop != self.I_start:
+            self.progress = (self.Y - self.I_start) / (self.I_stop - self.I_start)
+        else:
+            self.progress = 1.
         
 
     def compute_measurement_time(self):

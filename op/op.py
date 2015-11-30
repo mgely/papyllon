@@ -1,11 +1,14 @@
 import time
 import zmq
+import gui
+from os import getcwd
 
 class Op(object):
     """docstring for Operator"""
     def __init__(self):
         self.measurement_communication_port="5556"
         self.setup_communication()
+        self.papyllon_folder_address = self.get_papyllon_folder_address()
 
     def initialize_measurement(self):
         self.run_measurement_method('initialize_measurement()')
@@ -48,16 +51,27 @@ class Op(object):
         self.run_measurement_method("test_measurement()")
 
     def start(self):
-        name = raw_input('Your name: ')
-        device = raw_input('Device name: ')
-        detail = raw_input('Measurement details (ex: S21_XYZ_mag_pow): ')
-        self.run_measurement_method("start_measurement('"+name+"','"+device+"','"+detail+"')")
+        gui.SetupGUI(setup_file_adress = self.get_setup_file_address(), 
+            method = self.run_measurement_method)
 
     def stop(self):
         self.run_measurement_method("stop()")
 
     def time(self):
         self.run_measurement_method("print_measurement_time()")
+
+
+
+    def get_papyllon_folder_address(self):
+        module_address = getcwd()
+
+        # extracts the papyllon folder adress
+        papyllon_folder_address = module_address.replace('\\op','')
+
+        return papyllon_folder_address
+
+    def get_setup_file_address(self):
+        return self.papyllon_folder_address+'\\measurement\\setup.json'
         
 
 

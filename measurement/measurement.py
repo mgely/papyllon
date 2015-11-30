@@ -271,14 +271,35 @@ class Measurement(object):
         self.qt.SCRIPT = False
 
         logging.info('Measurement ended.')
-        print "Started: "+str(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(start)))
-        print "Ended: "+str(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(end)))
-        print "Measurement time: "+str(datetime.timedelta(seconds=end - start))
+
+        start_str = str(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(start)))
+        end_str = str(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(end)))
+        duration = str(datetime.timedelta(seconds=end - start))
+
+        print "Started: "+start_str
+        print "Ended: "+end_str
+        print "Measurement time: "+duration
 
         # Save settings
         copy(self.settings_file_address, folder)
+
+        # Save setup in data folder
+        copy(self.get_setup_file_address(), folder)
+
+        # Save script in data folder
         copy(self.qt.script_adress, folder)
         os.remove(self.qt.script_adress)
+
+        # Save time information
+        time_info = {
+        'duration' : duration,
+        'start' : start_str,
+        'end' : end_str
+        }
+        with open(folder+'\\timing.json',"w") as f:
+            json.dump(time_info, f, sort_keys=True, indent=4, separators=(',', ': '))
+
+
 
     def test_measurement(self):
         '''Method to test the setup before running a full measurement.
@@ -428,6 +449,10 @@ class Measurement(object):
 
     def get_settings_file_address(self):
         return self.papyllon_folder_address+'\\measurement\\settings.json'
+
+    def get_setup_file_address(self):
+        return self.papyllon_folder_address+'\\measurement\\setup.json'
+    
     
     def get_name(self):
         '''Returns the name of the current class, for exemple 'Measurement'
