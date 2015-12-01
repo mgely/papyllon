@@ -253,16 +253,19 @@ class TwoTone(measurement.Measurement):
                 'I_start',\
                 'I_stop',\
                 'I_points',\
-                'var_att_attenuation',\
-                'averages']
+                'var_att_attenuation']
 
     # Define a list of optional arguments needed in this measurement
     opt_arg_list = [['f_cw',6.2689e9],\
                     ['pow_cw',-10],\
-                    ['w_bare',4.601e9]]
+                    ['w_bare',4.601e9],\
+                    ['qubit_power_dep',False],\
+                    ['qubit_power_start',0.],\
+                    ['qubit_power_stop',0.],\
+                    ['qubit_power_points',1]]
 
     # Define a list of used instruments
-    inst_list = [['pna',            'PNA_N5221A_sal',               'TCPIP::192.168.1.42::INSTR'],\
+    inst_list = [['pna',            'PNA_N5221A_sal',           'TCPIP::192.168.1.42::INSTR'],\
                 ['curr_source',     'keysight_source_B2961A',   'TCPIP::192.168.1.56::INSTR'],\
                 ['var_att',         'agilent_var_attenuator',   'TCPIP::192.168.1.113::INSTR']]
 
@@ -285,6 +288,10 @@ class TwoTone(measurement.Measurement):
 
         # Used to control the measurement => defined here
         self.I_list=np.linspace(self.I_start,self.I_stop,self.I_points)
+        if self.qubit_power_dep == True:
+            self.qubit_power_list=np.linspace(self.qubit_power_start,
+                                                self.qubit_power_stop,
+                                                self.qubit_power_points)
 
         # Used to indicate frame progress
         self.frame_progress = 0
@@ -329,7 +336,10 @@ class TwoTone(measurement.Measurement):
 
         self.data.do('add_coordinate',  "Frequency [Hz]")
         self.data.do('add_coordinate',  "I_coil [A]")
-        self.data.do('add_coordinate',  'no Z coordinate')
+        if self.qubit_power_dep == True:
+            self.data.do('add_coordinate',  'Qubit power [dBm]')
+        else:
+            self.data.do('add_coordinate',  'no Z coordinate')
 
         self.data.do('add_value',       'linmag')
         self.data.do('add_value',       'phase')
@@ -341,7 +351,13 @@ class TwoTone(measurement.Measurement):
     ##################
 
     def measure(self):
-        self.acquire_frame(Z = 0.)
+        if self.qubit_power_dep == True:
+            for Z in self.qubit_power_list:
+                self.Z = Z # Needed to compute the progress     
+                self.pna.do('w',"SOUR2:POW3 %s" %(Z))
+                self.acquire_frame(Z)
+        else: 
+            self.acquire_frame(Z = 0.)
 
     def acquire_frame(self,Z):
 
@@ -392,7 +408,11 @@ class TwoTone(measurement.Measurement):
 
         self.trace = qtlabAPI.QTLabVariable(self.qt,'trace', 'pna.fetch_data', "channel  = %s" % (2), 'polar=True')
 
-        self.qt.send('data.add_data_point(qubit_list, list('+str(Y)+'*ones(len(qubit_list))),list('+str(Z)+'*ones(len(qubit_list))),trace[0], np.unwrap(trace[1]), list(0.*ones(len(qubit_list))) )')
+        self.qt.send('data.add_data_point(qubit_list,'+\
+            ' list('+str(Y)+'*ones(len(qubit_list))),'+\
+            ' list('+str(Z)+'*ones(len(qubit_list))),'+\
+            ' trace[0], np.unwrap(trace[1]),'+\
+            ' list(0.*ones(len(qubit_list))) )')
         self.data.do('new_block')
 
 
@@ -418,7 +438,14 @@ class TwoTone(measurement.Measurement):
             self.progress = (self.Y - self.I_start) / (self.I_stop - self.I_start)
         else:
             self.progress = 1.
+
+        if self.qubit_power_dep == True:
+            self.progress *= (self.Z - self.qubit_power_start) / (self.qubit_power_stop - self.qubit_power_start)
         
 
     def compute_measurement_time(self):
-        self.measurement_time = (self.qubit_points / float(self.qubit_ifbw) + self.cav_points / float(self.cav_ifbw)) * self.I_points
+        self.measurement_time = (self.qubit_points * self.qubit_averaging / float(self.qubit_ifbw) + self.cav_points * self.cav_averaging / float(self.cav_ifbw)) * self.I_points
+
+        if self.qubit_power_dep == True:
+            self.measurement_time *= self.qubit_power_points
+        

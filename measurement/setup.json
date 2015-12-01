@@ -1,7 +1,7 @@
 {
-    "device": "test",
+    "device": "Kurma6B_B",
     "emails": "mario.f.gely@gmail.com",
-    "experiment": "test",
-    "name": "test",
-    "notes": "some notes\nsome more"
+    "experiment": "overnight",
+    "name": "Sal",
+    "notes": "With the two tone still not ready, we re-do last week-ends measurement (which failed because of flux jumps)\n\n- 20 dB attenuation added on qubit input\n-10 dB attenuation added on cavity line"
 }
