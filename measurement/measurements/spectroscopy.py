@@ -356,7 +356,8 @@ class TwoTone(measurement.Measurement):
                 self.Z = Z # Needed to compute the progress     
                 self.pna.do('w',"SOUR2:POW3 %s" %(Z))
                 self.acquire_frame(Z)
-        else: 
+        else:      
+            self.pna.do('w',"SOUR2:POW3 %s" %(self.qubit_power))
             self.acquire_frame(Z = 0.)
 
     def acquire_frame(self,Z):

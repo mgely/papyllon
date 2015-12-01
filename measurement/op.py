@@ -6,6 +6,10 @@ from Tkinter import *
 import ttk
 import json
 
+'''To debug this class, simply run this module in a terminal. This will 
+start the gui whilst printing to the terminal.
+'''
+
 class Op(object):
     """docstring for SetupGUI"""
     def __init__(self):
@@ -55,8 +59,6 @@ class Op(object):
 
 
         self.root.title("Start measurement")
-        screen_width = self.root.winfo_screenwidth()
-        screen_height = self.root.winfo_screenheight()
         self.root.geometry("+%d+%d" % (self.x, self.y))
 
 
@@ -78,9 +80,10 @@ class Op(object):
             width = 30
             ).grid(column = 1, row = 0, sticky = (W,E))
 
+        self.go_back_to = self.loader
         ttk.Button(self.mainframe,
             text = "Talk to kernel",
-            command = self.interface,
+            command = self.go_to_interface,
             ).grid(column = 1, row = 1, sticky = (W,E))
 
         # Configure all the widgets to have the same padding
@@ -95,8 +98,6 @@ class Op(object):
         self.root.lift()
 
         self.root.title("Controller")
-        screen_width = self.root.winfo_screenwidth()
-        screen_height = self.root.winfo_screenheight()
         self.root.geometry("+%d+%d" % (self.x, self.y))
 
 
@@ -135,16 +136,24 @@ class Op(object):
             command = self.stop
             ).grid(column = 1, row = 3, sticky = (W,E))
 
+        # 
+        ttk.Button(self.mainframe,
+            text = "Initialize instruments",
+            command = self.initialize_instruments
+            ).grid(column = 1, row = 4, sticky = (W,E))
+
         # Exit measurement
         ttk.Button(self.mainframe,
             text = "Exit measurement",
             command = self.go_to_loader,
-            ).grid(column = 1, row = 4, sticky = (W,E))
+            ).grid(column = 1, row = 5, sticky = (W,E))
 
+        
+        self.go_back_to = self.controller
         ttk.Button(self.mainframe,
             text = "Talk to kernel",
-            command = self.interface,
-            ).grid(column = 1, row = 5, sticky = (W,E))
+            command = self.go_to_interface,
+            ).grid(column = 1, row = 6, sticky = (W,E))
 
 
         # Configure all the widgets to have the same padding
@@ -160,8 +169,6 @@ class Op(object):
 
 
         self.interface_root.title("Talk directly to the measurement kernel")
-        screen_width = self.interface_root.winfo_screenwidth()
-        screen_height = self.interface_root.winfo_screenheight()
         self.interface_root.geometry("+%d+%d" % (self.x, self.y)) 
 
         self.interface_mainframe = ttk.Frame(self.interface_root,padding = (3,3,3,3))
@@ -175,7 +182,6 @@ class Op(object):
 
         self.to_execute = StringVar()
         to_execute_entry = ttk.Entry(self.interface_mainframe,
-            width = 50,
             textvariable = self.to_execute)
         to_execute_entry.grid(column = 0, row = 0, sticky = (W, E))
         to_execute_entry.insert(0, 'self.')
@@ -186,9 +192,11 @@ class Op(object):
             ).grid(column = 1, row = 0, sticky = (W,E)) 
 
         # Configure all the widgets to have the same padding
-        for child in self.mainframe.winfo_children():
+        for child in self.interface_mainframe.winfo_children():
             child.grid_configure(padx = 5, pady = 5)
-        
+
+        # Keyboard shortcut for start
+        self.interface_root.bind('<Return>',self.send_in_interface)
         self.interface_root.mainloop()
 
 
@@ -203,10 +211,17 @@ class Op(object):
         self.root.destroy()
         self.loader()
 
+    def go_to_interface(self):
+        self.get_gui_position()
+        self.root.destroy()
+        self.interface()
+
 
     def send_in_interface(self):
+        print str(self.to_execute.get())
         self.send(str(self.to_execute.get()))
         self.interface_root.destroy()
+        self.go_back_to()
 
     def get_gui_position(self):
         self.x = self.root.winfo_x()
@@ -227,11 +242,18 @@ class Op(object):
         self.send("self.test_measurement()")
 
     def start(self):
+        self.get_gui_position()
+        self.root.destroy()
         gui.SetupGUI(setup_file_adress = self.get_setup_file_address(), 
             method = self.send)
+        self.controller()
 
     def stop(self):
         self.send("self.stop()")
+
+    def initialize_instruments(self):
+        self.send("self.initialize_measurement()")
+        self.send("self.initialize_instruments()")
 
     def time(self):
         self.send("self.print_measurement_time()")
