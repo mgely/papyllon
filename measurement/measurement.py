@@ -338,16 +338,15 @@ class Measurement(object):
 
         if command != None:
 
-            method_to_apply = 'self.'+command
-            logging.info("Applying "+method_to_apply)
+            logging.info("Applying "+command)
 
-            # eval(method_to_apply) # Use when debugging, favors information about errors over keeping exp running
+            # eval(command) # Use when debugging, favors information about errors over keeping exp running
             try:
-                eval(method_to_apply)
+                eval(command)
 
             # Failing to execute a command will not stop the measurement from running
             except Exception, e:
-                error_message = 'Error in '+method_to_apply+'\nFailed with error: ' + str(e) + '\n'
+                error_message = 'Error in '+command+'\nFailed with error: ' + str(e) + '\n'
                 tb = "\n".join(traceback.format_exc().splitlines())
                 logging.error(error_message+'\n'+tb+'\n')
 

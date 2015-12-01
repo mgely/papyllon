@@ -133,7 +133,7 @@ class SetupGUI(object):
 
     def start(self,*args):
         self.save_to_file(self.setup_file_adress)
-        self.method("start_measurement('"+self.name.get()+"','"+str(self.device.get())+"','"+str(self.experiment.get())+"')")
+        self.method("self.start_measurement('"+self.name.get()+"','"+str(self.device.get())+"','"+str(self.experiment.get())+"')")
         self.root.destroy()
 
 def byteify(input):
