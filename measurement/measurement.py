@@ -16,6 +16,8 @@ import os
 import datetime
 from shutil import copy
 
+
+
 class Measurement(object):
     '''Handles communication with the operator and the qtlab kernel.
 
@@ -48,11 +50,15 @@ class Measurement(object):
     # Define a list of used instruments
     inst_list = []
 
+
     def __init__(self):
+        with open("global.json","r") as f:
+            self.global_setup =  byteify(json.load(f))
+
         self.state = "ON"
         self.papyllon_folder_address = self.get_papyllon_folder_address()
         self.settings_file_address = self.get_settings_file_address()
-        self.data_address = self.get_data_file_address()
+        self.data_address = self.global_setup["data_directory"]
         self.setup_logging(level=logging.DEBUG)
 
         self.apply_settings()
@@ -537,44 +543,51 @@ class Measurement(object):
             self.process_command()
 
     def print_measurement_time(self):
-        self.initialize_measurement()
-        self.compute_measurement_time()
 
-        print "Expected time of measurement: \t"+\
-            str(datetime.timedelta(seconds=self.measurement_time))
+        try:
+            self.initialize_measurement()
+            self.compute_measurement_time()
 
-        print "Expected end of measurement: \t"+\
-            str(datetime.datetime.now()+datetime.timedelta(seconds=self.measurement_time))
+            print "Expected time of measurement: \t"+\
+                str(datetime.timedelta(seconds=self.measurement_time))
+
+            print "Expected end of measurement: \t"+\
+                str(datetime.datetime.now()+datetime.timedelta(seconds=self.measurement_time))
+        except:
+            logging.error('Could not print measurement time')
 
     # Append in measurement class to include additional information about progress
     def print_progress(self):
 
-        # Calculating progress
-        self.compute_progress()
+        # Try to not interrupt measurement in case of failure
+        try:
+            # Calculating progress
+            self.compute_progress()
 
-        # Building the progress bar
-        prog_bar = ""
-        i = 0.05
-        while i<self.progress:
-            prog_bar += "="
-            i += 0.05
-        prog_bar += ">"
-        while i<1.:
-            prog_bar += " "
-            i += 0.05
+            # Building the progress bar
+            prog_bar = ""
+            i = 0.05
+            while i<self.progress:
+                prog_bar += "="
+                i += 0.05
+            prog_bar += ">"
+            while i<1.:
+                prog_bar += " "
+                i += 0.05
 
-        # Calculating finishing time
-        self.compute_measurement_time()
-        time_left = (1-self.progress)*self.measurement_time
-        end_time = str(datetime.datetime.now()+datetime.timedelta(seconds=time_left))
-
-
-        print "-----------------------------------------------"
-        print "[" + prog_bar + "] (%2.f %%)" % (self.progress * 100)
-        print "Finished at "+end_time
-        print "-----------------------------------------------"
+            # Calculating finishing time
+            self.compute_measurement_time()
+            time_left = (1-self.progress)*self.measurement_time
+            end_time = str(datetime.datetime.now()+datetime.timedelta(seconds=time_left))
 
 
+            print "-----------------------------------------------"
+            print "[" + prog_bar + "] (%2.f %%)" % (self.progress * 100)
+            print "Finished at "+end_time
+            print "-----------------------------------------------"
+
+        except:
+            logging.error('Could not print progress')
 
 
 def byteify(input):
