@@ -332,6 +332,7 @@ class PNA_N5221A_sal(Instrument):
         a=0
         self._visainstrument.write("INITiate:IMMediate")
         while a==0:
+            print a
             qt.msleep(0.05)
             try:
                 a=eval(self.q('*OPC?;'))

@@ -1,7 +1,7 @@
 {
-    "device": "Kurma6B_B",
+    "device": "test",
     "emails": "mario.f.gely@gmail.com",
-    "experiment": "quick_scan",
-    "name": "Sal",
-    "notes": "- 20 dB attenuation added on qubit input\n-10 dB attenuation added on cavity line"
+    "experiment": "test",
+    "name": "test",
+    "notes": "-10 dB attenuation added on cavity line (var_att set to 70 to compensate)"
 }

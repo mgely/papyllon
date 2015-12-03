@@ -1,0 +1,5 @@
+Run the following command:
+
+pip install --upgrade google-api-python-client
+pip install python-pptx
+pip install pypiwin32

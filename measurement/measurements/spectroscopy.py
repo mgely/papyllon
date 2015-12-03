@@ -27,7 +27,7 @@ class SingleTone(measurement.Measurement):
     opt_arg_list = []
 
     # Define a list of used instruments
-    inst_list = [['pna',            'PNA_N5221A',               'TCPIP::192.168.1.42::INSTR'],\
+    inst_list = [['pna',            'PNA_N5221A_sal',               'TCPIP::192.168.1.42::INSTR'],\
                 ['curr_source',     'keysight_source_B2961A',   'TCPIP::192.168.1.56::INSTR'],\
                 ['var_att',         'agilent_var_attenuator',   'TCPIP::192.168.1.113::INSTR']]
 
@@ -180,7 +180,8 @@ class SingleTone(measurement.Measurement):
 
     def terminate_instruments(self):
         self.curr_source.do('ramp_source_curr',0.0)
-        self.curr_source.do('set_state',False)
+        self.curr_source.do('set_state',False)     
+        self.pna.do("set_power",-10)
 
         super(SingleTone, self).terminate_instruments()
 
@@ -224,7 +225,7 @@ class SingleTone(measurement.Measurement):
         self.measurement_time = 0
         for Z in self.power_list:
             bw = self.compute_bandwidth(Z)
-            self.measurement_time += self.f_points * self.I_points / bw
+            self.measurement_time += self.averages * self.f_points * self.I_points / bw
 
 
     def print_progress(self):
@@ -318,6 +319,7 @@ class TwoTone(measurement.Measurement):
                         self.w_bare,
                         self.f_cw,
                         self.pow_cw)  
+        self.pna.do("reset_two_tone_cavity")
 
         # Current source
         self.curr_source.do("set_output_type",          'CURR')

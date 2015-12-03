@@ -1,3 +1,4 @@
 {
-    "data_directory":"D:\\steelelab-nas\\measurement_data\\BlueFors\\door_computer"
+    "data_directory":"D:\\steelelab-nas\\measurement_data\\BlueFors\\door_computer",
+    "spyview_console_path":"C:\\papyllon\\papyllon\\spyview_windows\\spyview_console.exe"
 }

@@ -1,6 +1,7 @@
 from Tkinter import *
 import ttk
 import json
+from utility import byteify
 
 class SetupGUI(object):
     """docstring for SetupGUI"""
@@ -136,15 +137,3 @@ class SetupGUI(object):
         self.method("self.start_measurement('"+self.name.get()+"','"+str(self.device.get())+"','"+str(self.experiment.get())+"')")
         self.root.destroy()
 
-def byteify(input):
-    '''Utility function to parse all the unicode expressions in a dictionary
-    to a string
-    '''
-    if isinstance(input, dict):
-        return {byteify(key):byteify(value) for key,value in input.iteritems()}
-    elif isinstance(input, list):
-        return [byteify(element) for element in input]
-    elif isinstance(input, unicode):
-        return input.encode('utf-8')
-    else:
-        return input

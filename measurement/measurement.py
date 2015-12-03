@@ -15,6 +15,7 @@ import traceback
 import os
 import datetime
 from shutil import copy
+from utility import byteify, add_measurement_to_ppt, ask_user_to_generate_png
 
 
 
@@ -241,6 +242,9 @@ class Measurement(object):
                     str(now.tm_min) + '.' +\
                     str(now.tm_sec)
         if testing == False:
+            device_folder = self.data_address + '\\'+\
+                        name + '\\'+\
+                        device
             folder = self.data_address + '\\'+\
                         name + '\\'+\
                         device + '\\'+\
@@ -304,6 +308,9 @@ class Measurement(object):
         }
         with open(folder+'\\timing.json',"w") as f:
             json.dump(time_info, f, sort_keys=True, indent=4, separators=(',', ': '))
+
+        if testing == False:
+            self.add_data_to_ppt(device_folder, folder)
 
 
 
@@ -589,16 +596,11 @@ class Measurement(object):
         except:
             logging.error('Could not print progress')
 
+    def add_data_to_ppt(self, device_folder, measurement_folder):
+        raw_ppt_address = os.path.join(device_folder,'raw.pptx')
+        if not os.path.isfile(raw_ppt_address):
+            copy(os.path.join(self.papyllon_folder_address,'measurement','raw.pptx'), device_folder)
 
-def byteify(input):
-    '''Utility function to parse all the unicode expressions in a dictionary
-    to a string
-    '''
-    if isinstance(input, dict):
-        return {byteify(key):byteify(value) for key,value in input.iteritems()}
-    elif isinstance(input, list):
-        return [byteify(element) for element in input]
-    elif isinstance(input, unicode):
-        return input.encode('utf-8')
-    else:
-        return input
+        ask_user_to_generate_png(measurement_folder)
+        add_measurement_to_ppt(raw_ppt_address, measurement_folder)
+
