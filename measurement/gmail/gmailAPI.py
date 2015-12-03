@@ -14,6 +14,7 @@ import mimetypes
 from googleapiclient.errors import HttpError
 from base64 import urlsafe_b64encode,urlsafe_b64decode
 from HTMLParser import HTMLParser
+import os
 
 
 
@@ -31,7 +32,7 @@ pp = pprint.PrettyPrinter(indent=4)
 
 
 SCOPES = 'https://mail.google.com/'
-CLIENT_SECRET_FILE = 'client_secret.json'
+CLIENT_SECRET_FILE = os.path.join(os.path.dirname(__file__),'client_secret.json')
 APPLICATION_NAME = 'Gmail API Python'
 
 class GmailClient(object):
@@ -49,7 +50,7 @@ class GmailClient(object):
     Returns:
         Credentials, the obtained credential.
     """
-    credential_dir = '.credentials'
+    credential_dir = os.path.join(os.path.dirname(__file__),'.credentials')
     if not os.path.exists(credential_dir):
         os.makedirs(credential_dir)
     credential_path = os.path.join(credential_dir,

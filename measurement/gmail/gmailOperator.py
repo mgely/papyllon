@@ -1,9 +1,17 @@
+# TODO
+# and data_folder
+
+
 from gmailAPI import GmailClient
 from time import sleep
-import pprint
 from .. import utility
+import pprint
 pp = pprint.PrettyPrinter(indent=4)
 # pretty-print dictionaries with pp.pprint(dict)
+
+
+
+data_folder = 'D:\steelelab-nas\measurement_data\BlueFors\door_computer\Sal\Kurma6A_C\\2015_12_3_______17.28.54_____SingleTone__overnight_assp_zoom'
 
 class EmailOperator(object):
     """docstring for SetupGUI"""
@@ -31,13 +39,32 @@ class EmailOperator(object):
             self.status(message)
 
     def status(self, message):
-        pass
+        utility.create_png(data_folder)
+
+        png = None
+        for file in os.listdir(data_folder):
+            if file.endswith(".png"):
+                png = file
+
+        if png == None:
+            g.send(subject = 'Re: '+message['subject'],
+             message_text = 'Spyview did not generate a file', 
+             file_dir = None, 
+             filename = None,
+             cc = message['cc'])
+            raise RuntimeError('Spyview did not generate a file')
+        else:
+            g.send(subject = 'Re: '+message['subject'],
+             message_text = 'Spyview did not generate a file', 
+             file_dir = data_folder, 
+             filename = png,
+             cc = message['cc']) 
 
 
 
 
-# if __name__ == "__main__":
-    # EmailOperator()
+if __name__ == "__main__":
+    EmailOperator()
 
     #body
     #from
