@@ -99,7 +99,7 @@ class SingleTone(measurement.Measurement):
         self.data.do('add_coordinate',  "I_coil [A]")
         self.data.do('add_coordinate',  'PNA power [dBm]')
 
-        self.data.do('add_value',       'Transmission (dBm)')
+        self.data.do('add_value',       'Transmission')
         self.data.do('add_value',       'f_data [dBm]')
         self.data.do('add_value',       'Phase')
 
@@ -179,8 +179,8 @@ class SingleTone(measurement.Measurement):
     ##################
 
     def terminate_instruments(self):
-        self.curr_source.do('ramp_source_curr',0.0)
-        self.curr_source.do('set_state',False)     
+        # self.curr_source.do('ramp_source_curr',0.0)
+        # self.curr_source.do('set_state',False)     
         self.pna.do("set_power",-10)
 
         super(SingleTone, self).terminate_instruments()
@@ -263,7 +263,11 @@ class TwoTone(measurement.Measurement):
                     ['qubit_power_dep',False],\
                     ['qubit_power_start',0.],\
                     ['qubit_power_stop',0.],\
-                    ['qubit_power_points',1]]
+                    ['qubit_power_points',1],\
+                    ['cav_power_dep',False],\
+                    ['cav_power_start',0.],\
+                    ['cav_power_stop',0.],\
+                    ['cav_power_points',1]]
 
     # Define a list of used instruments
     inst_list = [['pna',            'PNA_N5221A_sal',           'TCPIP::192.168.1.42::INSTR'],\
@@ -293,6 +297,10 @@ class TwoTone(measurement.Measurement):
             self.qubit_power_list=np.linspace(self.qubit_power_start,
                                                 self.qubit_power_stop,
                                                 self.qubit_power_points)
+        if self.cav_power_dep == True:
+            self.cav_power_list=np.linspace(self.cav_power_start,
+                                                self.cav_power_stop,
+                                                self.cav_power_points)
 
         # Used to indicate frame progress
         self.frame_progress = 0
@@ -319,7 +327,7 @@ class TwoTone(measurement.Measurement):
                         self.w_bare,
                         self.f_cw,
                         self.pow_cw)  
-        self.pna.do("reset_two_tone_cavity")
+        # self.pna.do("reset_two_tone_cavity")
 
         # Current source
         self.curr_source.do("set_output_type",          'CURR')
@@ -340,6 +348,8 @@ class TwoTone(measurement.Measurement):
         self.data.do('add_coordinate',  "I_coil [A]")
         if self.qubit_power_dep == True:
             self.data.do('add_coordinate',  'Qubit power [dBm]')
+        if self.cav_power_dep == True:
+            self.data.do('add_coordinate',  'Cavity power [dBm]')
         else:
             self.data.do('add_coordinate',  'no Z coordinate')
 
@@ -358,8 +368,12 @@ class TwoTone(measurement.Measurement):
                 self.Z = Z # Needed to compute the progress     
                 self.pna.do('w',"SOUR2:POW3 %s" %(Z))
                 self.acquire_frame(Z)
+        elif self.cav_power_dep == True:
+            for Z in self.cav_power_list:
+                self.Z = Z # Needed to compute the progress     
+                self.pna.do('w',"SOUR2:POW1 %s" %(Z))
+                self.acquire_frame(Z)
         else:      
-            self.pna.do('w',"SOUR2:POW3 %s" %(self.qubit_power))
             self.acquire_frame(Z = 0.)
 
     def acquire_frame(self,Z):
@@ -404,6 +418,7 @@ class TwoTone(measurement.Measurement):
                 self.pna.do('trigger','channel = %s' % (2))
 
                 # Autoscale second screen
+                self.pna.do('w',"CALC2:FORM PHASE")
                 self.pna.do('w',"DISP:WIND2:TRAC1:Y:SCAL:AUTO")
 
 
@@ -424,9 +439,10 @@ class TwoTone(measurement.Measurement):
     ##################
 
     def terminate_instruments(self):
-        self.curr_source.do('ramp_source_curr',0.0)
-        self.curr_source.do('set_state',False)
+        # self.curr_source.do('ramp_source_curr',0.0)
+        # self.curr_source.do('set_state',False)
 
+        self.var_att.do("set_var_att",  70)
         super(TwoTone, self).terminate_instruments()
 
     def terminate_data_acquisition(self):
@@ -444,11 +460,16 @@ class TwoTone(measurement.Measurement):
 
         if self.qubit_power_dep == True:
             self.progress *= (self.Z - self.qubit_power_start) / (self.qubit_power_stop - self.qubit_power_start)
-        
+
+        if self.cav_power_dep == True:
+            self.progress *= (self.Z - self.cav_power_start) / (self.cav_power_stop - self.cav_power_start)     
 
     def compute_measurement_time(self):
         self.measurement_time = (self.qubit_points * self.qubit_averaging / float(self.qubit_ifbw) + self.cav_points * self.cav_averaging / float(self.cav_ifbw)) * self.I_points
 
         if self.qubit_power_dep == True:
             self.measurement_time *= self.qubit_power_points
+
+        if self.cav_power_dep == True:
+            self.measurement_time *= self.cav_power_points
         

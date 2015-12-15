@@ -1,7 +1,7 @@
 # TODO
 # and data_folder
 
-
+import os
 from gmailAPI import GmailClient
 from time import sleep
 from .. import utility
@@ -11,9 +11,9 @@ pp = pprint.PrettyPrinter(indent=4)
 
 
 
-data_folder = 'D:\steelelab-nas\measurement_data\BlueFors\door_computer\Sal\Kurma6A_C\\2015_12_3_______17.28.54_____SingleTone__overnight_assp_zoom'
+data_folder = r'D:\steelelab-nas\measurement_data\BlueFors\door_computer\Sal\Kurma6A_C\2015_12_14_______16.48.27_____SingleTone__rabi_pow_dep'
 
-class EmailOperator(object):
+class GmailOperator(object):
     """docstring for SetupGUI"""
     def __init__(self):
         self.g = GmailClient('TUD202834@gmail.com')
@@ -22,7 +22,11 @@ class EmailOperator(object):
 
     def idle(self):
         while True:
-            message_list = self.g.read_all_unread_messages()
+            try:
+                message_list = self.g.read_all_unread_messages()
+            except Exception, e:
+                print 'Fetching mail failed.'
+                print str(e)
             if message_list == None:
                 sleep(5)
             else:
@@ -40,31 +44,29 @@ class EmailOperator(object):
 
     def status(self, message):
         utility.create_png(data_folder)
+ 
+        pdf = ''
+        for f in os.listdir(data_folder):
+            if f.endswith(".pdf"):
+                pdf = f
 
-        png = None
-        for file in os.listdir(data_folder):
-            if file.endswith(".png"):
-                png = file
-
-        if png == None:
-            g.send(subject = 'Re: '+message['subject'],
+        if pdf == '':
+            self.g.send(to = message['from'],
+             subject = 'Re: '+message['subject'],
              message_text = 'Spyview did not generate a file', 
              file_dir = None, 
              filename = None,
              cc = message['cc'])
             raise RuntimeError('Spyview did not generate a file')
         else:
-            g.send(subject = 'Re: '+message['subject'],
-             message_text = 'Spyview did not generate a file', 
+            self.g.send(to = message['from'],
+             subject = 'Re: '+message['subject'],
+             message_text = '', 
              file_dir = data_folder, 
-             filename = png,
+             filename = pdf,
              cc = message['cc']) 
 
 
-
-
-if __name__ == "__main__":
-    EmailOperator()
 
     #body
     #from

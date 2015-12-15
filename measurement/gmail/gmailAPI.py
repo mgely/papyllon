@@ -7,6 +7,7 @@ from oauth2client import client
 from oauth2client import tools
 
 from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import message_from_string
@@ -133,13 +134,12 @@ class GmailClient(object):
         msg = MIMEBase(main_type, sub_type)
         msg.set_payload(fp.read())
         fp.close()
-
       msg.add_header('Content-Disposition', 'attachment', filename=filename)
       message.attach(msg)
 
       return {'raw': urlsafe_b64encode(message.as_string())}
 
-  def send(self, subject, message_text, file_dir = None, filename = None,cc = ''):
+  def send(self,to, subject, message_text, file_dir = None, filename = None,cc = ''):
     """Send an email message.
 
     Args:
@@ -154,7 +154,7 @@ class GmailClient(object):
       Sent Message.
     """
 
-    message = self.create_message(to, subject, message_text, file_dir = None, filename = None,cc = '')
+    message = self.create_message(to, subject, message_text, file_dir, filename,cc)
     try:
       message = (self.service.users().messages().send(userId='me', body=message)
                  .execute())

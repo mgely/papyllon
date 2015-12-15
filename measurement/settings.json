@@ -1,18 +1,23 @@
 {
-    "f_points": 401,
-    "f_start": 4.2e9,
-    "f_stop": 4.35e9,
-    "ifbw_first_power_frame": 5,
-    "averages": 4,
-    "I_points": 251,
-    "I_start": -0.48e-3,
-    "I_stop": -0.42e-3,
-    "adaptive_ifbw": false,
-    "power_points": 1,
-    "power_start": -12,
-    "power_stop": 6,
-    "var_att_attenuation": 70,
-    "measurement_name": "SingleTone",
+    "I_points": 1,
+    "I_start": 0.15e-3,
+    "I_stop": 0.15e-3,
+    "cav_averaging": 1,
+    "cav_ifbw": 50,
+    "cav_points": 801,
+    "cav_power": 15,
+    "cav_start": 4.2e9,
+    "cav_stop": 4.3e9,
+    "measurement_name": "TwoTone",
     "measurement_type": "spectroscopy",
-    "opt": {}
+    "opt": {
+        "pow_cw": 15
+    },
+    "qubit_averaging": 1,
+    "qubit_ifbw": 1,
+    "qubit_points": 801,
+    "qubit_power": 3,
+    "qubit_start": 6.01e9,
+    "qubit_stop": 6.04e9,
+    "var_att_attenuation": 70
 }

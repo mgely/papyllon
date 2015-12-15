@@ -560,8 +560,9 @@ class Measurement(object):
 
             print "Expected end of measurement: \t"+\
                 str(datetime.datetime.now()+datetime.timedelta(seconds=self.measurement_time))
-        except:
+        except Exception, e:
             logging.error('Could not print measurement time')
+            logging.error(str(e))
 
     # Append in measurement class to include additional information about progress
     def print_progress(self):
@@ -593,8 +594,9 @@ class Measurement(object):
             print "Finished at "+end_time
             print "-----------------------------------------------"
 
-        except:
+        except Exception, e:
             logging.error('Could not print progress')
+            logging.error(str(e))
 
     def add_data_to_ppt(self, device_folder, measurement_folder):
         raw_ppt_address = os.path.join(device_folder,'raw.pptx')
