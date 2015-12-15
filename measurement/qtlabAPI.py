@@ -129,14 +129,11 @@ class QTLabKernelAPI(object):
                 if msg['content']['status'] == 'error':
                     raise QTLabError(msg['content']['ename']+': '+msg['content']['evalue']) 
 
-    def do(self, method, *args):
+    def do(self, method, *args,**kwargs):
         ''' Will execute the code "method(*args)" in the qtlab terminal
-
-        Check the docstring for parse_args(*args) for details on how to 
-        enter arguments.
         '''
 
-        code = method+'(' + parse_args(*args)+')'
+        code = method+'(' + parse_args(*args,**kwargs)+')'
 
         try:
             self.send(code)
@@ -175,18 +172,18 @@ class QTLabVariable(object):
      - defining_function (str)
        For example 'int'
 
-     - *args (Check the docstring for parse_args(*args) for details on how to enter arguments.)
+     - *args, ,**kwargs
        For example '3'
 
-    Will execute "name = defining_function(*args)" in qtlab
+    Will execute "name = defining_function(*args,**kwargs)" in qtlab
     For example: a = int('3')
 
     '''
-    def __init__(self,qtlabAPI,name,defining_function, *args):
+    def __init__(self,qtlabAPI,name,defining_function, *args,**kwargs):
 
         self.name = name
         self.qtlabAPI = qtlabAPI
-        code = self.name+' = '+defining_function+'(' + parse_args(*args)+')'
+        code = self.name+' = '+defining_function+'(' + parse_args(*args,**kwargs)+')'
 
         try:
             self.qtlabAPI.send(code)
@@ -261,18 +258,17 @@ class SpyviewProcess(object):
         self.qtlabAPI.send("execfile('"+spyview_folder+"\\metagen.py')")
         self.name = ""
 
-    def do(self,*args):
+    def do(self,*args,**kwargs):
         '''Calls the "spyview_process_name" method with the given arguments.
-        (Check the docstring for parse_args(*args) for details on how to enter arguments)
         '''
-        self.qtlabAPI.send('spyview_process_'+self.name+'('+parse_args(*args)+')')
+        self.qtlabAPI.send('spyview_process_'+self.name+'('+parse_args(*args,**kwargs)+')')
 
 
 #####################
 #     Utility       #
 #####################
 
-def parse_args(*args):
+def parse_args(*args,**kwargs):
     '''Parses arguments when sending instructions to the qtlab kernel.
 
     - int, strings, floats should be entered un-altered
@@ -280,22 +276,28 @@ def parse_args(*args):
     - larger data structures such as arrays should not be entered but a qtlab variable should
         be used instead (otherwise all the variables in the array have to be sent via the comunication
         channel with the kernel and this could lead to bugs)
-    - IMPORTANT: keyword arguments have to be entered as strings.
-        arg1 = 3 should be entered as "arg1 = 3"
-        arg2 = my_float should be enetered as "arg2 = "+str(my_float)
-        arg3 = 'hello' should be entered as "arg3 = 'hello'"
-        arg4 = my_string should be entered as "arg4 = '"+my_string+"'"
     '''
 
     parsed_args = ""
     for arg in args:
-
         if isinstance(arg, str):
+            # This solution to entering kwargs is depracated, one can now just enter kwargs directly
             if '=' in arg:
                 parsed_args = parsed_args + arg + ","
+
             else:
                 parsed_args = parsed_args + "'"+arg+"',"
         else:
             parsed_args = parsed_args + str(arg) + ","
+
+
+    for arg in kwargs:
+        parsed_args = parsed_args + arg + " = "
+        value = kwargs[arg]
+        if isinstance(value, str):
+            parsed_args = parsed_args + "'"+value+"',"
+        else:
+            parsed_args = parsed_args + str(value) + ","
+
     parsed_args = parsed_args[:-1] #remove last comma
     return parsed_args

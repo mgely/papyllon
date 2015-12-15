@@ -13,7 +13,7 @@
     "opt": {
         "pow_cw": 15
     },
-    "qubit_averaging": 1,
+    "qubit_averaging": 5,
     "qubit_ifbw": 1,
     "qubit_points": 801,
     "qubit_power": 3,
