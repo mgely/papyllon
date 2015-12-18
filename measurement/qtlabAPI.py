@@ -130,7 +130,7 @@ class QTLabKernelAPI(object):
                     raise QTLabError(msg['content']['ename']+': '+msg['content']['evalue']) 
 
     def do(self, method, *args,**kwargs):
-        ''' Will execute the code "method(*args)" in the qtlab terminal
+        ''' Will execute the code "method(*args,**kwargs)" in the qtlab terminal
         '''
 
         code = method+'(' + parse_args(*args,**kwargs)+')'
@@ -193,10 +193,10 @@ class QTLabVariable(object):
     def __str__(self):
         return self.name
 
-    def do(self,method,*args):
-        '''Will execute a method of the variable: name.method(*args)
+    def do(self,method,*args,**kwargs):
+        '''Will execute a method of the variable: name.method(*args,**kwargs)
         '''
-        self.qtlabAPI.do(self.name+'.'+method, *args)
+        self.qtlabAPI.do(self.name+'.'+method, *args, **kwargs)
 
     
 

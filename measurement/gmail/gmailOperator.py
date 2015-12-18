@@ -11,7 +11,7 @@ pp = pprint.PrettyPrinter(indent=4)
 
 
 
-data_folder = r'D:\steelelab-nas\measurement_data\BlueFors\door_computer\Sal\Kurma6A_C\2015_12_14_______16.48.27_____SingleTone__rabi_pow_dep'
+data_folder = r'D:\steelelab-nas\measurement_data\BlueFors\door_computer\Sal\Kurma6B_B\2015_12_17_______19.4.45_____SingleTone__overnight_rabi'
 
 class GmailOperator(object):
     """docstring for SetupGUI"""

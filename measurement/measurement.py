@@ -3,6 +3,7 @@
 Mario Gely - mario.f.gely@gmail.com
 '''
 
+import py_compile
 import time 
 import json
 import pdb
@@ -182,6 +183,13 @@ class Measurement(object):
         logging.warning("\nMethod to compute measurement time not overwritten in \
             measurement class")
 
+
+
+
+
+
+
+
     ############################################
     # Methods called by user with the operator #
     ############################################
@@ -203,6 +211,7 @@ class Measurement(object):
 
                 try:
                     exec("import measurements."+self.measurement_type)
+                    exec("reload(measurements."+self.measurement_type+")")
                 except ImportError, e:
                     logging.error("The module measurements."+self.measurement_type+" does not exist.")
                     raise e
@@ -311,8 +320,6 @@ class Measurement(object):
 
         if testing == False:
             self.add_data_to_ppt(device_folder, folder)
-
-
 
     def test_measurement(self):
         '''Method to test the setup before running a full measurement.
@@ -464,7 +471,6 @@ class Measurement(object):
 
     def get_setup_file_address(self):
         return self.papyllon_folder_address+'\\measurement\\setup.json'
-    
     
     def get_name(self):
         '''Returns the name of the current class, for exemple 'Measurement'
