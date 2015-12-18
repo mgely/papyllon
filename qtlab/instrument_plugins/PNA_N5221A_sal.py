@@ -167,10 +167,7 @@ class PNA_N5221A_sal(Instrument):
                         f_points_probe,
                         aver_probe,
                         ifbw_probe,
-                        pow_probe,
-                        w_bare,
-                        f_cw,
-                        pow_cw):
+                        pow_probe):
         #setup two windows
         self.reset()
 
@@ -200,7 +197,6 @@ class PNA_N5221A_sal(Instrument):
 
         #do settings for Marker for the bias monitor
         self._visainstrument.write("CALC1:MARK:REF ON")
-        self._visainstrument.write("CALC1:MARK:REF:X " + str(w_bare))
         self._visainstrument.write("CALC1:MARK1 ON")
         self._visainstrument.write("CALC1:MARK1:FUNC MIN")
         self._visainstrument.write("CALC1:MARK1:FUNC:TRAC ON")
@@ -245,13 +241,10 @@ class PNA_N5221A_sal(Instrument):
         self._visainstrument.write("SENS2:FOM:RANG3:SWE:TYPE CW")    #set Receivers in CW mode
         self._visainstrument.write("SENS2:FOM:RANG2:SWE:TYPE CW")    #set Source in CW mode
         ##
-        self._visainstrument.write("SENS2:FOM:RANG3:FREQ:CW %s" %(f_cw)) #set cw freq to receivers
-        self._visainstrument.write("SENS2:FOM:RANG2:FREQ:CW %s" %(f_cw)) #set cw freq to source1
-        ##
         self._visainstrument.write("SENS2:FOM:DISP:SEL 'Primary'")       #set x-axis to primary 
         ##
         self._visainstrument.write("SOUR2:POW:COUP 0")                   #decouple powers
-        self._visainstrument.write("SOUR2:POW1 %s" %(pow_cw))
+        self._visainstrument.write("SOUR2:POW1 %s" %(bias_pow))
         self._visainstrument.write("SOUR2:POW3 %s" %(pow_probe))
         self._visainstrument.write("SOUR2:POW3:MODE ON")                 #switch on port3
 

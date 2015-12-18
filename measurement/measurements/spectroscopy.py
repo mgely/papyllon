@@ -26,7 +26,7 @@ class SingleTone(measurement.Measurement):
     # Define a list of optional arguments needed in this measurement
     opt_arg_list = []
 
-    # Define a list of used instruments
+    # Define a list of used instruments, which are automatically instantiated upon measurement object creation.
     inst_list = [['pna',            'PNA_N5221A_sal',               'TCPIP::192.168.1.42::INSTR'],\
                 ['curr_source',     'keysight_source_B2961A',   'TCPIP::192.168.1.56::INSTR'],\
                 ['var_att',         'agilent_var_attenuator',   'TCPIP::192.168.1.113::INSTR']]
@@ -323,10 +323,7 @@ class TwoTone(measurement.Measurement):
                         self.qubit_points,
                         self.qubit_averaging,
                         self.qubit_ifbw,
-                        self.qubit_power,
-                        self.w_bare,
-                        self.f_cw,
-                        self.pow_cw)  
+                        self.qubit_power)  
         # self.pna.do("reset_two_tone_cavity")
 
         # Current source
@@ -423,8 +420,17 @@ class TwoTone(measurement.Measurement):
 
 
 
+        #self.trace is a list the           qtlabAPI,name,defining_function, *args,**kwargs
+        self.trace = qtlabAPI.QTLabVariable(
+            qtlabAPI = self.qt,
+            name = 'trace', 
+            defining_function = 'pna.fetch_data', 
+            channel=2, 
+            polar=True)
 
-        self.trace = qtlabAPI.QTLabVariable(self.qt,'trace', 'pna.fetch_data', "channel  = %s" % (2), 'polar=True')
+
+        #sending a raw python command to qtlab, it is a string, the '+\' are there to concatenate the string over
+        #multiple inputlines.
 
         self.qt.send('data.add_data_point(qubit_list,'+\
             ' list('+str(Y)+'*ones(len(qubit_list))),'+\
