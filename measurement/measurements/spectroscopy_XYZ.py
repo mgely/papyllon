@@ -31,7 +31,7 @@ class Spectroscopy(measurement.Measurement):
     inst_list = [['pna',            'PNA_N5221A_sal',           'TCPIP::192.168.1.42::INSTR'],\
                 ['var_att',         'agilent_var_attenuator',   'TCPIP::192.168.1.113::INSTR']]
 
-    YZ_instrument_options = ['None','curr_source']
+    YZ_instrument_options = ['None','curr_source', 'curr_source_adwin']
 
     ##################
     # Initialization #
@@ -80,7 +80,28 @@ class Spectroscopy(measurement.Measurement):
                 self.process_command() # Check if the operator wants to stop the measurement
                 if self.MEASURE == True:
                     self.curr_source.do('ramp_source_curr',I)
-            setattr(self, Y_or_Z+'_func',curr_source_function) 
+            setattr(self, Y_or_Z+'_func',curr_source_function)
+
+        if instrument_name == 'curr_source_adwin':
+            # Initialization
+            self.curr_source_adwin = qtlabAPI.Instrument(
+                qtlabAPI = self.qt, 
+                local_name = 'curr_source_adwin', 
+                driver_name = 'ADwin_DAC_sal'
+                )
+
+            self.curr_source_adwin.do("start_process")
+
+            # Loop function
+            def curr_source_function(I):
+                self.process_command() # Check if the operator wants to stop the measurement
+                if self.MEASURE == True:
+
+                    self.curr_source_adwin.do('ramp_DAC_1',I*5000.)
+            setattr(self, Y_or_Z+'_func',curr_source_function)
+
+        
+
 
     def initialize_data_acquisition(self, directory):
         super(Spectroscopy, self).initialize_data_acquisition(directory)
@@ -264,10 +285,10 @@ class SingleTone(Spectroscopy):
     def compute_bandwidth(self,power):
         if self.pow_dep_axis == 'Y':
                 first_power = self.Y_start
-        elif Y_or_Z =='Z':
+        elif self.pow_dep_axis =='Z':
             first_power = self.Z_start
 
-        index = self.bandwidth.index(self.ifbw_first_frame) + int((power - first_power[0])/3)
+        index = self.bandwidth.index(self.ifbw_first_frame) + int((power - first_power)/3)
 
         # Add bounds to the bandwidth
         if index < 0:
@@ -305,11 +326,15 @@ class SingleTone(Spectroscopy):
             if self.pow_dep_axis == 'Y':
                 power_list = self.Y_list
                 current_power = self.Y
-                frame_progress = (self.Z - self.Z_start) / (self.Z_stop - self.Z_start)
+                frame_progress = 1.
+                if self.Z_stop != self.Z_start:
+                    frame_progress = (self.Z - self.Z_start) / (self.Z_stop - self.Z_start)
             elif self.pow_dep_axis =='Z':
                 power_list = self.Z_list
                 current_power = self.Z
-                frame_progress = (self.Y - self.Y_start) / (self.Y_stop - self.Y_start)
+                frame_progress = 1.
+                if self.Y_stop != self.Y_start:
+                    frame_progress = (self.Y - self.Y_start) / (self.Y_stop - self.Y_start)
             
 
             
@@ -332,7 +357,7 @@ class SingleTone(Spectroscopy):
 
             while i<len(power_list):
                 power  = power_list[i]
-                bw = compute_bandwidth(power)
+                bw = self.compute_bandwidth(power)
                 denominator += 1/bw
                 i += 1
 
@@ -352,7 +377,7 @@ class SingleTone(Spectroscopy):
 
             self.measurement_time = 0
             for power in power_list:
-                bw = self.compute_bandwidth(Z)
+                bw = self.compute_bandwidth(power)
                 self.measurement_time += self.averages * self.f_points * frames / bw
 
     def print_progress(self):

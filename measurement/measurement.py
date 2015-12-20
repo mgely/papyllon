@@ -4,6 +4,7 @@ Mario Gely - mario.f.gely@gmail.com
 '''
 
 import py_compile
+import gmail.gmailAPI as gmailAPI
 import time 
 import json
 import pdb
@@ -71,6 +72,8 @@ class Measurement(object):
         # For communication to QTlab
         self.qt = None
         self.setup_communication()
+
+        self.gmail = gmailAPI.GmailClient('TUD202834@gmail.com')
 
         # For configuring spyview 
         self.spyview = qtlabAPI.SpyviewProcess(self.qt,spyview_folder = self.papyllon_folder_address+'\\measurement\\spyview')
@@ -238,6 +241,9 @@ class Measurement(object):
         5. Removes all instruments
         '''
 
+        with open(self.papyllon_folder_address+'\\measurement\\setup.json',"r") as f:
+            setup =  byteify(json.load(f))
+
         start = time.time()
         logging.info("Measurement started")
         self.print_measurement_time()
@@ -279,6 +285,9 @@ class Measurement(object):
         self.initialize_instruments()
         self.initialize_data_acquisition(folder)
 
+        # Save settings
+        copy(self.settings_file_address, folder)
+
         # Measurement                
         self.MEASURE = True
         self.measure()
@@ -299,9 +308,6 @@ class Measurement(object):
         print "Ended: "+end_str
         print "Measurement time: "+duration
 
-        # Save settings
-        copy(self.settings_file_address, folder)
-
         # Save setup in data folder
         copy(self.get_setup_file_address(), folder)
 
@@ -318,7 +324,12 @@ class Measurement(object):
         with open(folder+'\\timing.json',"w") as f:
             json.dump(time_info, f, sort_keys=True, indent=4, separators=(',', ': '))
 
+
+
         if testing == False:
+            self.gmail.send(to = setup["emails"],
+                 subject = 'Measurement ended',
+                 message_text = '')
             self.add_data_to_ppt(device_folder, folder)
 
     def test_measurement(self):

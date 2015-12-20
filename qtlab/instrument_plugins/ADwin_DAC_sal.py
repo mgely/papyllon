@@ -23,7 +23,7 @@ from instrument import Instrument
 import visa
 import types
 import logging
-import numpy
+import numpy as np
 
 from time import sleep,time
 
@@ -53,7 +53,7 @@ class ADwin_DAC_sal(Instrument):
     device number can be found with ADconfig usually it is 0x255
     '''
 
-    def __init__(self, name, address):
+    def __init__(self, name,address=0x255):
         '''
         Initializes the any_device, and communicates with the wrapper.
 
@@ -239,7 +239,23 @@ class ADwin_DAC_sal(Instrument):
         #adc4 = Volt(self.ADwin.Get_Par(8))/float(8)
         return adc1,adc2 #,adc3,adc4
 
-    
+    def ramp_DAC_1(self, value, wait=20e-3, step_size=5e-4):
+        print 'ramp source to ', value, '\n'
+        
+        ramp_d = value-self.get_DAC_1() 
+        ramp_sign = np.sign(ramp_d)
+
+        ramp_bool = True
+        while(ramp_bool):
+            actual_value=self.get_DAC_1()
+            if(abs(value-actual_value)<10*step_size):
+                self.set_DAC_1(value)
+                ramp_bool = False
+            else:
+                self.set_DAC_1(actual_value+ramp_sign*step_size)
+                qt.msleep(wait)
+        return value
+        
 ##        def do_get_Par(self, par):
 ##            '''
 ##            Get the value of par inside the ADwin Par register

@@ -1,0 +1,23 @@
+{
+    "Z_coord": "Current [A]",
+    "Z_instrument": "curr_source_adwin",
+    "Z_points": 1,
+    "Z_start":0e-3,
+    "Z_stop": 0e-3,
+    "Y_coord": "Cavity power [dBm]",
+    "Y_instrument": "pna_power",
+    "Y_points": 4,
+    "Y_start": -8,
+    "Y_stop": 15,
+    "adaptive_ifbw": true,
+    "averages": 1,
+    "f_points": 401,
+    "f_start": 4.15e9,
+    "f_stop": 4.4e9,
+    "ifbw_first_frame": 100,
+    "measurement_name": "SingleTone",
+    "measurement_type": "spectroscopy_XYZ",
+    "opt": {},
+    "var_att_attenuation": 70,
+    "pna_power": 0
+}
