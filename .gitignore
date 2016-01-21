@@ -49,3 +49,6 @@ qtlab/tmp/
 
 # Compiled python 
 *.pyc
+measurement/setup.json
+measurement/measurement_log.txt
+measurement/settings.json
