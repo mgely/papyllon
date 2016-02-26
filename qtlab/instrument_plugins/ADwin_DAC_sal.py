@@ -255,6 +255,23 @@ class ADwin_DAC_sal(Instrument):
                 self.set_DAC_1(actual_value+ramp_sign*step_size)
                 qt.msleep(wait)
         return value
+
+    def ramp_DAC_2(self, value, wait=1e-3, step_size=1e-3):
+        print 'ramp source to ', value, '\n'
+        
+        ramp_d = value-self.get_DAC_2() 
+        ramp_sign = np.sign(ramp_d)
+
+        ramp_bool = True
+        while(ramp_bool):
+            actual_value=self.get_DAC_2()
+            if(abs(value-actual_value)<10*step_size):
+                self.set_DAC_2(value)
+                ramp_bool = False
+            else:
+                self.set_DAC_2(actual_value+ramp_sign*step_size)
+                qt.msleep(wait)
+        return value
         
 ##        def do_get_Par(self, par):
 ##            '''
@@ -295,17 +312,19 @@ class ADwin_DAC_sal(Instrument):
         '''
         Things to do at starting of measurement
         '''
-        self.set_DAC_1(0)
-        self.set_DAC_2(0)
-        self.set_DAC_3(0)
-        self.set_DAC_4(0)
+        pass
+        # self.set_DAC_1(0)
+        # self.set_DAC_2(0)
+        # self.set_DAC_3(0)
+        # self.set_DAC_4(0)
 
     def _measurement_end_cb(self, sender):
         '''
         Things to do after the measurement
         '''
-        self.set_DAC_1(0)
-        self.set_DAC_2(0)
-        self.set_DAC_3(0)
-        self.set_DAC_4(0)
+        pass
+        # self.set_DAC_1(0)
+        # self.set_DAC_2(0)
+        # self.set_DAC_3(0)
+        # self.set_DAC_4(0)
   

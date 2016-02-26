@@ -1,0 +1,22 @@
+{
+    "Z_coord": "Cavity drive frequency [MHz]",
+    "Z_instrument": "cavity_frequency",
+    "Z_points": 11,
+    "Z_start":5017.8,
+    "Z_stop": 5018.3,
+    "Y_coord": "Voltage (multiply by 0.8 to get real value)",
+    "Y_instrument": "volt_source_adwin",
+    "Y_points": 161,
+    "Y_start": -8,
+    "Y_stop": 8,
+    "f_start":6935405,
+    "f_stop":6946405,
+    "f_points":801,
+    "ifbw":100,
+    "field_fox_power":0,
+    "cavity_frequency":5018.04,
+    "cavity_power":25,
+    "gate_voltage":8,
+    "measurement_name": "FieldFoxHomodyne_ElectrostaticDrive",
+    "measurement_type": "spectroscopy_XYZ"
+}

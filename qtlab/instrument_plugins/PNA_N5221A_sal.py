@@ -127,6 +127,7 @@ class PNA_N5221A_sal(Instrument):
         self.add_function('peak_track')
         self.add_function('setup_two_tone')
         self.add_function('reset_two_tone_cavity')
+        self.add_function('setup_omit')
 
         # Connect to measurement flow to detect start and stop of measurement
         qt.flow.connect('measurement-start', self._measurement_start_cb)
@@ -136,7 +137,99 @@ class PNA_N5221A_sal(Instrument):
 #           functions
 # --------------------------------------
 
-    def reset_two_tone_cavity(self,averages=1):
+    def setup_omit(self,
+        f_start,
+        f_stop,
+        f_points,
+        averages,
+        ifbw,
+        cavity_pow,
+        drum_pow,
+        drum_freq):
+
+        self.reset()
+
+        #setup display
+        self.w("DISP:WIND1:STATE ON")
+
+        # setup cavity scan
+        self.w("CALC:PAR:DEF:EXT 'CH1_S21_S1', 'S21'")
+        self.w("DISP:WIND1:TRACE1:FEED 'CH1_S21_S1'") # connect to the display
+        self.w("CALC:PAR:SEL 'CH1_S21_S1'")
+        self.w("CALC:FORM MLOG")
+
+        # setup triggering per channel
+        self.w("INIT:CONT OFF")
+        self.w("SENS:SWE:MODE HOLD")
+        self.w("TRIG:SCOP CURR")
+
+
+        # apply cavity settings
+        self.w("SENS:FREQ:START %s" % (f_start))
+        self.w("SENS:FREQ:STOP %s" % (f_stop))
+        self.w("SENS:SWE:POIN %s" % (f_points))
+        self.w("SENS:BWID %s" % (ifbw))
+        self.w("SOUR:POW1 %s" %(cavity_pow))
+
+        # cavity averaging
+        self.w("SENS:AVER 1")
+        self.w("SENS:AVER:MODE SWE")
+        self.w("SENS:AVER:COUN %s" % (averages))
+
+
+        # setup drum probe
+        self.w("SENS:FOM:STATE 1")      #switch on Frequency Offset Module
+        self.w("SOUR:POW3:MODE ON")                 #switch on port3
+        self.w("SOUR:POW:COUP 0")                   #decouple powers
+        self.w("SOUR:POW3 %s" %(drum_pow))
+        self.w("SENS:FOM:RANG4:COUP 0")     #decouple Source 
+        self.w("SENS:FOM:RANG4:SWE:TYPE CW")    #set Source in CW mode
+
+        self.w("SENS:FOM:RANG4:FREQ:CW %s" %(drum_freq))
+
+
+    def sweep_omit(self,drum_freq):
+        self.w("SENS:FOM:RANG4:FREQ:CW %s" %(drum_freq))
+        self.trigger()
+        self.auto_scale()
+
+
+#########################################################################
+#########################################################################
+#               TO DO 
+#########################################################################
+#########################################################################
+#########################################################################
+
+
+    def reset_omit_cavity_and_sweep(self, drum_freq, pump_power):
+        f_cavity_guess = current cavity frequency
+
+        # Lower ifbw an number of points to find the cavity minimum
+
+        def to_minimize(f_c):
+            # set the pump frequency to f_c - f_pump
+            # sweep the cavity
+            # find the minimum f_c
+            return abs((f_c - f_pump) - pump_detuning
+
+        # restore ifbw an number of points 
+
+        f_c = minimize(to_minimize,f_cavity_guess)
+        # set cavity center to f_c
+        self.sweep_omit(f_c+drum_freq)
+
+
+
+#########################################################################
+#########################################################################
+#########################################################################
+#########################################################################
+#########################################################################
+#########################################################################
+ 
+
+    def reset_two_tone_cavity(self,averages=1,cavity_feature = "DIP"):
         #set continuous off 
         self._visainstrument.write("SENS1:SWE:MODE HOLD")
         self._visainstrument.write("INIT:CONT OFF")
@@ -147,7 +240,11 @@ class PNA_N5221A_sal(Instrument):
             self.trigger(channel=1)
             self.auto_scale(window=1,trace=1)
 
-        self._visainstrument.write("CALC1:MARK2:FUNC MIN")
+        if cavity_feature == "DIP":
+            self._visainstrument.write("CALC1:MARK2:FUNC MIN")
+        if cavity_feature == "PEAK":
+            self._visainstrument.write("CALC1:MARK2:FUNC MAX")
+            print 'here'
 
         peak=eval(self._visainstrument.ask("CALC1:MARK2:X?"))
 
@@ -167,7 +264,13 @@ class PNA_N5221A_sal(Instrument):
                         f_points_probe,
                         aver_probe,
                         ifbw_probe,
-                        pow_probe):
+                        pow_probe,
+                        cavity_feature = "DIP"):
+
+        if cavity_feature == "DIP":
+            MIN_or_MAX = "MIN"
+        elif cavity_feature == "PEAK":
+            MIN_or_MAX = "MAX"
         #setup two windows
         self.reset()
 
@@ -198,11 +301,11 @@ class PNA_N5221A_sal(Instrument):
         #do settings for Marker for the bias monitor
         self._visainstrument.write("CALC1:MARK:REF ON")
         self._visainstrument.write("CALC1:MARK1 ON")
-        self._visainstrument.write("CALC1:MARK1:FUNC MIN")
+        self._visainstrument.write("CALC1:MARK1:FUNC %s" % (MIN_or_MAX))
         self._visainstrument.write("CALC1:MARK1:FUNC:TRAC ON")
         self._visainstrument.write("CALC1:MARK1:DELT ON")
         self._visainstrument.write("CALC1:MARK2 ON")
-        self._visainstrument.write("CALC1:MARK2:FUNC MIN")
+        self._visainstrument.write("CALC1:MARK2:FUNC %s" % (MIN_or_MAX))
         self._visainstrument.write("CALC1:MARK2:FUNC:TRAC ON")
 
         #do settings for averaging of bias monitor

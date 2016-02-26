@@ -157,7 +157,7 @@ def add_measurement_to_ppt(ppt_file,data_directory):
 
     meta_information = False
     for file in os.listdir(data_directory):
-        if file.endswith(".png"):
+        if file.endswith(".png") or file.endswith(".PNG"):
             png = os.path.join(data_directory, file)
         if file.endswith(".json"):
             if 'timing' in file:

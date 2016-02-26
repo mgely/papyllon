@@ -52,3 +52,6 @@ qtlab/tmp/
 measurement/setup.json
 measurement/measurement_log.txt
 measurement/settings.json
+measurement/setup.json
+measurement/measurement_log.txt
+measurement/gmail/.credentials/gmail-python-quickstart.json

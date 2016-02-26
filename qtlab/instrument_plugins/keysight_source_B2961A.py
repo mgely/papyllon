@@ -317,7 +317,7 @@ class keysight_source_B2961A(Instrument):
 ##        if self._change_autozero:
 ##            self.set_autozero(True)
 
-    def ramp_source_curr(self,value, wait=10e-3, step_size=1e-6):
+    def ramp_source_curr(self,value, wait=10e-3, step_size=1e-5):
         print 'ramp source to ', value, '\n'
         
         ramp_d = value-self.get_bias_current() 

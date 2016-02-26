@@ -62,14 +62,15 @@ class FieldFox(Instrument):
         self._address = address
         self._visainstrument = visa.instrument(self._address)
 
+
         # Add parameters to wrapper
 
         self.add_parameter('start_frequency', type=types.FloatType,
                            flags=Instrument.FLAG_GETSET,
-                           units='Hz', minval=10e6, maxval=13500e6)
+                           units='Hz', minval=1, maxval=14e9)
         self.add_parameter('stop_frequency', type=types.FloatType,
                            flags=Instrument.FLAG_GETSET,
-                           units='Hz', minval=10e6, maxval=13500e6)
+                           units='Hz', minval=1, maxval=14e9)
         self.add_parameter('sweeppoints',
                            flags=Instrument.FLAG_GETSET,
                            units=' ', minval=1, maxval=32001,
@@ -120,6 +121,9 @@ class FieldFox(Instrument):
     def query(self,string):
         return self._visainstrument.ask(string)
 
+    def autoscale(self):
+        return self._visainstrument.write("DISP:WIND:TRAC:Y:AUTO")
+
     
     
         #it sends visa.instrument(adress).ask(string)     ben
@@ -144,6 +148,7 @@ class FieldFox(Instrument):
     def do_get_resolution_bandwidth(self):
         return float(self._visainstrument.ask('BAND?'))
 
+
     def do_set_mode(self,mode):
         return self._visainstrument.write('INST:SEL "%s"' % (mode))
     def do_set_sweeppoints(self,number):
@@ -153,8 +158,17 @@ class FieldFox(Instrument):
     def do_set_stop_frequency(self,number): #in Hz
         return self._visainstrument.write('FREQ:STOP %s' % (number))
     def do_set_resolution_bandwidth(self,number):
-        return self._visainstrument.write('BAND %s' % (number))
+        if self._visainstrument.ask("INST:SEL?") == '\"SA\"': # If se are using it as a Spectrum analizer
+            return self._visainstrument.write('BAND %s' % (number))
+        elif self._visainstrument.ask("INST:SEL?") == '\"NA\"': # If se are using it as a Network analizer
+            return self._visainstrument.write('SENS:BWID %s' % (number))
 
+
+        
+    def do_set_power(self,number):
+        return self._visainstrument.write('SOUR:POW %s' % (number))
+    def set_ref(self, INT_or_EXT):
+        return self._visainstrument.write('SENS:ROSC:SOUR %s' % (INT_or_EXT))
 
 # --------------------------------------
 #           functions
@@ -162,9 +176,9 @@ class FieldFox(Instrument):
 
     def sweep(self):
         self._visainstrument.write('INIT:CONT OFF')
-        a=0
         self._visainstrument.write('INIT:IMM')
         
+        a=0
         while a==0:
             qt.msleep(0.05)
             try:
@@ -178,9 +192,24 @@ class FieldFox(Instrument):
        
 
     def fetch_data(self):
-        trace=self._visainstrument.ask('TRAC:DATA?')
-        tr2=map(float,trace.split(','))
-        return tr2
+        if self._visainstrument.ask("INST:SEL?") == '\"SA\"': # If se are using it as a Spectrum analizer
+            trace = self._visainstrument.ask('TRAC:DATA?')
+            trace = map(float,trace.split(','))
+        elif self._visainstrument.ask("INST:SEL?") == '\"NA\"': # If se are using it as a Network analizer
+            trace = [[],[],[]]
+            self._visainstrument.write('CALC:FORM MLOG')
+            tr = self._visainstrument.ask('CALC:DATA:FDAT?')
+            trace[0] = map(float,tr.split(','))
+
+            self._visainstrument.write('CALC:FORM MLIN')
+            tr = self._visainstrument.ask('CALC:DATA:FDAT?')
+            trace[1] = map(float,tr.split(','))
+
+            self._visainstrument.write('CALC:FORM UPH')
+            tr = self._visainstrument.ask('CALC:DATA:FDAT?')
+            trace[2] = map(float,tr.split(','))
+
+        return trace
 
 # --------------------------------------
 #           Internal Routines

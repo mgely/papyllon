@@ -26,8 +26,7 @@ def bool_to_str(val):
     '''
     if val == True:
         return "ON"
-    else:
-        return "OFF"
+    else:        return "OFF"
 
 class RS_FSV(Instrument):
     '''
@@ -67,23 +66,29 @@ class RS_FSV(Instrument):
 
         self.add_parameter('start_frequency', type=types.FloatType,
                            flags=Instrument.FLAG_GETSET,
-                           units='MHz', minval=0.009, maxval=18000)
+                           units='Hz', minval=9e3, maxval=18e9)
         self.add_parameter('stop_frequency', type=types.FloatType,
                            flags=Instrument.FLAG_GETSET,
-                           units='MHz', minval=0.009, maxval=18000)
+                           units='Hz', minval=9e3, maxval=18e9)
         self.add_parameter('sweeppoints', type=types.IntType,
                            flags=Instrument.FLAG_GETSET,
                            units='', minval=101, maxval=32001)
-        self.add_parameter('averages', type=types.IntType,
-                           flags=Instrument.FLAG_GETSET,
-                           units='',minval=0, maxval=32767)
         self.add_parameter('resolution_bandwidth', type=types.FloatType,
                            flags=Instrument.FLAG_GETSET,
-                           units='MHz')
+                           units='Hz')
+        self.add_parameter('video_bandwidth', type=types.FloatType,
+                           flags=Instrument.FLAG_GETSET,
+                           units='Hz')
         self.add_parameter('resolution_bandwidth_auto', type=types.BooleanType,
                            flags=Instrument.FLAG_GETSET,
                            units='')
         self.add_parameter('filter_type', type=types.StringType,
+                          flags=Instrument.FLAG_GETSET,
+                          units='')
+        self.add_parameter('sweep_type', type=types.StringType,
+                          flags=Instrument.FLAG_GETSET,
+                          units='')
+        self.add_parameter('reference_oscillator', type=types.StringType,
                           flags=Instrument.FLAG_GETSET,
                           units='')
         self.add_parameter('sweeptime', type=types.FloatType,
@@ -99,6 +104,10 @@ class RS_FSV(Instrument):
         self.add_parameter('trace_continuous', type=types.BooleanType,
                           flags=Instrument.FLAG_GETSET,
                           units='')
+        self.add_parameter('input_attenuation', type=types.FloatType,
+                           flags=Instrument.FLAG_GETSET,
+                           units='dB')
+
 
         # Connect to measurement flow to detect start and stop of measurement
         qt.flow.connect('measurement-start', self._measurement_start_cb)
@@ -125,7 +134,6 @@ class RS_FSV(Instrument):
         self.get_sweeppoints()
         self.get_start_frequency()
         self.get_stop_frequency()
-        self.get_averages()
         self.get_resolution_bandwidth()
         self.get_resolution_bandwidth_auto()
         self.get_filter_type()
@@ -134,15 +142,11 @@ class RS_FSV(Instrument):
         self.get_source_power()
         self.get_trace_continuous()
 
-    def get_trace2(self):
-        '''
-        Takes a new, single trace then returns it as a list of amplitudes.
-        For requency/amplitude pairs see spectrum_measure.fsl_measure()
-        '''
-        logging.debug('Taking trace')
-        #self._visainstrument.write('INIT;*WAI') #Start new trace and wait for completion
-        logging.debug('Reading trace')
-        return eval('[' + self._visainstrument.ask('TRAC? TRACE1') + ']') #read out trace
+    def sweep(self, averages = 1):
+        self._visainstrument.write('INIT:CONT OFF')
+        self._visainstrument.write('SWE:COUN %s'%averages)
+        self._visainstrument.write('DISP:TRAC1:MODE AVER')
+        self._visainstrument.write('INIT;*WAI') # Starts the measurement and waits for the end of the X sweeps
 
     def get_trace(self):
         a = 0
@@ -178,19 +182,19 @@ class RS_FSV(Instrument):
         self._visainstrument.write("*CLS")#clear status registers (stop doing other stuff)
         return self._visainstrument.write("HCOP:IMM:NEXT;*OPC")#Immediately print to file
 
-    def do_get_start_frequency(self): #in MHz
+    def do_get_start_frequency(self): 
         '''
-        Start of sweep (MHz)
+        Start of sweep (Hz)
         '''
         logging.debug('Reading start frequency')
-        return float(self._visainstrument.ask('FREQ:START?'))/1e6
+        return float(self._visainstrument.ask('FREQ:START?'))
 
-    def do_get_stop_frequency(self): #in MHz
+    def do_get_stop_frequency(self): #in Hz
         '''
-        End of sweep (MHz)
+        End of sweep (Hz)
         '''
         logging.debug('Reading stop frequency')
-        return float(self._visainstrument.ask('FREQ:STOP?'))/1e6
+        return float(self._visainstrument.ask('FREQ:STOP?'))
 
     def do_get_sweeppoints(self):
         '''
@@ -199,16 +203,9 @@ class RS_FSV(Instrument):
         logging.debug('Reading sweep points')
         return int(self._visainstrument.ask('SWE:POIN?'))
 
-    def do_get_averages(self):
-        '''
-        Number of averages per sweep. 0 is default and 32767 is max.
-        '''
-        logging.debug('Reading number of averages')
-        return int(self._visainstrument.ask('AVER:COUN?'))
-
-    def do_get_resolution_bandwidth(self): #in MHz
+    def do_get_resolution_bandwidth(self): #in Hz
         logging.debug('Reading resolution bandwidth')
-        return float(self._visainstrument.ask('BAND?'))/1e6
+        return float(self._visainstrument.ask('BAND?'))
 
     def do_get_filter_type(self):
         logging.debug('Reading filter type')
@@ -227,31 +224,44 @@ class RS_FSV(Instrument):
         logging.debug('Reading Source power')
         return float(self._visainstrument.ask('SOUR:POW?'))
 
+    def do_get_reference_oscillator(self):
+        logging.debug('Reading reference oscillator')
+        return self._visainstrument.ask('SOUR:EXT:ROSC?')
 
-    def do_set_start_frequency(self, start): #in MHz
+    def do_get_video_bandwidth(self):
+        logging.debug('Reading video bandwidth')
+        return self._visainstrument.ask('BAND:VID?')
+
+    def do_get_sweep_type(self):
+        logging.debug('Reading sweep type')
+        return self._visainstrument.ask('SWE:TYPE?')
+
+    def do_get_input_attenuation(self):
+        return self._visainstrument.ask('INP:ATT?')
+
+
+
+
+    def do_set_start_frequency(self, start): #in Hz
         logging.debug('Setting start freq to %s' % start)
-        return self._visainstrument.write('FREQ:START %sMHz' % start)
+        return self._visainstrument.write('FREQ:START %sMHz' % (start*1e-6))
 
-    def do_set_stop_frequency(self, stop): #in MHz
+    def do_set_stop_frequency(self, stop): #in Hz
         logging.debug('Setting stop freq to %s' % stop)
-        return self._visainstrument.write('FREQ:STOP %sMHz' % stop)
+        return self._visainstrument.write('FREQ:STOP %sMHz' % (stop*1e-6))
 
     def do_set_sweeppoints(self,sweeppoints):
         logging.debug('Setting sweep points to %s' % sweeppoints)
         return self._visainstrument.write('SWE:POIN %s' % sweeppoints)
 
-    def do_set_averages(self, averages):
-        logging.debug('Setting number of averages to %s' % averages)
-        return self._visainstrument.write('AVER:COUN %s' % averages)
-
-    def do_set_resolution_bandwidth(self,resolution_bandwidth): #in MHz
+    def do_set_resolution_bandwidth(self,resolution_bandwidth): #in Hz
         '''
         Don't set too low (see FSV). Can be manually set up to 10MHz.
         Note that video BW is automatically kept at 3x reolution BW
-        It can be change manually on the FSL or using 'BAND:VID %sMHz'
+        It can be change manually on the FSL or using 'BAND:VID %sHz'
         '''
         logging.debug('Setting Resolution BW to %s' % resolution_bandwidth)
-        return self._visainstrument.write('BAND %sMHz' % resolution_bandwidth)
+        return self._visainstrument.write('BAND %sMHz' % (resolution_bandwidth*1e-6))
     
     def do_set_resolution_bandwidth_auto(self, state):
         '''
@@ -288,6 +298,9 @@ class RS_FSV(Instrument):
         tracking = bool_to_str(tracking)
         return self._visainstrument.write('OUTP %s' % tracking)
 
+    def do_set_input_attenuation(self,att):
+        return self._visainstrument.write('INP:ATT %s'%att)
+
     def do_set_source_power(self, source_power): #in dBm
         '''
         Can be set to 0,-10,-20,-30 dBm. on 18GHz FSL
@@ -319,21 +332,40 @@ class RS_FSV(Instrument):
         return self._visainstrument.ask(string)
 
 
-    def get_center_frequency(self): #in MHz
+    def get_center_frequency(self): #in Hz
         '''
         Setting center and span is alternative to setting start and stop
         '''
-        return float(self._visainstrument.ask('FREQ:CENT?'))/1e6
+        return float(self._visainstrument.ask('FREQ:CENT?'))
 
-    def get_span(self): #in MHz
-        return float(self._visainstrument.ask('FREQ:SPAN?'))/1e6   
+    def get_span(self): #in Hz
+        return float(self._visainstrument.ask('FREQ:SPAN?'))  
 
     def set_center_frequency(self, centerfrequency): #in MHz
-        return self._visainstrument.write('FREQ:CENT %sMHz' % centerfrequency)
+        return self._visainstrument.write('FREQ:CENT %sMHz' % (centerfrequency*1e-6))
 
-    def set_span(self, span): #in MHz
-        return self._visainstrument.write('FREQ:SPAN %sMHz' % span)
+    def set_span(self, span): #in Hz
+        return self._visainstrument.write('FREQ:SPAN %sMHz' % (span*1e-6))
 
+    def do_set_reference_oscillator(self, source):
+        if source == 'INT' or source == 'EXT':
+            logging.debug('Setting reference oscillator')
+            return self._visainstrument.write('SOUR:EXT:ROSC %s' % source)
+        else:
+            return "Choose values 'INT' or 'EXT'"
+
+    def do_set_video_bandwidth(self, vbw):
+        logging.debug('Setting video bandwidth')
+        return self._visainstrument.write('BAND:VID %s' % vbw)
+
+    def do_set_sweep_type(self, sweeptype):
+        '''Options:
+                'SWE': Selects analog frequency sweeps.
+                'AUTO': Automatically selects the sweep type (FFT or analog frequency sweep).
+                'FFT': Selects FFT sweeps.
+        '''
+        logging.debug('Setting sweep type')
+        return self._visainstrument.write('SWE:TYPE %s' % sweeptype)
 
 
 # --------------------------------------
@@ -341,15 +373,19 @@ class RS_FSV(Instrument):
 # --------------------------------------
 
     def _measurement_start_cb(self, sender):
+
         '''
         Things to do at starting of measurement
         '''
-        self.set_trace_continuous(False) #switch to single trace mode
-        self.get_all()
+        self._visainstrument.write('INIT:CONT OFF') # Switches to single sweep mode.
+
+    #     self.set_trace_continuous(False) #switch to single trace mode
+    #     self.get_all()
 
     def _measurement_end_cb(self, sender):
-        '''
-        Things to do after the measurement
-        '''
-        self.set_trace_continuous(True) #turn continuous back on
+        pass
+    #     '''
+    #     Things to do after the measurement
+    #     '''
+    #     self.set_trace_continuous(True) #turn continuous back on
     
